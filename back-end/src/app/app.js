@@ -48,7 +48,6 @@ router.route('/supervisor')
         } catch (error) {
             console.log(error);
         }
-
     })
 router.route('/history')
     .post(async (req, res) => {
