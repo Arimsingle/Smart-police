@@ -17,6 +17,8 @@
     "express": "^4.17.1",
     "firebase": "^7.18.0",
     "firebase-admin": "^9.1.0",
+    "ipfs-api": "^26.1.2",
+    "ipfs-http-client": "^46.0.0",
     "truffle-hdwallet-provider": "^1.0.17",
     "web3": "^1.2.11"
   }

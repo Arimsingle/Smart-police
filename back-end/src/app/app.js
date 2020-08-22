@@ -11,7 +11,7 @@ const Tx = require('ethereumjs-tx');
 app.use(cors());
 app.use('/api', bodyParser.json(), router);
 app.use('/api', bodyParser.urlencoded({ extended: false }), router);
-
+require('../routes/register')({ router, web3 });
 router.route('/supervisor')
     .post(async (req, res) => {
         try {
@@ -34,7 +34,6 @@ router.route('/supervisor')
                 value: web3.utils.numberToHex(0),
                 data: dataEncode,
             }
-
             let privateKey = Buffer.from(dotenv.parsed.PRIVATE_KEY, 'hex',);
             let tx = new Tx(rawTx);
             tx.sign(privateKey);
