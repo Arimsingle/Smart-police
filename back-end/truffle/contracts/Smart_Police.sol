@@ -31,14 +31,15 @@ contract Smart_Police{
     mapping(address => mapping (address => Bandit[])) private HistoryBanditArray; 
     mapping(address => Certifier[]) private certifierBandit;
     mapping(address => address[])private RecorderBandit;
-    
     mapping(address => Police) private PoliceData;
     //event
-    event _SetSupervisor(address indexed _admin,address indexed supervisor);
-    event _SetHistoryBandit(address indexed _admin,address indexed _bandit,string _publicInfo);
+    event _SetSupervisor(address indexed _admin,address indexed _supervisor);
+    event _SetHistoryBandit(address indexed _admin,address indexed _bandit,string indexed _publicInfo);
+    event _PoliceInfo(address indexed _police,string indexed _publicInfo);
+    event _RecorderBandit(address indexed _supervisor,address indexed _bandit);
     
     //function set supervisor by admin
-    function setSupervisor(address _Supervisor)public onlyAdmin returns(bool){
+    function setSupervisor(address _Supervisor)public onlyAdmin returns(bool sucess){
         Claim[_Supervisor] = true;
         emit _SetSupervisor(admin,_Supervisor);
         return true;
@@ -47,6 +48,7 @@ contract Smart_Police{
     function PoliceInfo(address _Police,string  memory _PublicInfo)public returns (bool sucess){
         Police memory _PoliceObj = Police(_PublicInfo);
         PoliceData[_Police] = _PoliceObj;
+        emit _PoliceInfo(_Police,_PublicInfo);
         return true;
         
     }
@@ -58,6 +60,7 @@ contract Smart_Police{
         certifierBandit[_Bandit].push(_CertifierObj);
         HistoryBanditArray[_Bandit][_Supervisor].push(_BanditObj);
         RecorderBandit[_Supervisor].push(_Bandit);
+        emit _RecorderBandit(_Supervisor,_Bandit);
         emit _SetHistoryBandit(_Supervisor,_Bandit,_PublicInfo);
         return true;
     }

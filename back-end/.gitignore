@@ -1,2 +1,8 @@
 node_modules
 .env
+src/app/dist
+src/database/dist
+src/routes/dist
+src/services/dist
+src/utils/dist
+src/web3/dist

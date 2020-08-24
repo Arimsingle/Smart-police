@@ -1,7 +1,6 @@
 const abi = [
   {
     "inputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
@@ -10,33 +9,110 @@ const abi = [
     "inputs": [
       {
         "indexed": true,
-        "name": "_admin",
+        "internalType": "address",
+        "name": "_police",
         "type": "address"
       },
       {
         "indexed": true,
-        "name": "supervisor",
-        "type": "address"
+        "internalType": "string",
+        "name": "_publicInfo",
+        "type": "string"
       }
     ],
-    "name": "_SetSupervisor",
+    "name": "_PoliceInfo",
     "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_Police",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_PublicInfo",
+        "type": "string"
+      }
+    ],
+    "name": "PoliceInfo",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "sucess",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "anonymous": false,
     "inputs": [
       {
         "indexed": true,
+        "internalType": "address",
+        "name": "_supervisor",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_bandit",
+        "type": "address"
+      }
+    ],
+    "name": "_RecorderBandit",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_Supervisor",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_Bandit",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_PublicInfo",
+        "type": "string"
+      }
+    ],
+    "name": "setHistoryBandit",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "sucess",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "_admin",
         "type": "address"
       },
       {
         "indexed": true,
+        "internalType": "address",
         "name": "_bandit",
         "type": "address"
       },
       {
-        "indexed": false,
+        "indexed": true,
+        "internalType": "string",
         "name": "_publicInfo",
         "type": "string"
       }
@@ -45,9 +121,9 @@ const abi = [
     "type": "event"
   },
   {
-    "constant": false,
     "inputs": [
       {
+        "internalType": "address",
         "name": "_Supervisor",
         "type": "address"
       }
@@ -55,122 +131,37 @@ const abi = [
     "name": "setSupervisor",
     "outputs": [
       {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_Police",
-        "type": "address"
-      },
-      {
-        "name": "_PublicInfo",
-        "type": "string"
-      }
-    ],
-    "name": "PoliceInfo",
-    "outputs": [
-      {
+        "internalType": "bool",
         "name": "sucess",
         "type": "bool"
       }
     ],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
+    "anonymous": false,
     "inputs": [
       {
-        "name": "_Supervisor",
+        "indexed": true,
+        "internalType": "address",
+        "name": "_admin",
         "type": "address"
       },
       {
-        "name": "_Bandit",
+        "indexed": true,
+        "internalType": "address",
+        "name": "_supervisor",
         "type": "address"
-      },
-      {
-        "name": "_PublicInfo",
-        "type": "string"
       }
     ],
-    "name": "setHistoryBandit",
-    "outputs": [
-      {
-        "name": "sucess",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "name": "_SetSupervisor",
+    "type": "event"
   },
   {
-    "constant": true,
     "inputs": [
       {
-        "name": "_Police",
-        "type": "address"
-      }
-    ],
-    "name": "getPoliceInfo",
-    "outputs": [
-      {
-        "components": [
-          {
-            "name": "publicInfo",
-            "type": "string"
-          }
-        ],
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_Certifier",
-        "type": "address"
-      },
-      {
-        "name": "_Bandit",
-        "type": "address"
-      }
-    ],
-    "name": "getHistoryBanditArray",
-    "outputs": [
-      {
-        "components": [
-          {
-            "name": "publicInfo",
-            "type": "string"
-          }
-        ],
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
+        "internalType": "address",
         "name": "_Bandit",
         "type": "address"
       }
@@ -180,45 +171,28 @@ const abi = [
       {
         "components": [
           {
+            "internalType": "address",
             "name": "certifier",
             "type": "address"
           },
           {
+            "internalType": "string",
             "name": "certifierPublicInfo",
             "type": "string"
           }
         ],
+        "internalType": "struct Smart_Police.Certifier[]",
         "name": "",
         "type": "tuple[]"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
-        "name": "_Recorder",
-        "type": "address"
-      }
-    ],
-    "name": "getRecorderBandit",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
+        "internalType": "address",
         "name": "_Recorder",
         "type": "address"
       }
@@ -226,11 +200,87 @@ const abi = [
     "name": "getClaim",
     "outputs": [
       {
+        "internalType": "bool",
         "name": "sucess",
         "type": "bool"
       }
     ],
-    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_Certifier",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_Bandit",
+        "type": "address"
+      }
+    ],
+    "name": "getHistoryBanditArray",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "publicInfo",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct Smart_Police.Bandit[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_Police",
+        "type": "address"
+      }
+    ],
+    "name": "getPoliceInfo",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "publicInfo",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct Smart_Police.Police",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_Recorder",
+        "type": "address"
+      }
+    ],
+    "name": "getRecorderBandit",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   }

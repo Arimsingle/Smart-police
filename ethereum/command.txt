@@ -1,0 +1,6 @@
+bootnode -nodekey boot.key -verbosity 9 -addr :30310
+geth --datadir node1/ --syncmode 'full' --port 30311 --rpc --rpcaddr 'localhost' --rpcport 8501 --rpccorsdomain "*" --rpcapi 'personal,debug,eth,net,web3,txpool,miner' --ws --wsaddr 'localhost' --wsport 8546 --wsorigins '*' --wsapi 'personal,admin,eth,net,web3,miner,txpool,debug' --bootnodes 'enode://bdb4ad4802d67f121ad3f48c6bf44aa366efec4b6c94a8c1e7fb2e0659785d307149a560c1256c2db45a13bbd7d2d544a6a36fee29cd1aea698505c5bc5adf31@127.0.0.1:0?discport=30310' --networkid 1515 --gasprice '1' --unlock '0xB27C3871795B64c70C860e8373AE569dbbFac8B9' --mine --ipcdisable --allow-insecure-unlock
+geth --datadir node2/ --syncmode 'full' --port 30312 --rpc --rpcaddr 'localhost' --rpcport 8502 --rpccorsdomain "*"  --rpcapi 'personal,debug,eth,net,web3,txpool,miner' --ws --wsaddr 'localhost' --wsport 8547 --wsorigins '*' --wsapi 'personal,admin,eth,net,web3,miner,txpool,debug' --bootnodes 'enode://bdb4ad4802d67f121ad3f48c6bf44aa366efec4b6c94a8c1e7fb2e0659785d307149a560c1256c2db45a13bbd7d2d544a6a36fee29cd1aea698505c5bc5adf31@127.0.0.1:0?discport=30310' --networkid 1515 --gasprice '0' --unlock '0x3aa7943401e9d2B9AAAB85f8F09c1Ff4185cB70d' --mine --ipcdisable --allow-insecure-unlock
+docker run -p 3000:80 -e APP_NODE_URL="http://localhost:8501" alethio/ethereum-lite-explorer
+
+https://ipfs.infura.io/ipfs/

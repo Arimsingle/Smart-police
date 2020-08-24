@@ -6820,11 +6820,33 @@
           ],
           "name": "_SetHistoryBandit",
           "type": "event"
+        },
+        "0x54a91023aeb9a25e62b48936f2a6a11d23acaef6098c1c3c992d1ab6df3c62c3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_admin",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_bandit",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_publicInfo",
+              "type": "string"
+            }
+          ],
+          "name": "_SetHistoryBandit",
+          "type": "event"
         }
       },
       "links": {},
-      "address": "0x92176ab9309b5458b5e70F10Be0E2514890F2915",
-      "transactionHash": "0x25896bc52609c28b92a773184cb66002c07f98ae76a01ff892295592e521cbdd"
+      "address": "0xfEBDaaB1a7E5f51992798c6E8a1063330eC5990d",
+      "transactionHash": "0x3157a8e13d8a1c334afe593974baac794367d1ded79790932b62229fb00d9805"
     },
     "5777": {
       "events": {
@@ -6879,7 +6901,8 @@
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-08-22T20:26:52.524Z",
+  "updatedAt": "2020-08-23T15:57:37.027Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },

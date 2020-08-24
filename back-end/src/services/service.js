@@ -2,7 +2,9 @@
 const { db } = require('../database/db');
 
 const addData = async (dataPolice) => {
-    await db.collection('Police').doc(dataPolice.Email).set(dataPolice);
+    const UID = await db.collection('Police').doc().id
+    dataPolice.UID = UID;
+    await db.collection('Police').doc(UID).set(dataPolice);
 }
 const deleteData = async (data) => {
     await db.collection('cities').doc('DC').delete();

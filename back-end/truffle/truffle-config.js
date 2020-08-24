@@ -9,25 +9,14 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
     },
     private: {
-      host: process.env.LOCALHOST,     // Localhost (default: none)
-      port: process.env.PRIVATE_PORT,            // Standard Ethereum port (default: none)
-      network_id: "*",       // Any network (default: none)
+      host: process.env.LOCALHOST,
+      port: process.env.PRIVATE_PORT_WS,
+      network_id: '1515',
       gas: 0,
       gasPrice: 0,
       websockets: true,
       chainId: '1515'
     },
-    // Another network with more advanced options...
-    // advanced: {
-    // port: 8777,             // Custom port
-    // network_id: 1342,       // Custom network
-    // gas: 8500000,           // Gas sent with each transaction (default: ~6700000)
-    // gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
-    // from: <address>,        // Account to send txs from (default: accounts[0])
-    // websockets: true        // Enable EventEmitter interface for web3 (default: false)
-    // },
-    // Useful for deploying to a public network.
-    // NB: It's important to wrap the provider as a function.
     sokol: {
       provider: () => new HDWalletProvider(process.env.PRIVATE_KEY, `https://sokol.poa.network`),
       network_id: process.env.SOKOL_PORT,       // Ropsten's id
