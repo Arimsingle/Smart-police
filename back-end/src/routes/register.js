@@ -48,7 +48,6 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             const bufferPolice = await Buffer.from(JSON.stringify(dataPolice));
             const ipfsUri = await ipfs.add(bufferPolice, { recusive: true });
             dataPolice.ipfsUri = ipfsUri.path;
-
             const police_temp = await contract_Police.methods.PoliceInfo(_Account.address, dataPolice.ipfsUri);
             const dataEncode = await police_temp.encodeABI();
             const gas = await police_temp.estimateGas({ from: _Account.address });

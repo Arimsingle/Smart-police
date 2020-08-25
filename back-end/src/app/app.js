@@ -13,15 +13,88 @@ app.use('/api', bodyParser.json(), router);
 app.use('/api', bodyParser.urlencoded({ extended: false }), router);
 require('../routes/register')({ router, web3, Tx, contract_Police, dotenv });
 require('../routes/supervisor')({ router, web3, Tx, contract_Police, dotenv });
-router.route('/something')
-    .post(async (req, res) => {
+
+router.route('/policeinfo') //List data of a police
+    .get(async (req, res) => {
+        try {
+            contract_Police.methods.getPoliceInfo(req.body._Police).call().then(result => {
+                res.json({
+                    massage: "Call success",
+                    Data: result
+                })
+            })
+        } catch (error) {
+            res.json({
+                massage: "Call faild",
+                Error: error
+            })
+        }
+    })
+router.route('/historybandit') //List all history who's certifier record bandit ->station
+    .get(async (req, res) => {
+        try {
+            contract_Police.methods.getHistoryBanditArray(req.body._Certifier, req.body._Bandit).call().then(result => {
+                res.json({
+                    massage: "Call success",
+                    Data: result
+                })
+            })
+        } catch (error) {
+            res.json({
+                massage: "Call faild",
+                Error: error
+            })
+        }
 
     })
-router.route('/history')
-    .post(async (req, res) => {
+router.route('/certifierbandit') //List who's certifier bandit
+    .get(async (req, res) => {
         try {
+            contract_Police.methods.getCertifierBandit(req.body._Bandit).call().then(result => {
+                res.json({
+                    massage: "Call success",
+                    Data: result
+                })
+            })
         } catch (error) {
-            console.log(error);
+            res.json({
+                massage: "Call faild",
+                Error: error
+            })
+        }
+
+    })
+router.route('/recorderBandit') //List who's record bandit
+    .get(async (req, res) => {
+        try {
+            contract_Police.methods.getRecorderBandit(req.body._Recorder).call().then(result => {
+                res.json({
+                    massage: "Call success",
+                    Data: result
+                })
+            })
+        } catch (error) {
+            res.json({
+                massage: "Call faild",
+                Error: error
+            })
+        }
+
+    })
+router.route('/claimer') //List who's claimer set by admin
+    .get(async (req, res) => {
+        try {
+            contract_Police.methods.getClaim(req.body._Recorder).call().then(result => {
+                res.json({
+                    massage: "Call success",
+                    Data: result
+                })
+            })
+        } catch (error) {
+            res.json({
+                massage: "Call faild",
+                Error: error
+            })
         }
 
     })
