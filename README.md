@@ -1,8 +1,8 @@
 # Smart-police
-PROJECT 1 CoE PSU PHUKET
+PROJECT 1 : CoE PSU PHUKET
 ***********************************************
-Blockchain(Private Blockchain) x Image processing(Face recognition) x Data Analysis(Linear regression)
+Technology : Blockchain(Private Ethereum) x Image processing(Face recognition) x Data Analysis(Linear regression)
 ***********************************************
-Police x Bandit
+Infomation : Police x Bandit
 ***********************************************
 Plugin IPFS : https://ipfs.infura.io/ipfs/
