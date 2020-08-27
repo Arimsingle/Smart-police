@@ -1,9 +1,8 @@
 const IPFS = require('ipfs-http-client');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 const crypto = require('../utils/cryptography');
-const { Register } = require('../services/db');
+const { Register, addData } = require('../services/db');
 const { tranferCoin, tranferData } = require('../services/rawTx');
-const ethABI = require('web3-eth-abi')
 module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dotenv }) {
     router.post('/register', async (req, res) => {
         let data = "";
@@ -58,11 +57,13 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             const serializedTx = tx.serialize();
             await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
                 .on('receipt', async (result) => {
+                    // console.log(result.logs[0].data, [result.logs[0].topics[0], result.logs[0].topics[1]]);
+                    data = result.logs[0].data;
                     for (let i = 1; i < result.logs[0].topics.length + 1; i++) {
                         topics.push(result.logs[0].topics[i]);
                     }
                 })
-            let decodedData = web3.eth.abi.decodeLog([
+            let decodedData = await web3.eth.abi.decodeLog([
                 {
                     "type": "address",
                     "name": "_police",
@@ -74,17 +75,27 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                     "name": "_publicInfo",
                     "indexed": false,
                 }
-            ], data, topics)
-            await Register('Police', dataPolice).then(() => {
-                return res.send({
-                    Message: "Register success",
-                    Result: dataPolice,
-                    Decode: decodedData
-                });
-            })
+            ], data, topics);
+            await Register('Police', dataPolice).then(async () => {
+                await addData('Decode', _Account.address.slice(2),
+                    {
+                        Result:
+                        {
+                            _police: decodedData._police,
+                            _publicInfo: decodedData._publicInfo
+                        }
+                    }).then(() => {
+                        return res.json({
+                            message: 'Register sucess',
+                            Result: dataPolice
+                        })
+                    });
+
+            });
+
 
         } catch (error) {
-            console.log(error);
+            console.log("Error : ", error);
         }
 
 
