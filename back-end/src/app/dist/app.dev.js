@@ -46,32 +46,52 @@ require('../routes/supervisor')({
   dotenv: dotenv
 });
 
+require('../routes/record')({
+  router: router,
+  web3: web3,
+  Tx: Tx,
+  contract_Police: contract_Police,
+  dotenv: dotenv
+});
+
+require('../routes/portfolio')({
+  router: router,
+  web3: web3,
+  Tx: Tx,
+  contract_Police: contract_Police,
+  dotenv: dotenv
+});
+
 router.route('/policeinfo') //List data of a police
 .get(function _callee(req, res) {
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          try {
-            contract_Police.methods.getPoliceInfo(req.body._Police).call().then(function (result) {
-              res.json({
-                massage: "Call success",
-                Data: result
-              });
+          _context.prev = 0;
+          contract_Police.methods.getPoliceInfo(req.body._Police).call().then(function (result) {
+            return res.json({
+              massage: "Call method success",
+              Data: result
             });
-          } catch (error) {
-            res.json({
-              massage: "Call faild",
-              Error: error
-            });
-          }
+          });
+          _context.next = 7;
+          break;
 
-        case 1:
+        case 4:
+          _context.prev = 4;
+          _context.t0 = _context["catch"](0);
+          return _context.abrupt("return", res.json({
+            massage: "Call method faild",
+            Error: _context.t0
+          }));
+
+        case 7:
         case "end":
           return _context.stop();
       }
     }
-  });
+  }, null, null, [[0, 4]]);
 });
 router.route('/historybandit') //List all history who's certifier record bandit ->station
 .get(function _callee2(req, res) {
@@ -79,26 +99,30 @@ router.route('/historybandit') //List all history who's certifier record bandit 
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          try {
-            contract_Police.methods.getHistoryBanditArray(req.body._Certifier, req.body._Bandit).call().then(function (result) {
-              res.json({
-                massage: "Call success",
-                Data: result
-              });
+          _context2.prev = 0;
+          contract_Police.methods.getHistoryBanditArray(req.body._Certifier, req.body._Bandit).call().then(function (result) {
+            return res.json({
+              massage: "Call method success",
+              Data: result
             });
-          } catch (error) {
-            res.json({
-              massage: "Call faild",
-              Error: error
-            });
-          }
+          });
+          _context2.next = 7;
+          break;
 
-        case 1:
+        case 4:
+          _context2.prev = 4;
+          _context2.t0 = _context2["catch"](0);
+          return _context2.abrupt("return", res.json({
+            massage: "Call method faild",
+            Error: _context2.t0
+          }));
+
+        case 7:
         case "end":
           return _context2.stop();
       }
     }
-  });
+  }, null, null, [[0, 4]]);
 });
 router.route('/certifierbandit') //List who's certifier bandit
 .get(function _callee3(req, res) {
@@ -106,26 +130,30 @@ router.route('/certifierbandit') //List who's certifier bandit
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          try {
-            contract_Police.methods.getCertifierBandit(req.body._Bandit).call().then(function (result) {
-              res.json({
-                massage: "Call success",
-                Data: result
-              });
+          _context3.prev = 0;
+          contract_Police.methods.getCertifierBandit(req.body._Bandit).call().then(function (result) {
+            return res.json({
+              massage: "Call method success",
+              Data: result
             });
-          } catch (error) {
-            res.json({
-              massage: "Call faild",
-              Error: error
-            });
-          }
+          });
+          _context3.next = 7;
+          break;
 
-        case 1:
+        case 4:
+          _context3.prev = 4;
+          _context3.t0 = _context3["catch"](0);
+          return _context3.abrupt("return", res.json({
+            massage: "Call method faild",
+            Error: _context3.t0
+          }));
+
+        case 7:
         case "end":
           return _context3.stop();
       }
     }
-  });
+  }, null, null, [[0, 4]]);
 });
 router.route('/recorderBandit') //List who's record bandit
 .get(function _callee4(req, res) {
@@ -133,26 +161,30 @@ router.route('/recorderBandit') //List who's record bandit
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          try {
-            contract_Police.methods.getRecorderBandit(req.body._Recorder).call().then(function (result) {
-              res.json({
-                massage: "Call success",
-                Data: result
-              });
+          _context4.prev = 0;
+          contract_Police.methods.getRecorderBandit(req.body._Recorder).call().then(function (result) {
+            return res.json({
+              massage: "Call method success",
+              recorder: result
             });
-          } catch (error) {
-            res.json({
-              massage: "Call faild",
-              Error: error
-            });
-          }
+          });
+          _context4.next = 7;
+          break;
 
-        case 1:
+        case 4:
+          _context4.prev = 4;
+          _context4.t0 = _context4["catch"](0);
+          return _context4.abrupt("return", res.json({
+            massage: "Call method faild",
+            Error: _context4.t0
+          }));
+
+        case 7:
         case "end":
           return _context4.stop();
       }
     }
-  });
+  }, null, null, [[0, 4]]);
 });
 router.route('/claimer') //List who's claimer set by admin
 .get(function _callee5(req, res) {
@@ -160,29 +192,33 @@ router.route('/claimer') //List who's claimer set by admin
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          try {
-            contract_Police.methods.getClaim(req.body._Recorder).call().then(function (result) {
-              res.json({
-                massage: "Call success",
-                Data: result
-              });
+          _context5.prev = 0;
+          contract_Police.methods.getClaim(req.body._Supervisor).call().then(function (result) {
+            return res.json({
+              massage: "Call method success",
+              supervisor: result
             });
-          } catch (error) {
-            res.json({
-              massage: "Call faild",
-              Error: error
-            });
-          }
+          });
+          _context5.next = 7;
+          break;
 
-        case 1:
+        case 4:
+          _context5.prev = 4;
+          _context5.t0 = _context5["catch"](0);
+          return _context5.abrupt("return", res.json({
+            massage: "Call method faild",
+            Error: _context5.t0
+          }));
+
+        case 7:
         case "end":
           return _context5.stop();
       }
     }
-  });
+  }, null, null, [[0, 4]]);
 });
 app.use("*", function (req, res) {
-  return res.status(404).send('404 Not found');
+  return res.status(404).send(req);
 });
 app.listen(dotenv.parsed.PORT, function () {
   return console.log("Server is running ".concat(dotenv.parsed.PORT));

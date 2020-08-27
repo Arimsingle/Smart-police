@@ -10,8 +10,12 @@ var ipfs = new IPFS({
 
 var crypto = require('../utils/cryptography');
 
-var _require = require('../services/service'),
-    addData = _require.addData;
+var _require = require('../services/db'),
+    Register = _require.Register;
+
+var _require2 = require('../services/rawTx'),
+    tranferCoin = _require2.tranferCoin,
+    tranferData = _require2.tranferData;
 
 module.exports = function ipfsFunction(_ref) {
   var router = _ref.router,
@@ -19,62 +23,45 @@ module.exports = function ipfsFunction(_ref) {
       Tx = _ref.Tx,
       contract_Police = _ref.contract_Police,
       dotenv = _ref.dotenv;
-  router.post('/register', function _callee2(req, res) {
-    var transactionHash, _Account, _EncryptedPrivateKey, _EncryptedPassword, nonceTransfer, rawTx, privateKey, tx, serializedTx, dataPolice, bufferPolice, ipfsUri, police_temp, dataEncode, gas, ethBalance, nonce, _rawTx, decryptedPrivateKey, _privateKey, _tx, _serializedTx;
+  router.post('/register', function _callee(req, res) {
+    var _Account, _EncryptedPrivateKey, _EncryptedPassword, nonceTransfer, rawTx, privateKey, tx, serializedTx, dataPolice, bufferPolice, ipfsUri, police_temp, dataEncode, gas, ethBalance, nonce, _rawTx, decryptedPrivateKey, _privateKey, _tx, _serializedTx;
 
-    return regeneratorRuntime.async(function _callee2$(_context2) {
+    return regeneratorRuntime.async(function _callee$(_context) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context.prev = _context.next) {
           case 0:
-            transactionHash = [];
-            _Account = web3.eth.accounts.create();
+            _Account = web3.eth.accounts.create(); // Create account
+
             _EncryptedPrivateKey = crypto.encrypt(_Account.privateKey, req.body._Password);
             _EncryptedPassword = crypto.encrypt(req.body._Password, "Admin");
-            _context2.prev = 4;
-            _context2.next = 7;
+            _context.prev = 3;
+            _context.next = 6;
             return regeneratorRuntime.awrap(web3.eth.getTransactionCount(dotenv.parsed.ACCOUNT));
 
-          case 7:
-            nonceTransfer = _context2.sent;
-            rawTx = {
-              nonce: web3.utils.numberToHex(nonceTransfer),
-              gasPrice: web3.utils.numberToHex(web3.utils.toWei('10', 'gwei')),
-              gasLimit: web3.utils.numberToHex(21000),
-              to: _Account.address,
-              value: web3.utils.numberToHex(web3.utils.toWei('1', 'ether'))
-            };
-            privateKey = Buffer.from(dotenv.parsed.PRIVATE_KEY, 'hex');
+          case 6:
+            nonceTransfer = _context.sent;
+            // Round of address use transaction
+            rawTx = tranferCoin(nonceTransfer, _Account.address);
+            privateKey = Buffer.from(dotenv.parsed.PRIVATE_KEY, 'hex'); // Decript privatekey
+
             tx = new Tx(rawTx);
             tx.sign(privateKey);
             serializedTx = tx.serialize();
-            _context2.next = 15;
-            return regeneratorRuntime.awrap(web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).on('receipt', function _callee(result) {
-              return regeneratorRuntime.async(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      transactionHash.push(result.transactionHash); // console.log(result);
+            _context.next = 14;
+            return regeneratorRuntime.awrap(web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')));
 
-                    case 1:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              });
-            }));
-
-          case 15:
-            _context2.next = 20;
+          case 14:
+            _context.next = 19;
             break;
 
-          case 17:
-            _context2.prev = 17;
-            _context2.t0 = _context2["catch"](4);
-            console.log(_context2.t0);
+          case 16:
+            _context.prev = 16;
+            _context.t0 = _context["catch"](3);
+            console.log("Error", _context.t0);
 
-          case 20:
-            _context2.prev = 20;
-            _context2.next = 23;
+          case 19:
+            _context.prev = 19;
+            _context.next = 22;
             return regeneratorRuntime.awrap({
               Name: req.body._Name,
               Surname: req.body._Surname,
@@ -82,110 +69,101 @@ module.exports = function ipfsFunction(_ref) {
               Email: req.body._Email,
               Rank: req.body._Rank,
               imageUrl: req.body._imageUrl,
-              Portfolio: req.body._Portfolio,
-              TransactionHash: transactionHash,
               Account: _Account.address.substring(2),
+              Supervisor: false,
               Private: {
                 PrivateKey: JSON.stringify(_EncryptedPrivateKey),
                 Password: JSON.stringify(_EncryptedPassword)
               }
             });
 
-          case 23:
-            dataPolice = _context2.sent;
-            _context2.next = 26;
+          case 22:
+            dataPolice = _context.sent;
+            _context.next = 25;
             return regeneratorRuntime.awrap(Buffer.from(JSON.stringify(dataPolice)));
 
-          case 26:
-            bufferPolice = _context2.sent;
-            _context2.next = 29;
+          case 25:
+            bufferPolice = _context.sent;
+            _context.next = 28;
             return regeneratorRuntime.awrap(ipfs.add(bufferPolice, {
               recusive: true
             }));
 
-          case 29:
-            ipfsUri = _context2.sent;
-            dataPolice.ipfsUri = ipfsUri.path;
-            _context2.next = 33;
+          case 28:
+            ipfsUri = _context.sent;
+            dataPolice.ipfsUri = "https://ipfs.infura.io/ipfs/".concat(ipfsUri.path);
+            _context.next = 32;
             return regeneratorRuntime.awrap(contract_Police.methods.PoliceInfo(_Account.address, dataPolice.ipfsUri));
 
-          case 33:
-            police_temp = _context2.sent;
-            _context2.next = 36;
+          case 32:
+            police_temp = _context.sent;
+            _context.next = 35;
             return regeneratorRuntime.awrap(police_temp.encodeABI());
 
-          case 36:
-            dataEncode = _context2.sent;
-            _context2.next = 39;
+          case 35:
+            dataEncode = _context.sent;
+            _context.next = 38;
             return regeneratorRuntime.awrap(police_temp.estimateGas({
               from: _Account.address
             }));
 
-          case 39:
-            gas = _context2.sent;
-            _context2.next = 42;
+          case 38:
+            gas = _context.sent;
+            _context.next = 41;
             return regeneratorRuntime.awrap(web3.eth.getBalance(_Account.address));
 
-          case 42:
-            ethBalance = _context2.sent;
+          case 41:
+            ethBalance = _context.sent;
 
             if (!(ethBalance < gas)) {
-              _context2.next = 45;
+              _context.next = 44;
               break;
             }
 
-            return _context2.abrupt("return", res.json({
+            return _context.abrupt("return", res.json({
               message: "Not enough eth coin"
             }));
 
-          case 45:
-            _context2.next = 47;
+          case 44:
+            _context.next = 46;
             return regeneratorRuntime.awrap(web3.eth.getTransactionCount(_Account.address));
 
-          case 47:
-            nonce = _context2.sent;
-            _rawTx = {
-              chainId: web3.utils.numberToHex(1515),
-              nonce: web3.utils.numberToHex(nonce),
-              gasPrice: web3.utils.numberToHex(gas),
-              gasLimit: '0x2DC6C0',
-              to: dotenv.parsed.CONTRACT_ADDRESS,
-              value: web3.utils.numberToHex(0),
-              data: dataEncode
-            };
+          case 46:
+            nonce = _context.sent;
+            _rawTx = tranferData(nonce, gas, dataEncode, dotenv.parsed.CONTRACT_ADDRESS);
             decryptedPrivateKey = crypto.decrypt(_EncryptedPrivateKey, req.body._Password).slice(2);
-            console.log(decryptedPrivateKey);
             _privateKey = Buffer.from(decryptedPrivateKey, 'hex');
             _tx = new Tx(_rawTx);
 
             _tx.sign(_privateKey);
 
             _serializedTx = _tx.serialize();
-            _context2.next = 57;
-            return regeneratorRuntime.awrap(web3.eth.sendSignedTransaction('0x' + _serializedTx.toString('hex')).on('receipt', function (result) {
-              transactionHash.push(result.transactionHash); // console.log(result);
+            _context.next = 55;
+            return regeneratorRuntime.awrap(web3.eth.sendSignedTransaction('0x' + _serializedTx.toString('hex')));
+
+          case 55:
+            _context.next = 57;
+            return regeneratorRuntime.awrap(Register('Police', dataPolice).then(function () {
+              return res.send({
+                message: "Register success",
+                Result: dataPolice
+              });
             }));
 
           case 57:
-            _context2.next = 59;
-            return regeneratorRuntime.awrap(addData(dataPolice));
+            _context.next = 62;
+            break;
 
           case 59:
-            return _context2.abrupt("return", res.send({
-              message: "Success",
-              Infomation: dataPolice
-            }));
+            _context.prev = 59;
+            _context.t1 = _context["catch"](19);
+            console.log(_context.t1);
 
           case 62:
-            _context2.prev = 62;
-            _context2.t1 = _context2["catch"](20);
-            console.log(_context2.t1);
-
-          case 65:
           case "end":
-            return _context2.stop();
+            return _context.stop();
         }
       }
-    }, null, null, [[4, 17], [20, 62]]);
+    }, null, null, [[3, 16], [19, 59]]);
   });
 }; //https://ipfs.infura.io/ipfs/

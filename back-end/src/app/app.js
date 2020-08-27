@@ -13,19 +13,20 @@ app.use('/api', bodyParser.json(), router);
 app.use('/api', bodyParser.urlencoded({ extended: false }), router);
 require('../routes/register')({ router, web3, Tx, contract_Police, dotenv });
 require('../routes/supervisor')({ router, web3, Tx, contract_Police, dotenv });
-
+require('../routes/record')({ router, web3, Tx, contract_Police, dotenv });
+require('../routes/portfolio')({ router, web3, Tx, contract_Police, dotenv });
 router.route('/policeinfo') //List data of a police
     .get(async (req, res) => {
         try {
             contract_Police.methods.getPoliceInfo(req.body._Police).call().then(result => {
-                res.json({
-                    massage: "Call success",
+                return res.json({
+                    massage: "Call method success",
                     Data: result
                 })
             })
         } catch (error) {
-            res.json({
-                massage: "Call faild",
+            return res.json({
+                massage: "Call method faild",
                 Error: error
             })
         }
@@ -34,14 +35,14 @@ router.route('/historybandit') //List all history who's certifier record bandit 
     .get(async (req, res) => {
         try {
             contract_Police.methods.getHistoryBanditArray(req.body._Certifier, req.body._Bandit).call().then(result => {
-                res.json({
-                    massage: "Call success",
+                return res.json({
+                    massage: "Call method success",
                     Data: result
                 })
             })
         } catch (error) {
-            res.json({
-                massage: "Call faild",
+            return res.json({
+                massage: "Call method faild",
                 Error: error
             })
         }
@@ -51,14 +52,14 @@ router.route('/certifierbandit') //List who's certifier bandit
     .get(async (req, res) => {
         try {
             contract_Police.methods.getCertifierBandit(req.body._Bandit).call().then(result => {
-                res.json({
-                    massage: "Call success",
+                return res.json({
+                    massage: "Call method success",
                     Data: result
                 })
             })
         } catch (error) {
-            res.json({
-                massage: "Call faild",
+            return res.json({
+                massage: "Call method faild",
                 Error: error
             })
         }
@@ -68,14 +69,14 @@ router.route('/recorderBandit') //List who's record bandit
     .get(async (req, res) => {
         try {
             contract_Police.methods.getRecorderBandit(req.body._Recorder).call().then(result => {
-                res.json({
-                    massage: "Call success",
-                    Data: result
+                return res.json({
+                    massage: "Call method success",
+                    recorder: result
                 })
             })
         } catch (error) {
-            res.json({
-                massage: "Call faild",
+            return res.json({
+                massage: "Call method faild",
                 Error: error
             })
         }
@@ -84,15 +85,15 @@ router.route('/recorderBandit') //List who's record bandit
 router.route('/claimer') //List who's claimer set by admin
     .get(async (req, res) => {
         try {
-            contract_Police.methods.getClaim(req.body._Recorder).call().then(result => {
-                res.json({
-                    massage: "Call success",
-                    Data: result
+            contract_Police.methods.getClaim(req.body._Supervisor).call().then(result => {
+                return res.json({
+                    massage: "Call method success",
+                    supervisor: result
                 })
             })
         } catch (error) {
-            res.json({
-                massage: "Call faild",
+            return res.json({
+                massage: "Call method faild",
                 Error: error
             })
         }
@@ -100,5 +101,5 @@ router.route('/claimer') //List who's claimer set by admin
     })
 
 
-app.use("*", (req, res) => res.status(404).send('404 Not found'));
+app.use("*", (req, res) => res.status(404).send(req));
 app.listen(dotenv.parsed.PORT, () => console.log(`Server is running ${dotenv.parsed.PORT}`));
