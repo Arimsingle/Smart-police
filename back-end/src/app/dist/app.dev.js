@@ -10,12 +10,6 @@ var cors = require('cors');
 
 var app = express();
 
-var _require = require('../web3/web3'),
-    web3 = _require.web3;
-
-var _require2 = require('../web3/abi'),
-    abi = _require2.abi;
-
 var dotenv = require('dotenv').config({
   path: '../../.env'
 });
@@ -24,11 +18,18 @@ var contract_Police = new web3.eth.Contract(abi, dotenv.parsed.CONTRACT_ADDRESS)
 
 var Tx = require('ethereumjs-tx');
 
+var _require = require('../web3/web3'),
+    web3 = _require.web3;
+
+var _require2 = require('../web3/abi'),
+    abi = _require2.abi; // use module
+
+
 app.use(cors());
 app.use('/api', bodyParser.json(), router);
 app.use('/api', bodyParser.urlencoded({
   extended: false
-}), router);
+}), router); // import other component
 
 require('../routes/register')({
   router: router,
@@ -60,10 +61,10 @@ require('../routes/portfolio')({
   Tx: Tx,
   contract_Police: contract_Police,
   dotenv: dotenv
-});
+}); // List infomation of a police
 
-router.route('/policeinfo') //List data of a police
-.get(function _callee(req, res) {
+
+router.route('/policeinfo').get(function _callee(req, res) {
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -92,9 +93,9 @@ router.route('/policeinfo') //List data of a police
       }
     }
   }, null, null, [[0, 4]]);
-});
-router.route('/historybandit') //List all history who's certifier record bandit ->station
-.get(function _callee2(req, res) {
+}); // List all history who's certifier record bandit -> like station maybe :D
+
+router.route('/historybandit').get(function _callee2(req, res) {
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -123,9 +124,9 @@ router.route('/historybandit') //List all history who's certifier record bandit 
       }
     }
   }, null, null, [[0, 4]]);
-});
-router.route('/certifierbandit') //List who's certifier bandit
-.get(function _callee3(req, res) {
+}); // List who's certifier bandit (Certifier[])
+
+router.route('/certifierbandit').get(function _callee3(req, res) {
   return regeneratorRuntime.async(function _callee3$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
@@ -154,9 +155,9 @@ router.route('/certifierbandit') //List who's certifier bandit
       }
     }
   }, null, null, [[0, 4]]);
-});
-router.route('/recorderBandit') //List who's record bandit
-.get(function _callee4(req, res) {
+}); // List who's record bandit (address[])
+
+router.route('/recorderBandit').get(function _callee4(req, res) {
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
@@ -185,9 +186,9 @@ router.route('/recorderBandit') //List who's record bandit
       }
     }
   }, null, null, [[0, 4]]);
-});
-router.route('/claimer') //List who's claimer set by admin
-.get(function _callee5(req, res) {
+}); // List status of supervisor (boolean)
+
+router.route('/claimer').get(function _callee5(req, res) {
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
@@ -216,9 +217,43 @@ router.route('/claimer') //List who's claimer set by admin
       }
     }
   }, null, null, [[0, 4]]);
+}); // List balance
+
+router.route('/balance').get(function _callee6(req, res) {
+  return regeneratorRuntime.async(function _callee6$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.prev = 0;
+          _context6.next = 3;
+          return regeneratorRuntime.awrap(web3.eth.getBalance(req.body._police).then(function (result) {
+            return res.json({
+              massage: "Call method success",
+              balance: result
+            });
+          }));
+
+        case 3:
+          _context6.next = 8;
+          break;
+
+        case 5:
+          _context6.prev = 5;
+          _context6.t0 = _context6["catch"](0);
+          return _context6.abrupt("return", res.json({
+            massage: "Call method faild",
+            Error: _context6.t0
+          }));
+
+        case 8:
+        case "end":
+          return _context6.stop();
+      }
+    }
+  }, null, null, [[0, 5]]);
 });
 app.use("*", function (req, res) {
-  return res.status(404).send(req);
+  return res.status(404).send(res);
 });
 app.listen(dotenv.parsed.PORT, function () {
   return console.log("Server is running ".concat(dotenv.parsed.PORT));

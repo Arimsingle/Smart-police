@@ -1,6 +1,6 @@
 const { addData, updateDataArray, readDataByUID } = require('./db');
 // const bodyParser = require('body-parser');
-const conditionArray = async (collection, uid, data, req, res) => {
+const conditionSwitch = async (collection, uid, data,res) => {
     const validator = await readDataByUID(collection, uid
         .slice(2))
         .then((result) => {
@@ -39,5 +39,5 @@ const conditionArray = async (collection, uid, data, req, res) => {
     }
 }
 module.exports = {
-    conditionArray
+    conditionSwitch
 }

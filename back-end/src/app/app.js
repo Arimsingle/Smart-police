@@ -3,22 +3,25 @@ const bodyParser = require('body-parser');
 const router = express.Router();
 const cors = require('cors');
 const app = express();
-const { web3 } = require('../web3/web3');
-const { abi } = require('../web3/abi');
 const dotenv = require('dotenv').config({ path: '../../.env' });
 const contract_Police = new web3.eth.Contract(abi, dotenv.parsed.CONTRACT_ADDRESS);
 const Tx = require('ethereumjs-tx');
+const { web3 } = require('../web3/web3');
+const { abi } = require('../web3/abi');
+// use module
 app.use(cors());
 app.use('/api', bodyParser.json(), router);
 app.use('/api', bodyParser.urlencoded({ extended: false }), router);
+// import other component
 require('../routes/register')({ router, web3, Tx, contract_Police, dotenv });
 require('../routes/supervisor')({ router, web3, Tx, contract_Police, dotenv });
 require('../routes/record')({ router, web3, Tx, contract_Police, dotenv });
 require('../routes/portfolio')({ router, web3, Tx, contract_Police, dotenv });
-router.route('/policeinfo') //List data of a police
+// List infomation of a police
+router.route('/policeinfo')
     .get(async (req, res) => {
         try {
-            contract_Police.methods.getPoliceInfo(req.body._Police).call().then(result => {
+            contract_Police.methods.getPoliceInfo(req.body._Police).call().then((result) => {
                 return res.json({
                     massage: "Call method success",
                     Data: result
@@ -31,27 +34,11 @@ router.route('/policeinfo') //List data of a police
             })
         }
     })
-router.route('/historybandit') //List all history who's certifier record bandit ->station
+// List all history who's certifier record bandit -> like station maybe :D
+router.route('/historybandit')
     .get(async (req, res) => {
         try {
-            contract_Police.methods.getHistoryBanditArray(req.body._Certifier, req.body._Bandit).call().then(result => {
-                return res.json({
-                    massage: "Call method success",
-                    Data: result
-                })
-            })
-        } catch (error) {
-            return res.json({
-                massage: "Call method faild",
-                Error: error
-            })
-        }
-
-    })
-router.route('/certifierbandit') //List who's certifier bandit
-    .get(async (req, res) => {
-        try {
-            contract_Police.methods.getCertifierBandit(req.body._Bandit).call().then(result => {
+            contract_Police.methods.getHistoryBanditArray(req.body._Certifier, req.body._Bandit).call().then((result) => {
                 return res.json({
                     massage: "Call method success",
                     Data: result
@@ -65,10 +52,29 @@ router.route('/certifierbandit') //List who's certifier bandit
         }
 
     })
-router.route('/recorderBandit') //List who's record bandit
+// List who's certifier bandit (Certifier[])
+router.route('/certifierbandit')
     .get(async (req, res) => {
         try {
-            contract_Police.methods.getRecorderBandit(req.body._Recorder).call().then(result => {
+            contract_Police.methods.getCertifierBandit(req.body._Bandit).call().then((result) => {
+                return res.json({
+                    massage: "Call method success",
+                    Data: result
+                })
+            })
+        } catch (error) {
+            return res.json({
+                massage: "Call method faild",
+                Error: error
+            })
+        }
+
+    })
+// List who's record bandit (address[])
+router.route('/recorderBandit')
+    .get(async (req, res) => {
+        try {
+            contract_Police.methods.getRecorderBandit(req.body._Recorder).call().then((result) => {
                 return res.json({
                     massage: "Call method success",
                     recorder: result
@@ -82,10 +88,11 @@ router.route('/recorderBandit') //List who's record bandit
         }
 
     })
-router.route('/claimer') //List who's claimer set by admin
+// List status of supervisor (boolean)
+router.route('/claimer')
     .get(async (req, res) => {
         try {
-            contract_Police.methods.getClaim(req.body._Supervisor).call().then(result => {
+            contract_Police.methods.getClaim(req.body._Supervisor).call().then((result) => {
                 return res.json({
                     massage: "Call method success",
                     supervisor: result
@@ -99,7 +106,24 @@ router.route('/claimer') //List who's claimer set by admin
         }
 
     })
+// List balance
+router.route('/balance')
+    .get(async (req, res) => {
+        try {
+            await web3.eth.getBalance(req.body._police).then((result) => {
+                return res.json({
+                    massage: "Call method success",
+                    balance: result
+                })
+            })
+        } catch (error) {
+            return res.json({
+                massage: "Call method faild",
+                Error: error
+            })
+        }
+    })
 
 
-app.use("*", (req, res) => res.status(404).send(req));
+app.use("*", (req, res) => res.status(404).send(res));
 app.listen(dotenv.parsed.PORT, () => console.log(`Server is running ${dotenv.parsed.PORT}`));

@@ -31,25 +31,29 @@ module.exports = function ipfsFunction(_ref) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
+            // variable to use subcriber function
             data = "";
-            topics = [];
-            _Account = web3.eth.accounts.create(); // Create account
+            topics = []; // Create account
 
-            _EncryptedPrivateKey = crypto.encrypt(_Account.privateKey, req.body._Password);
-            _EncryptedPassword = crypto.encrypt(req.body._Password, "Admin");
-            _context3.prev = 5;
-            _context3.next = 8;
+            _Account = web3.eth.accounts.create(); // encrypt private key
+
+            _EncryptedPrivateKey = crypto.encrypt(_Account.privateKey, req.body._Password); // encrypt password
+
+            _EncryptedPassword = crypto.encrypt(req.body._Password, "Admin"); // Round of address use transaction
+
+            _context3.next = 7;
             return regeneratorRuntime.awrap(web3.eth.getTransactionCount(dotenv.parsed.ACCOUNT));
 
-          case 8:
+          case 7:
             nonceTransfer = _context3.sent;
-            // Round of address use transaction
             rawTx = tranferCoin(nonceTransfer, _Account.address);
-            privateKey = Buffer.from(dotenv.parsed.PRIVATE_KEY, 'hex'); // Decript privatekey
-
+            _context3.prev = 9;
+            // decript privatekey
+            privateKey = Buffer.from(dotenv.parsed.PRIVATE_KEY, 'hex');
             tx = new Tx(rawTx);
             tx.sign(privateKey);
-            serializedTx = tx.serialize();
+            serializedTx = tx.serialize(); // Send & sign transaction
+
             _context3.next = 16;
             return regeneratorRuntime.awrap(web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')));
 
@@ -59,7 +63,7 @@ module.exports = function ipfsFunction(_ref) {
 
           case 18:
             _context3.prev = 18;
-            _context3.t0 = _context3["catch"](5);
+            _context3.t0 = _context3["catch"](9);
             console.log("Error", _context3.t0);
 
           case 21:
@@ -94,7 +98,8 @@ module.exports = function ipfsFunction(_ref) {
 
           case 30:
             ipfsUri = _context3.sent;
-            dataPolice.ipfsUri = "https://ipfs.infura.io/ipfs/".concat(ipfsUri.path);
+            dataPolice.ipfsUri = "https://ipfs.infura.io/ipfs/".concat(ipfsUri.path); /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             _context3.next = 34;
             return regeneratorRuntime.awrap(contract_Police.methods.PoliceInfo(_Account.address, dataPolice.ipfsUri));
 
@@ -148,7 +153,6 @@ module.exports = function ipfsFunction(_ref) {
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
-                      // console.log(result.logs[0].data, [result.logs[0].topics[0], result.logs[0].topics[1]]);
                       data = result.logs[0].data;
 
                       for (i = 1; i < result.logs[0].topics.length + 1; i++) {
@@ -218,6 +222,6 @@ module.exports = function ipfsFunction(_ref) {
             return _context3.stop();
         }
       }
-    }, null, null, [[5, 18], [21, 64]]);
+    }, null, null, [[9, 18], [21, 64]]);
   });
 };
