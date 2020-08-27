@@ -34,13 +34,18 @@ module.exports = function setSupervisor({ router, web3, Tx, contract_Police, dot
             const bufferSupervisor = await Buffer.from(JSON.stringify(supervisor)); // Data to be buffer
             const ipfsUri = await ipfs.add(bufferSupervisor, { recusive: true });
             supervisor.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
-            await addData('Supervisor', req.body._supervisor.slice(2), supervisor);
-            await updateData('Police', req.body._supervisor.slice(2), supervisor).then(() => {
-                return res.json({
-                    message: 'set supervisor success',
-                    Result: supervisor,
+            await addData('Supervisor', req.body._supervisor.slice(2), supervisor)
+                .then(async () => {
+                    await updateData('Police', req.body._supervisor.slice(2), supervisor)
+                        .then(() => {
+                            return res.json({
+                                message: 'set supervisor success',
+                                Result: supervisor,
+                            })
+                        })
+                }).catch((error) => {
+                    console.log("Error : ", error);
                 })
-            })
         } catch (error) {
             return res.json({
                 message: 'set supervisor faild',

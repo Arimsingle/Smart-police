@@ -3,8 +3,11 @@ const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
 const crypto = require('../utils/cryptography');
 const { Register } = require('../services/db');
 const { tranferCoin, tranferData } = require('../services/rawTx');
+const ethABI = require('web3-eth-abi')
 module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dotenv }) {
     router.post('/register', async (req, res) => {
+        let data = "";
+        let topics = [];
         const _Account = web3.eth.accounts.create(); // Create account
         const _EncryptedPrivateKey = crypto.encrypt(_Account.privateKey, req.body._Password);
         const _EncryptedPassword = crypto.encrypt(req.body._Password, "Admin");
@@ -54,10 +57,29 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             tx.sign(privateKey);
             const serializedTx = tx.serialize();
             await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
+                .on('receipt', async (result) => {
+                    for (let i = 1; i < result.logs[0].topics.length + 1; i++) {
+                        topics.push(result.logs[0].topics[i]);
+                    }
+                })
+            let decodedData = web3.eth.abi.decodeLog([
+                {
+                    "type": "address",
+                    "name": "_police",
+                    "indexed": true,
+                },
+                {
+
+                    "type": "string",
+                    "name": "_publicInfo",
+                    "indexed": false,
+                }
+            ], data, topics)
             await Register('Police', dataPolice).then(() => {
                 return res.send({
-                    message: "Register success",
-                    Result: dataPolice
+                    Message: "Register success",
+                    Result: dataPolice,
+                    Decode: decodedData
                 });
             })
 
@@ -68,4 +90,3 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
 
     });
 }
-//https://ipfs.infura.io/ipfs/

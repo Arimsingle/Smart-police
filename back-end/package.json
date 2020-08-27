@@ -20,6 +20,7 @@
     "ipfs-api": "^26.1.2",
     "ipfs-http-client": "^46.0.0",
     "truffle-hdwallet-provider": "^1.0.17",
-    "web3": "^1.2.11"
+    "web3": "^1.2.11",
+    "web3-eth-abi": "^1.2.9"
   }
 }

@@ -12,7 +12,10 @@ module.exports = function portfolioFunction({ router, web3, Tx, contract_Police,
                     message: "Your account does not exits Please register"
                 })
             }
-            const police_temp = await contract_Police.methods.setPortfolio(req.body._supervisor, req.body._police, req.body._portfolio);
+            const police_temp = await contract_Police.methods.setPortfolio(
+                req.body._supervisor,
+                req.body._police,
+                req.body._portfolio);
             const dataEncode = await police_temp.encodeABI();
             const gas = await police_temp.estimateGas({ from: req.body._supervisor });
             const ethBalance = await web3.eth.getBalance(req.body._supervisor);
@@ -38,7 +41,7 @@ module.exports = function portfolioFunction({ router, web3, Tx, contract_Police,
                     }
                 ]
             }
-            const validator = await await readDataByUID('Portfolio', req.body._police
+            const validator = await readDataByUID('Portfolio', req.body._police
                 .slice(2))
                 .then((result) => {
                     if (result) {
@@ -48,30 +51,58 @@ module.exports = function portfolioFunction({ router, web3, Tx, contract_Police,
                 }).catch((error) => {
                     console.log("Error : ", error);
                 })
-            if (validator) {
-                await updateDataArray('Portfolio', req.body._police
-                    .slice(2), portfolioData.Result[0])
-                    .then(() => {
-                        return res.json({
-                            message: 'set portfolio success',
-                            Result: portfolioData.Result[0]
+
+            switch (validator) {
+                case true:
+                    await updateDataArray('Portfolio', req.body._police
+                        .slice(2), portfolioData.Result[0])
+                        .then(() => {
+                            return res.json({
+                                message: 'set portfolio success',
+                                Result: portfolioData.Result[0]
+                            })
+                        }).catch((error) => {
+                            console.log("Error : ", error);
                         })
-                    }).catch((error) => {
-                        console.log("Error : ", error);
-                    })
-            }
-            else {
-                await addData('Portfolio', req.body._police
-                    .slice(2), portfolioData)
-                    .then(() => {
-                        return res.json({
-                            message: 'set portfolio success',
-                            Result: portfolioData.Result[0]
+                    break;
+                case false:
+                    await addData('Portfolio', req.body._police
+                        .slice(2), portfolioData)
+                        .then(() => {
+                            return res.json({
+                                message: 'set portfolio success',
+                                Result: portfolioData.Result[0]
+                            })
+                        }).catch((error) => {
+                            console.log("Error : ", error);
                         })
-                    }).catch((error) => {
-                        console.log("Error : ", error);
-                    })
+                    break;
             }
+
+            // if (validator) {
+            //     await updateDataArray('Portfolio', req.body._police
+            //         .slice(2), portfolioData.Result[0])
+            //         .then(() => {
+            //             return res.json({
+            //                 message: 'set portfolio success',
+            //                 Result: portfolioData.Result[0]
+            //             })
+            //         }).catch((error) => {
+            //             console.log("Error : ", error);
+            //         })
+            // }
+            // else {
+            //     await addData('Portfolio', req.body._police
+            //         .slice(2), portfolioData)
+            //         .then(() => {
+            //             return res.json({
+            //                 message: 'set portfolio success',
+            //                 Result: portfolioData.Result[0]
+            //             })
+            //         }).catch((error) => {
+            //             console.log("Error : ", error);
+            //         })
+            // }
         } catch (error) {
             console.log("Error : ", error);
         }
