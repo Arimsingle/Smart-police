@@ -1,6 +1,5 @@
 //https://firebase.google.com/docs/firestore/query-data/get-data
 const { db } = require('../database/db');
-const admin = require('firebase-admin');
 const firebase = require('firebase');
 const Register = async (collection, data) => {
     await db.collection(collection).doc(data.Account).set(data);

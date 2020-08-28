@@ -1,19 +1,15 @@
 // const IPFS = require('ipfs-http-client');
 // const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 const crypto = require('../utils/cryptography');
-const { readDataByUID } = require('../services/db');
 const { conditionSwitch } = require('../services/switch');
 const { tranferData } = require('../services/rawTx');
+const { findPrivateKey } = require('../services/privatekey');
 module.exports = function portfolioFunction({ router, web3, Tx, contract_Police, dotenv }) {
     router.post('/portfolio', async (req, res) => {
         // find private key in database 
-        const { Private: { PrivateKey } } = await readDataByUID('Police', req.body._police.slice(2));
-        if (!PrivateKey) {
-            return res.json({
-                message: "Your account does not exits Please register :D"
-            });
-        }
-
+        const PrivateKey = await findPrivateKey('Police', req.body._supervisor.slice(2), res).then((result) => {
+            return result;
+        });
         try {
             // templete of setPortfolio method
             const police_temp = await contract_Police.methods.setPortfolio(
@@ -31,10 +27,10 @@ module.exports = function portfolioFunction({ router, web3, Tx, contract_Police,
             if (ethBalance < gas) {
                 return res.json({
                     message: "Not enough eth coin"
-                })
+                });
             }
             // round of address transaction 
-            const nonce = await web3.eth.getTransactionCount(req.body._police);
+            const nonce = await web3.eth.getTransactionCount(req.body._supervisor);
             // Data to sign transaction
             const rawTx = tranferData(nonce, gas, dataEncode, dotenv.parsed.CONTRACT_ADDRESS);
             // decript private key
@@ -48,44 +44,21 @@ module.exports = function portfolioFunction({ router, web3, Tx, contract_Police,
             await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
             // call condition function
             await conditionSwitch('Portfolio', req.body._police, {
-                Result: [
-                    {
-                        from: req.body._supervisor.slice(2),
-                        to: req.body._police.slice(2),
-                        portfolio: req.body._portfolio
-                    }
-                ] //data
+                Result:
+                    [
+                        {
+                            from: req.body._supervisor.slice(2),
+                            to: req.body._police.slice(2),
+                            portfolio: req.body._portfolio
+                        }
+                    ] //data
             }, res);
-
-            // switch (validator) {
-            //     case true:
-            //         await updateDataArray('Portfolio', req.body._police
-            //             .slice(2), portfolioData.Result[0])
-            //             .then(() => {
-            //                 return res.json({
-            //                     message: 'set portfolio success',
-            //                     Result: portfolioData.Result[0]
-            //                 })
-            //             }).catch((error) => {
-            //                 console.log("Error : ", error);
-            //             })
-            //         break;
-            //     case false:
-            //         await addData('Portfolio', req.body._police
-            //             .slice(2), portfolioData)
-            //             .then(() => {
-            //                 return res.json({
-            //                     message: 'set portfolio success',
-            //                     Result: portfolioData.Result[0]
-            //                 })
-            //             }).catch((error) => {
-            //                 console.log("Error : ", error);
-            //             })
-            //         break;
-            // }
-
         } catch (error) {
-            console.log("Error : ", error);
+            return res.json({
+                message: "Call method faild",
+                info: "Only Supervisor use this method",
+                Error: error,
+            })
         }
     })
 }

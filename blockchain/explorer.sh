@@ -1,0 +1,1 @@
+docker run -p 3000:80 -e APP_NODE_URL="http://localhost:8501" alethio/ethereum-lite-explorer

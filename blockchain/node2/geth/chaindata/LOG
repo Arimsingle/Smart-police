@@ -112,3 +112,24 @@
 22:02:22.160437 table@remove removed @16
 22:02:22.160437 table@remove removed @5
 22:02:22.160437 table@remove removed @2
+=============== Aug 28, 2020 (+07) ===============
+20:56:02.979355 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:56:02.989346 version@stat F·[0 1] S·785KiB[0B 785KiB] Sc·[0.00 0.01]
+20:56:02.989346 db@open opening
+20:56:02.989346 journal@recovery F·1
+20:56:02.992328 journal@recovery recovering @22
+20:56:03.038299 memdb@flush created L0@25 N·27477 S·1MiB "H\x00\x1c..hbZ,v36460":"r\x00\x00..\xecv\xcc,v45846"
+20:56:03.041300 version@stat F·[1 1] S·2MiB[1MiB 785KiB] Sc·[0.25 0.01]
+20:56:03.054299 db@janitor F·5 G·1
+20:56:03.054299 db@janitor removing table-21
+20:56:03.054299 db@open done T·64.9523ms
+=============== Aug 28, 2020 (+07) ===============
+21:28:33.694369 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:28:33.705389 version@stat F·[1 1] S·2MiB[1MiB 785KiB] Sc·[0.25 0.01]
+21:28:33.705389 db@open opening
+21:28:33.705389 journal@recovery F·1
+21:28:33.709372 journal@recovery recovering @26
+21:28:33.758373 memdb@flush created L0@28 N·22997 S·949KiB "H\x00x..\u007f\xfd\r,v66171":"r\x00\x00..\xecv\xcc,v68844"
+21:28:33.762371 version@stat F·[2 1] S·2MiB[2MiB 785KiB] Sc·[0.50 0.01]
+21:28:33.782372 db@janitor F·5 G·0
+21:28:33.782372 db@open done T·76.9828ms

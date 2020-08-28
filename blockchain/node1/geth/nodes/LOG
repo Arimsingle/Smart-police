@@ -127,3 +127,35 @@
 22:02:17.688976 db@janitor F·5 G·1
 22:02:17.688976 db@janitor removing table-24
 22:02:17.688976 db@open done T·32.9691ms
+=============== Aug 28, 2020 (+07) ===============
+20:55:53.301473 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:55:53.310473 version@stat F·[1 1] S·70KiB[69KiB 355B] Sc·[0.25 0.00]
+20:55:53.310473 db@open opening
+20:55:53.310473 journal@recovery F·1
+20:55:53.312474 journal@recovery recovering @29
+20:55:53.326473 memdb@flush created L0@31 N·7016 S·55KiB "loc..seq,v9173":"n:-..ong,v9183"
+20:55:53.329504 version@stat F·[2 1] S·125KiB[125KiB 355B] Sc·[0.50 0.00]
+20:55:53.341474 db@janitor F·5 G·0
+20:55:53.342476 db@open done T·32.0031ms
+20:55:53.396958 table@compaction L0·2 -> L1·1 S·125KiB Q·16189
+20:55:53.411959 table@build created L1@34 N·12 S·599B "loc..seq,v9173":"version,v1"
+20:55:53.412959 version@stat F·[0 1] S·599B[0B 599B] Sc·[0.00 0.00]
+20:55:53.413966 table@compaction committed F-2 S-124KiB Ke·0 D·15960 T·17.0081ms
+20:55:53.414988 table@remove removed @28
+20:55:53.414988 table@remove removed @27
+=============== Aug 28, 2020 (+07) ===============
+21:28:25.001386 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:28:25.008386 version@stat F·[0 1] S·599B[0B 599B] Sc·[0.00 0.00]
+21:28:25.008386 db@open opening
+21:28:25.008386 journal@recovery F·1
+21:28:25.011416 journal@recovery recovering @32
+21:28:25.021388 memdb@flush created L0@35 N·16 S·385B "loc..seq,v16190":"n:-..ong,v16204"
+21:28:25.025388 version@stat F·[1 1] S·984B[385B 599B] Sc·[0.25 0.00]
+21:28:25.040392 db@janitor F·5 G·1
+21:28:25.041387 db@janitor removing table-31
+21:28:25.041387 db@open done T·33.0016ms
+21:28:25.064405 table@compaction L0·1 -> L1·1 S·984B Q·16206
+21:28:25.076386 table@build created L1@38 N·12 S·598B "loc..seq,v16190":"version,v1"
+21:28:25.076386 version@stat F·[0 1] S·598B[0B 598B] Sc·[0.00 0.00]
+21:28:25.078385 table@compaction committed F-1 S-386B Ke·0 D·16 T·13.98ms
+21:28:25.080394 table@remove removed @34

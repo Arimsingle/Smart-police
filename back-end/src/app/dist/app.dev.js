@@ -14,15 +14,15 @@ var dotenv = require('dotenv').config({
   path: '../../.env'
 });
 
-var contract_Police = new web3.eth.Contract(abi, dotenv.parsed.CONTRACT_ADDRESS);
-
-var Tx = require('ethereumjs-tx');
-
 var _require = require('../web3/web3'),
     web3 = _require.web3;
 
 var _require2 = require('../web3/abi'),
-    abi = _require2.abi; // use module
+    abi = _require2.abi;
+
+var contract_Police = new web3.eth.Contract(abi, dotenv.parsed.CONTRACT_ADDRESS);
+
+var Tx = require('ethereumjs-tx'); // use module
 
 
 app.use(cors());
@@ -31,7 +31,15 @@ app.use('/api', bodyParser.urlencoded({
   extended: false
 }), router); // import other component
 
-require('../routes/register')({
+require('../routes/police_register')({
+  router: router,
+  web3: web3,
+  Tx: Tx,
+  contract_Police: contract_Police,
+  dotenv: dotenv
+});
+
+require('../routes/bandit_register')({
   router: router,
   web3: web3,
   Tx: Tx,
@@ -70,7 +78,7 @@ router.route('/policeinfo').get(function _callee(req, res) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          contract_Police.methods.getPoliceInfo(req.body._Police).call().then(function (result) {
+          contract_Police.methods.getPoliceInfo(req.body._police).call().then(function (result) {
             return res.json({
               massage: "Call method success",
               Data: result
@@ -101,7 +109,7 @@ router.route('/historybandit').get(function _callee2(req, res) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.prev = 0;
-          contract_Police.methods.getHistoryBanditArray(req.body._Certifier, req.body._Bandit).call().then(function (result) {
+          contract_Police.methods.getHistoryBanditArray(req.body._certifier, req.body._bandit).call().then(function (result) {
             return res.json({
               massage: "Call method success",
               Data: result
@@ -132,7 +140,7 @@ router.route('/certifierbandit').get(function _callee3(req, res) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
-          contract_Police.methods.getCertifierBandit(req.body._Bandit).call().then(function (result) {
+          contract_Police.methods.getCertifierBandit(req.body._bandit).call().then(function (result) {
             return res.json({
               massage: "Call method success",
               Data: result
@@ -163,7 +171,7 @@ router.route('/recorderBandit').get(function _callee4(req, res) {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.prev = 0;
-          contract_Police.methods.getRecorderBandit(req.body._Recorder).call().then(function (result) {
+          contract_Police.methods.getRecorderBandit(req.body._recorder).call().then(function (result) {
             return res.json({
               massage: "Call method success",
               recorder: result
@@ -194,7 +202,7 @@ router.route('/claimer').get(function _callee5(req, res) {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
-          contract_Police.methods.getClaim(req.body._Supervisor).call().then(function (result) {
+          contract_Police.methods.getClaim(req.body._supervisor).call().then(function (result) {
             return res.json({
               massage: "Call method success",
               supervisor: result

@@ -24,7 +24,7 @@ module.exports = function ipfsFunction(_ref) {
       Tx = _ref.Tx,
       contract_Police = _ref.contract_Police,
       dotenv = _ref.dotenv;
-  router.post('/register', function _callee3(req, res) {
+  router.post('/police/register', function _callee3(req, res) {
     var data, topics, _Account, _EncryptedPrivateKey, _EncryptedPassword, nonceTransfer, rawTx, privateKey, tx, serializedTx, dataPolice, bufferPolice, ipfsUri, police_temp, dataEncode, gas, ethBalance, nonce, _rawTx, decryptedPrivateKey, _privateKey, _tx, _serializedTx, decodedData;
 
     return regeneratorRuntime.async(function _callee3$(_context3) {

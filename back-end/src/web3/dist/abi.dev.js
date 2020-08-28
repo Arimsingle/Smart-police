@@ -52,6 +52,19 @@ var abi = [{
   "anonymous": false,
   "inputs": [{
     "indexed": true,
+    "name": "_bandit",
+    "type": "address"
+  }, {
+    "indexed": false,
+    "name": "_publicInfo",
+    "type": "string"
+  }],
+  "name": "_Bandit_Info",
+  "type": "event"
+}, {
+  "anonymous": false,
+  "inputs": [{
+    "indexed": true,
     "name": "_supervisor",
     "type": "address"
   }, {
@@ -149,13 +162,30 @@ var abi = [{
 }, {
   "constant": false,
   "inputs": [{
+    "name": "_Bandit",
+    "type": "address"
+  }, {
+    "name": "_PublicInfo",
+    "type": "string"
+  }],
+  "name": "Bandit_Info",
+  "outputs": [{
+    "name": "sucess",
+    "type": "bool"
+  }],
+  "payable": false,
+  "stateMutability": "nonpayable",
+  "type": "function"
+}, {
+  "constant": false,
+  "inputs": [{
     "name": "_Supervisor",
     "type": "address"
   }, {
     "name": "_Bandit",
     "type": "address"
   }, {
-    "name": "_PublicInfo",
+    "name": "_Report",
     "type": "string"
   }],
   "name": "setHistoryBandit",
@@ -187,6 +217,24 @@ var abi = [{
 }, {
   "constant": true,
   "inputs": [{
+    "name": "_Bandit",
+    "type": "address"
+  }],
+  "name": "getBanditInfo",
+  "outputs": [{
+    "components": [{
+      "name": "publicInfo",
+      "type": "string"
+    }],
+    "name": "",
+    "type": "tuple"
+  }],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "constant": true,
+  "inputs": [{
     "name": "_Certifier",
     "type": "address"
   }, {
@@ -196,7 +244,7 @@ var abi = [{
   "name": "getHistoryBanditArray",
   "outputs": [{
     "components": [{
-      "name": "publicInfo",
+      "name": "report",
       "type": "string"
     }],
     "name": "",
