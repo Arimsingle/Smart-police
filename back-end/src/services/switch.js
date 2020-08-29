@@ -1,6 +1,5 @@
 const { addData, updateDataArray, readDataByUID } = require('./db');
-// const bodyParser = require('body-parser');
-const conditionSwitch = async (collection, uid, data,res) => {
+const conditionSwitch = async (collection, uid, data, dataObj, nameDoc) => {
     const validator = await readDataByUID(collection, uid
         .slice(2))
         .then((result) => {
@@ -14,25 +13,15 @@ const conditionSwitch = async (collection, uid, data,res) => {
     switch (validator) {
         case true:
             await updateDataArray(collection, uid
-                .slice(2), data.Result[0])
-                .then(() => {
-                    return res.json({
-                        message: `${collection} sucess`,
-                        Result: data.Result[0]
-                    })
-                }).catch((error) => {
+                .slice(2), dataObj, nameDoc)
+                .catch((error) => {
                     console.log("Error : ", error);
                 })
             break;
         case false:
             await addData(collection, uid
                 .slice(2), data)
-                .then(() => {
-                    return res.json({
-                        message: `${collection} sucess`,
-                        Result: data.Result[0]
-                    })
-                }).catch((error) => {
+                .catch((error) => {
                     console.log("Error : ", error);
                 })
             break;

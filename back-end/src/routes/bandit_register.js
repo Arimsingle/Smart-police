@@ -1,18 +1,22 @@
-const dateTime = require('node-datetime');
 const IPFS = require('ipfs-http-client');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
+// const dateTime = require('node-datetime');
 const crypto = require('../utils/cryptography');
-const { Register } = require('../services/db');
+const { Register, addData } = require('../services/db');
 const { tranferData } = require('../services/rawTx');
 const { findPrivateKey } = require('../services/privatekey');
-const { db } = require('../database/db');
+require('node-datetime-thai');
 module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dotenv }) {
     router.post('/bandit/register', async (req, res) => {
+        const Now = new Date();
+        // variable to use subcriber function
+        let data = "";
+        let topics = [];
         // Create account
         const _Account = web3.eth.accounts.create();
         // encrypt private key
         const _EncryptedPrivateKey = crypto.encrypt(_Account.privateKey, "Police");
-        const PrivateKey = await findPrivateKey('Police', req.body._police.slice(2), res).then((result) => {
+        const PrivateKey = await findPrivateKey('PoliceInfo', req.body._police.slice(2), res).then((result) => {
             return result;
         });
         try {
@@ -24,7 +28,7 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                 Email: req.body._Email,
                 Rank: req.body._Rank,
                 imageUrl: req.body._imageUrl,
-                Date: dateTime.create().format('Y-m-d H:M:S').toString(),
+                Date: Now.toThaiString(3),
                 Account: _Account.address.slice(2),
                 Private: {
                     PrivateKey: JSON.stringify(_EncryptedPrivateKey)
@@ -52,15 +56,46 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             const tx = new Tx(rawTx);
             tx.sign(privateKey);
             const serializedTx = tx.serialize();
-            await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
-            await Register("Bandit", dataBandit);
-            return res.json({
-                message: "success"
-            })
+            await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
+                .on('receipt', async (result) => {
+                    data = result.logs[0].data;
+                    for (let i = 1; i < result.logs[0].topics.length + 1; i++) {
+                        topics.push(result.logs[0].topics[i]);
+                    }
+                });
+            let decodedData = await web3.eth.abi.decodeLog([
+                {
+                    "indexed": true,
+                    "name": "_bandit",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "_publicInfo",
+                    "type": "string"
+                }
+            ], data, topics);
+            await Register("BanditInfo", dataBandit).then(async () => {
+                await addData('Decode', dataBandit.Account,
+                    {
+                        BanditRegister:
+                        {
+                            _bandit: decodedData._bandit,
+                            _publicInfo: decodedData._publicInfo
+                        }
+                    }).then(() => {
+                        return res.json({
+                            message: 'Register sucess',
+                            Result: dataBandit
+                        })
+                    });
+            });
+            // return res.json({
+            //     message: "register success",
+            //     Result: dataBandit
+            // })
         } catch (error) {
             console.log("Error : ", error);
         }
-
-
     });
 }

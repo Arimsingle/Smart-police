@@ -7,12 +7,42 @@ const Register = async (collection, data) => {
 const addData = async (collection, account, data) => {
     await db.collection(collection).doc(account).set(data);
 }
-const updateDataArray = async (collection, account, data) => {
-    await db.collection(collection).doc(account).update({
-        Result: firebase.firestore.FieldValue.arrayUnion(
-            data
-        )
-    });
+const updateDataArray = async (collection, account, dataObj, nameDoc) => {
+    // await db.collection(collection).doc(account).update({
+    //     doc: firebase.firestore.FieldValue.arrayUnion(
+    //         dataObj
+    //     )
+    // });
+    switch (nameDoc) {
+        case "BanditHistory":
+            await db.collection(collection).doc(account).update({
+                BanditHistory: firebase.firestore.FieldValue.arrayUnion(
+                    dataObj
+                )
+            });
+            break;
+        case "RecordBandit":
+            await db.collection(collection).doc(account).update({
+                RecordBandit: firebase.firestore.FieldValue.arrayUnion(
+                    dataObj
+                )
+            });
+            break;
+        case "RecordBandit":
+            await db.collection(collection).doc(account).update({
+                RecordBandit: firebase.firestore.FieldValue.arrayUnion(
+                    dataObj
+                )
+            });
+            break;
+        case "PolicePortfolio":
+            await db.collection(collection).doc(account).update({
+                PolicePortfolio: firebase.firestore.FieldValue.arrayUnion(
+                    dataObj
+                )
+            });
+            break;
+    }
 
 }
 

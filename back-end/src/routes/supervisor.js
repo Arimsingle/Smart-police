@@ -46,7 +46,7 @@ module.exports = function setSupervisor({ router, web3, Tx, contract_Police, dot
             supervisor.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
             await addData('Supervisor', req.body._supervisor.slice(2), supervisor)
                 .then(async () => {
-                    await updateData('Police', req.body._supervisor.slice(2), supervisor)
+                    await updateData('PoliceInfo', req.body._supervisor.slice(2), supervisor)
                         .then(() => {
                             return res.json({
                                 message: 'set supervisor success',

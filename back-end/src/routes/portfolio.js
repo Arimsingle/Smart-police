@@ -7,7 +7,7 @@ const { findPrivateKey } = require('../services/privatekey');
 module.exports = function portfolioFunction({ router, web3, Tx, contract_Police, dotenv }) {
     router.post('/portfolio', async (req, res) => {
         // find private key in database 
-        const PrivateKey = await findPrivateKey('Police', req.body._supervisor.slice(2), res).then((result) => {
+        const PrivateKey = await findPrivateKey('PoliceInfo', req.body._supervisor.slice(2), res).then((result) => {
             return result;
         });
         try {
@@ -43,8 +43,8 @@ module.exports = function portfolioFunction({ router, web3, Tx, contract_Police,
             // sign & send transaction
             await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
             // call condition function
-            await conditionSwitch('Portfolio', req.body._police, {
-                Result:
+            await conditionSwitch('Decode', req.body._police, {
+                PolicePortfolio:
                     [
                         {
                             from: req.body._supervisor.slice(2),
@@ -52,7 +52,20 @@ module.exports = function portfolioFunction({ router, web3, Tx, contract_Police,
                             portfolio: req.body._portfolio
                         }
                     ] //data
-            }, res);
+            }, {
+                from: req.body._supervisor.slice(2),
+                to: req.body._police.slice(2),
+                portfolio: req.body._portfolio
+            }, "PolicePortfolio").then(() => {
+                return res.json({
+                    message: "Set portfolio success",
+                    Portfolio: {
+                        from: req.body._supervisor.slice(2),
+                        to: req.body._police.slice(2),
+                        portfolio: req.body._portfolio
+                    }
+                })
+            })
         } catch (error) {
             return res.json({
                 message: "Call method faild",

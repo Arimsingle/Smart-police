@@ -1,12 +1,16 @@
 const crypto = require('../utils/cryptography');
-
+const { conditionSwitch } = require('../services/switch');
 const { tranferData } = require('../services/rawTx');
 const { findPrivateKey } = require('../services/privatekey');
 module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dotenv }) {
     router.post('/record', async (req, res) => {
         // find private key in database 
+        let data = "";
+        // let data2 = "";
+        let topics = [];
+        // let topics2 = [];
         //ตอนนี้ใช้ collecion police ไปก่อน
-        const PrivateKey = await findPrivateKey('Police', req.body._supervisor.slice(2), res).then((result) => {
+        const PrivateKey = await findPrivateKey('PoliceInfo', req.body._supervisor.slice(2), res).then((result) => {
             return result;
         });
         // console.log(PrivateKey);
@@ -31,13 +35,83 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             const tx = new Tx(rawTx);
             tx.sign(privateKey);
             const serializedTx = tx.serialize();
-            await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).then(() => {
+            await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
+                .on('receipt', async (result) => {
+                    data = result.logs[1].data;
+                    for (let i = 0; i < result.logs.length; i++) {
+                        topics.push(result.logs[0].topics[i + 1]);
+                    }
+                });
+            let decodedHistoty = await web3.eth.abi.decodeLog([
+                {
+                    "indexed": true,
+                    "name": "_admin",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "name": "_bandit",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "_publicInfo",
+                    "type": "string"
+                }
+            ], data, topics);
+            let decodedRecord = await web3.eth.abi.decodeLog([
+                {
+                    "indexed": true,
+                    "name": "_supervisor",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "name": "_bandit",
+                    "type": "address"
+                }
+            ], data, topics);
+            await conditionSwitch('Decode', req.body._bandit, {
+                BanditHistory:
+                    [
+                        {
+                            _police: decodedHistoty._admin,
+                            _bandit: decodedHistoty._bandit,
+                            _publicInfo: decodedHistoty._publicInfo
+                        }
+                    ] //data
+            }, {
+                _police: decodedHistoty._admin,
+                _bandit: decodedHistoty._bandit,
+                _publicInfo: decodedHistoty._publicInfo
+            }, 'BanditHistory').then(async () => {
+                await conditionSwitch('Decode', req.body._supervisor, {
+                    RecordBandit:
+                        [
+                            {
+                                _supervisor: decodedRecord._supervisor,
+                                _bandit: decodedRecord._bandit,
+                            }
+                        ] //data
+                }, {
+                    _supervisor: decodedRecord._supervisor,
+                    _bandit: decodedRecord._bandit,
+                }, 'RecordBandit')
+            }).then(() => {
                 return res.json({
-                    _supervisor: req.body._supervisor,
-                    _bandit: req.body._bandit,
-                    _publicInfo: req.body._publicInfo
+                    message: "Set historyBandit & recordBandit success :)",
+                    historyBandit: {
+                        _police: decodedHistoty._admin,
+                        _bandit: decodedHistoty._bandit,
+                        _publicInfo: decodedHistoty._publicInfo
+                    },
+                    recordBandit: {
+                        _supervisor: decodedRecord._supervisor,
+                        _bandit: decodedRecord._bandit,
+                    },
                 })
             })
+
         } catch (error) {
             console.log(error);
         }

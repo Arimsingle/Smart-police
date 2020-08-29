@@ -1,10 +1,13 @@
 const IPFS = require('ipfs-http-client');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 const crypto = require('../utils/cryptography');
+const { sendSignTransaction } = require('../services/sendSign');
 const { Register, addData } = require('../services/db');
 const { tranferCoin, tranferData } = require('../services/rawTx');
+require('node-datetime-thai');
 module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dotenv }) {
     router.post('/police/register', async (req, res) => {
+        var Now = new Date();
         // variable to use subcriber function
         let data = "";
         let topics = [];
@@ -35,10 +38,10 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                 Surname: req.body._Surname,
                 Type: req.body._Type,
                 Email: req.body._Email,
-                Tel: req.body._phone,
                 Rank: req.body._Rank,
+                Date: Now.toThaiString(3),
                 imageUrl: req.body._imageUrl,
-                Account: _Account.address.substring(2),
+                Account: _Account.address.slice(2),
                 Supervisor: false,
                 Private: {
                     PrivateKey: JSON.stringify(_EncryptedPrivateKey),
@@ -70,6 +73,7 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
                 .on('receipt', async (result) => {
                     data = result.logs[0].data;
+                    // console.log(result.logs[0].topics);
                     for (let i = 1; i < result.logs[0].topics.length + 1; i++) {
                         topics.push(result.logs[0].topics[i]);
                     }
@@ -87,10 +91,10 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                     "indexed": false,
                 }
             ], data, topics);
-            await Register('Police', dataPolice).then(async () => {
-                await addData('Decode', _Account.address.slice(2),
+            await Register('PoliceInfo', dataPolice).then(async () => {
+                await addData('Decode', dataPolice.Account,
                     {
-                        Result:
+                        PoliceRegister:
                         {
                             _police: decodedData._police,
                             _publicInfo: decodedData._publicInfo
