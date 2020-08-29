@@ -1,6 +1,7 @@
 ## Smart-police
 # About 
-> **Project 1: CoE PSU PHUKET**
+> ARIMA KOUSEI
+
 [![N|Solid](https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/PSU_CoC_ENG.png)](https://www.phuket.psu.ac.th/)
 # Tools
 > **Back-end** : NodeJS , **Front-end** : NextJS , **Smart contract** : Solidity
