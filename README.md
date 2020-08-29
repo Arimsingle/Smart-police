@@ -1,10 +1,17 @@
-# Smart-police
-PROJECT 1 : CoE PSU PHUKET
+## Smart-police
+# About
+> **Project 1: CoE PSU PHUKET 
 ***********************************************
-Back-end : NodeJS , Front-end : NextJS , Smart contract : Solidity
+[![N|Solid](https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/PSU_CoC_ENG.png)](https://www.phuket.psu.ac.th/)
 ***********************************************
-Technology : Blockchain(Private Ethereum) x Image processing(Face recognition) x Data Analysis(Linear regression)
+# Tools
+**Back-end** : NodeJS , **Front-end** : NextJS , **Smart contract** : Solidity
 ***********************************************
-Infomation : Police x Bandit
+# Technology 
+> **Blockchain**(Private Ethereum) x **Image processing**(Face recognition) x **Data Analysis**(Linear regression)
 ***********************************************
-Plugin IPFS : https://ipfs.infura.io/ipfs/
+# Infomation 
+> Police x Bandit
+***********************************************
+# Plugin 
+IPFS : https://ipfs.infura.io/ipfs/
