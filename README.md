@@ -10,4 +10,4 @@
 # Infomation 
 > Police x Bandit
 # Plugin 
-> IPFS : https://ipfs.infura.io/ipfs/
+> IPFS example : https://ipfs.infura.io/ipfs/QmZr6AmK2bKPof8WiLXSSKbwQHhDEBGDsqoiMY4jHVn9uw
