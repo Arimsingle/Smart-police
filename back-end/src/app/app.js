@@ -125,6 +125,23 @@ router.route('/balance')
             })
         }
     })
+// List ipfs link
+router.route('/ipfs')
+    .get(async (req, res) => {
+        try {
+            await web3.eth.getIpfs(req.body._police).then((result) => {
+                return res.json({
+                    massage: "Call method success",
+                    balance: result
+                })
+            })
+        } catch (error) {
+            return res.json({
+                massage: "Call method faild",
+                Error: error
+            })
+        }
+    })
 
 
 app.use("*", (req, res) => res.status(404).send(res));

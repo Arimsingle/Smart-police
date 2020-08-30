@@ -259,6 +259,40 @@ router.route('/balance').get(function _callee6(req, res) {
       }
     }
   }, null, null, [[0, 5]]);
+}); // List ipfs link
+
+router.route('/ipfs').get(function _callee7(req, res) {
+  return regeneratorRuntime.async(function _callee7$(_context7) {
+    while (1) {
+      switch (_context7.prev = _context7.next) {
+        case 0:
+          _context7.prev = 0;
+          _context7.next = 3;
+          return regeneratorRuntime.awrap(web3.eth.getIpfs(req.body._police).then(function (result) {
+            return res.json({
+              massage: "Call method success",
+              balance: result
+            });
+          }));
+
+        case 3:
+          _context7.next = 8;
+          break;
+
+        case 5:
+          _context7.prev = 5;
+          _context7.t0 = _context7["catch"](0);
+          return _context7.abrupt("return", res.json({
+            massage: "Call method faild",
+            Error: _context7.t0
+          }));
+
+        case 8:
+        case "end":
+          return _context7.stop();
+      }
+    }
+  }, null, null, [[0, 5]]);
 });
 app.use("*", function (req, res) {
   return res.status(404).send(res);
