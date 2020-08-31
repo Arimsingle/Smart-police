@@ -55,6 +55,14 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             const police_temp = await contract_Police.methods.PoliceInfo(_Account.address, dataPolice.ipfsUri);
+            //Fixing for perfomance
+            const { serializedTx } = await sendSignTransaction({
+                templete: police_temp,
+                from: _Account.address,
+                contract: dotenv.parsed.CONTRACT_ADDRESS,
+                PrivateKey: _EncryptedPrivateKey
+            })
+
             const dataEncode = await police_temp.encodeABI();
             const gas = await police_temp.estimateGas({ from: _Account.address });
             const ethBalance = await web3.eth.getBalance(_Account.address);
@@ -70,6 +78,8 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             const tx = new Tx(rawTx);
             tx.sign(privateKey);
             const serializedTx = tx.serialize();
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
                 .on('receipt', async (result) => {
                     data = result.logs[0].data;

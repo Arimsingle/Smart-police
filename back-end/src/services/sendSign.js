@@ -1,9 +1,10 @@
 //decode
 //ยังไม่ได้ใช้
-const sendSignTransaction = async (templete, from, contract, web3, crypto) => {
+const sendSignTransaction = async (templeteObj) => {
     try {
-        const dataEncode = await templete.encodeABI();
-        const gas = await templete.estimateGas({ from: _Account.address });
+        // templeteObj.templete
+        const dataEncode = await templeteObj.templete.encodeABI();
+        const gas = await templete.estimateGas({ from: templeteObj.from });
         const ethBalance = await web3.eth.getBalance(_Account.address);
         if (ethBalance < gas) {
             return res.json({
@@ -17,26 +18,7 @@ const sendSignTransaction = async (templete, from, contract, web3, crypto) => {
         const tx = new Tx(rawTx);
         tx.sign(privateKey);
         const serializedTx = tx.serialize();
-        await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
-            .on('receipt', async (result) => {
-                data = result.logs[0].data;
-                for (let i = 1; i < result.logs[0].topics.length + 1; i++) {
-                    topics.push(result.logs[0].topics[i]);
-                }
-            })
-        let decodedData = await web3.eth.abi.decodeLog([
-            {
-                "type": "address",
-                "name": "_police",
-                "indexed": true,
-            },
-            {
-
-                "type": "string",
-                "name": "_publicInfo",
-                "indexed": false,
-            }
-        ], data, topics);
+        return serializedTx;
     } catch (error) {
         console.log(error);
     }

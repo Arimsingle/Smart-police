@@ -35,6 +35,7 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             const tx = new Tx(rawTx);
             tx.sign(privateKey);
             const serializedTx = tx.serialize();
+            /////////////////////////////////////////////////////////////
             await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
                 .on('receipt', async (result) => {
                     data = result.logs[1].data;
