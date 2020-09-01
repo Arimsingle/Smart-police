@@ -1,15 +1,19 @@
+// import Layout from '../components/Layout'
 import Link from 'next/link'
-import Layout from '../components/Layout'
-
+import { DatePicker } from 'antd';
+import { Button } from 'antd';
 const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
+  <div>
     <h1>Hello Next.js 👋</h1>
     <p>
       <Link href="/about">
         <a>About</a>
       </Link>
     </p>
-  </Layout>
+    <div>
+      <DatePicker />
+      <Button type="dashed">Button</Button>
+    </div>
+  </div>
 )
-
 export default IndexPage
