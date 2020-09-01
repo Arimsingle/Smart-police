@@ -1,34 +1,29 @@
 const IPFS = require('ipfs-http-client');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
-const { tranferData } = require('../services/rawTx');
+const { sendSignTransaction } = require('../services/sendSign');
 const { addData, updateData } = require('../services/db');
+require('node-datetime-thai');
 module.exports = function setSupervisor({ router, web3, Tx, contract_Police, dotenv }) {
     router.post('/supervisor', async (req, res) => {
         let TopicArray = [];
+        let Now = new Date();
         try {
             // templete of setPortfolio method
-            const police_temp = await contract_Police.methods.setSupervisor(req.body._supervisor);
-            // encode to be abi data
-            const dataEncode = await police_temp.encodeABI();
-            // get gas for send transaction
-            const gas = await police_temp.estimateGas({ from: dotenv.parsed.ACCOUNT });
-            // get eth coin to buy gas
-            const ethBalance = await web3.eth.getBalance(dotenv.parsed.ACCOUNT);
-            if (ethBalance < gas) {
-                return res.json({
-                    message: "Not enough eth coin"
-                })
-            }
-            // round of address transaction
-            const nonce = await web3.eth.getTransactionCount(dotenv.parsed.ACCOUNT);
-            // Data to sign transaction
-            const rawTx = tranferData(nonce, gas, dataEncode, dotenv.parsed.CONTRACT_ADDRESS);
-            // private key
-            const privateKey = Buffer.from(dotenv.parsed.PRIVATE_KEY, 'hex');
-            const tx = new Tx(rawTx);
-            tx.sign(privateKey);
-            const serializedTx = tx.serialize();
-            // sign & send transaction
+            const supervisor_temp = await contract_Police.methods.setSupervisor(req.body._supervisor);
+            // use sendSignTransaction function
+            const serializedTx = await sendSignTransaction({
+                templete: supervisor_temp,
+                from: dotenv.parsed.ACCOUNT,
+                contract: dotenv.parsed.CONTRACT_ADDRESS,
+                PrivateKey: dotenv.parsed.PRIVATE_KEY,
+                password: req.body._password,
+                res: res,
+                web3: web3,
+                Tx: Tx
+            }).then((result) => {
+                return result;
+            });
+            // sign & send transaction to blockchain
             await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
                 .on('receipt', (result) => {
                     for (let i = 0; i < result.logs[0].topics.length; i++) {
@@ -38,7 +33,8 @@ module.exports = function setSupervisor({ router, web3, Tx, contract_Police, dot
             // data interface
             let supervisor = await {
                 from: dotenv.parsed.ACCOUNT.slice(2),
-                to: req.body._supervisor.slice(2)
+                to: req.body._supervisor.slice(2),
+                Date: Now.toThaiString(3),
             }
             // Data to encript buffer upload to ipfs 
             const bufferSupervisor = await Buffer.from(JSON.stringify(supervisor));

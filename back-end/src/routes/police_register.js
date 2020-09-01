@@ -3,20 +3,21 @@ const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
 const crypto = require('../utils/cryptography');
 const { sendSignTransaction } = require('../services/sendSign');
 const { Register, addData } = require('../services/db');
-const { tranferCoin, tranferData } = require('../services/rawTx');
+const { tranferCoin } = require('../services/rawTx');
 require('node-datetime-thai');
 module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dotenv }) {
     router.post('/police/register', async (req, res) => {
-        var Now = new Date();
+        // Date times method
+        let Now = new Date();
         // variable to use subcriber function
         let data = "";
         let topics = [];
         // Create account
         const _Account = web3.eth.accounts.create();
         // encrypt private key
-        const _EncryptedPrivateKey = crypto.encrypt(_Account.privateKey, req.body._Password);
+        const _EncryptedPrivateKey = crypto.encrypt(_Account.privateKey, req.body._password);
         // encrypt password
-        const _EncryptedPassword = crypto.encrypt(req.body._Password, "Admin");
+        const _EncryptedPassword = crypto.encrypt(req.body._password, "Admin");
         // Round of address use transaction
         const nonceTransfer = await web3.eth.getTransactionCount(dotenv.parsed.ACCOUNT);
         const rawTx = tranferCoin(nonceTransfer, _Account.address);
@@ -34,11 +35,11 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
         try {
             // data 
             let dataPolice = await {
-                Name: req.body._Name,
-                Surname: req.body._Surname,
-                Type: req.body._Type,
-                Email: req.body._Email,
-                Rank: req.body._Rank,
+                Name: req.body._name,
+                Surname: req.body._surname,
+                Type: req.body._type,
+                Email: req.body._email,
+                Rank: req.body._rank,
                 Date: Now.toThaiString(3),
                 imageUrl: req.body._imageUrl,
                 Account: _Account.address.slice(2),
@@ -53,41 +54,30 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             const ipfsUri = await ipfs.add(bufferPolice, { recusive: true });
             dataPolice.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             const police_temp = await contract_Police.methods.PoliceInfo(_Account.address, dataPolice.ipfsUri);
-            //Fixing for perfomance
-            const { serializedTx } = await sendSignTransaction({
+            // use sendSignTransaction function
+            const serializedTx = await sendSignTransaction({
                 templete: police_temp,
                 from: _Account.address,
                 contract: dotenv.parsed.CONTRACT_ADDRESS,
-                PrivateKey: _EncryptedPrivateKey
+                PrivateKey: _EncryptedPrivateKey,
+                password: req.body._password,
+                res: res,
+                web3: web3,
+                Tx: Tx
+            }).then((result) => {
+                return result;
             })
 
-            const dataEncode = await police_temp.encodeABI();
-            const gas = await police_temp.estimateGas({ from: _Account.address });
-            const ethBalance = await web3.eth.getBalance(_Account.address);
-            if (ethBalance < gas) {
-                return res.json({
-                    message: "Not enough eth coin"
-                });
-            }
-            const nonce = await web3.eth.getTransactionCount(_Account.address);
-            const rawTx = tranferData(nonce, gas, dataEncode, dotenv.parsed.CONTRACT_ADDRESS);
-            const decryptedPrivateKey = crypto.decrypt(_EncryptedPrivateKey, req.body._Password).slice(2);
-            const privateKey = Buffer.from(decryptedPrivateKey, 'hex');
-            const tx = new Tx(rawTx);
-            tx.sign(privateKey);
-            const serializedTx = tx.serialize();
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+            // sign & send transaction to blockchain
             await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
                 .on('receipt', async (result) => {
                     data = result.logs[0].data;
-                    // console.log(result.logs[0].topics);
                     for (let i = 1; i < result.logs[0].topics.length + 1; i++) {
                         topics.push(result.logs[0].topics[i]);
                     }
-                })
+                });
+            // input data to decode
             let decodedData = await web3.eth.abi.decodeLog([
                 {
                     "type": "address",
@@ -101,14 +91,16 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                     "indexed": false,
                 }
             ], data, topics);
+
+            let PoliceInfoData = {
+                _police: decodedData._police,
+                _publicInfo: decodedData._publicInfo
+            }
+
             await Register('PoliceInfo', dataPolice).then(async () => {
                 await addData('Decode', dataPolice.Account,
                     {
-                        PoliceRegister:
-                        {
-                            _police: decodedData._police,
-                            _publicInfo: decodedData._publicInfo
-                        }
+                        PoliceRegister: PoliceInfoData
                     }).then(() => {
                         return res.json({
                             message: 'Register sucess',

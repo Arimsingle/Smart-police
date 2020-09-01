@@ -5,6 +5,7 @@ const crypto = require('../utils/cryptography');
 const { Register, addData } = require('../services/db');
 const { tranferData } = require('../services/rawTx');
 const { findPrivateKey } = require('../services/privatekey');
+const { sendSignTransaction } = require('../services/sendSign');
 require('node-datetime-thai');
 module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dotenv }) {
     router.post('/bandit/register', async (req, res) => {
@@ -22,14 +23,15 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
         try {
             // data 
             let dataBandit = await {
-                Name: req.body._Name,
-                Surname: req.body._Surname,
-                Type: req.body._Type,
-                Email: req.body._Email,
-                Rank: req.body._Rank,
+                Name: req.body._name,
+                Surname: req.body._surname,
+                Type: req.body._type,
+                Email: req.body._email,
+                Rank: req.body._rank,
                 imageUrl: req.body._imageUrl,
                 Date: Now.toThaiString(3),
                 Account: _Account.address.slice(2),
+                Police: req.body._police,
                 Private: {
                     PrivateKey: JSON.stringify(_EncryptedPrivateKey)
                 }
@@ -38,24 +40,21 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             const bufferBandit = await Buffer.from(JSON.stringify(dataBandit));
             const ipfsUri = await ipfs.add(bufferBandit, { recusive: true });
             dataBandit.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            const police_temp = await contract_Police.methods.Bandit_Info(_Account.address, dataBandit.ipfsUri);
-            const dataEncode = await police_temp.encodeABI();
-            const gas = await police_temp.estimateGas({ from: req.body._police });
-            const ethBalance = await web3.eth.getBalance(req.body._police);
-            if (ethBalance < gas) {
-                return res.json({
-                    message: "Not enough eth coin"
-                });
-            }
-            const nonce = await web3.eth.getTransactionCount(req.body._police);
-            const rawTx = tranferData(nonce, gas, dataEncode, dotenv.parsed.CONTRACT_ADDRESS);
-            const decryptedPrivateKey = crypto.decrypt(JSON.parse(PrivateKey), req.body._Password).slice(2);
-            const privateKey = Buffer.from(decryptedPrivateKey, 'hex');
-            const tx = new Tx(rawTx);
-            tx.sign(privateKey);
-            const serializedTx = tx.serialize();
+            const bandit_temp = await contract_Police.methods.Bandit_Info(_Account.address, dataBandit.ipfsUri);
+            // use sendSignTransaction function
+            const serializedTx = await sendSignTransaction({
+                templete: bandit_temp,
+                from: req.body._police,
+                contract: dotenv.parsed.CONTRACT_ADDRESS,
+                PrivateKey: JSON.parse(PrivateKey),
+                password: req.body._password,
+                res: res,
+                web3: web3,
+                Tx: Tx
+            }).then((result) => {
+                return result;
+            })
+            // sendSignedTransaction to blockcahin
             await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
                 .on('receipt', async (result) => {
                     data = result.logs[0].data;
@@ -63,6 +62,7 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                         topics.push(result.logs[0].topics[i]);
                     }
                 });
+            // input data to decode
             let decodedData = await web3.eth.abi.decodeLog([
                 {
                     "indexed": true,
@@ -90,10 +90,6 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                         })
                     });
             });
-            // return res.json({
-            //     message: "register success",
-            //     Result: dataBandit
-            // })
         } catch (error) {
             console.log("Error : ", error);
         }

@@ -72,46 +72,34 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                     "type": "address"
                 }
             ], data, topics);
-            await conditionSwitch('Decode', req.body._bandit, {
-                BanditHistory:
-                    [
-                        {
-                            _police: decodedHistoty._admin,
-                            _bandit: decodedHistoty._bandit,
-                            _publicInfo: decodedHistoty._publicInfo
-                        }
-                    ] //data
-            }, {
+            let banditHistoryData = {
                 _police: decodedHistoty._admin,
                 _bandit: decodedHistoty._bandit,
                 _publicInfo: decodedHistoty._publicInfo
-            }, 'BanditHistory').then(async () => {
+            }
+            let recordBanditData = {
+                _supervisor: decodedRecord._supervisor,
+                _bandit: decodedRecord._bandit
+            }
+            await conditionSwitch('Decode', req.body._bandit, {
+                BanditHistory:
+                    [
+                        banditHistoryData
+                    ] //data
+            }, banditHistoryData, 'BanditHistory').then(async () => {
                 await conditionSwitch('Decode', req.body._supervisor, {
                     RecordBandit:
                         [
-                            {
-                                _supervisor: decodedRecord._supervisor,
-                                _bandit: decodedRecord._bandit,
-                            }
+                            recordBanditData
                         ] //data
-                }, {
-                    _supervisor: decodedRecord._supervisor,
-                    _bandit: decodedRecord._bandit,
-                }, 'RecordBandit')
+                }, recordBanditData, 'RecordBandit')
             }).then(() => {
                 return res.json({
                     message: "Set historyBandit & recordBandit success :)",
-                    historyBandit: {
-                        _police: decodedHistoty._admin,
-                        _bandit: decodedHistoty._bandit,
-                        _publicInfo: decodedHistoty._publicInfo
-                    },
-                    recordBandit: {
-                        _supervisor: decodedRecord._supervisor,
-                        _bandit: decodedRecord._bandit,
-                    },
-                })
-            })
+                    historyBandit: banditHistoryData,
+                    recordBandit: recordBanditData
+                });
+            });
 
         } catch (error) {
             console.log(error);
