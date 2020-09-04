@@ -1,5 +1,5 @@
 import styled from "styled-components";
-export const NavbarJSX = {
+export const Navbar = {
     Item: styled.div`
         background:linear-gradient(90deg,#870000 0%,#190A05 100%);
         height:80px;
@@ -86,6 +86,11 @@ export const NavbarJSX = {
         }
         @media only screen and (max-width: 1022px) and (min-width: 960px){
             font-size:2.1rem;
+        }
+        @media screen and (max-width:500px){
+            font-size:1.8rem;
+            margin:0;
+            margin-top:10px;
         }
         @media screen and (max-width:960px){
             position:absolute;

@@ -2,16 +2,16 @@ import Link from "next/link";
 import { CgMenu, CgClose } from "react-icons/cg";
 import { GiPoliceBadge } from "react-icons/gi";
 import { MenuBars } from "./menuBars/menuBars";
-import { NavbarJSX } from "../style/style-component/navbar"
+import { Navbar } from "../style/style-component/navbar"
 import { useState } from "react";
 const NavBar = () => {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(state => !state);
     return (
-        <NavbarJSX.Item>
-            <NavbarJSX.Logo>
+        <Navbar.Item>
+            <Navbar.Logo>
                 <GiPoliceBadge className="react-logo" /> Smart Police
-            </NavbarJSX.Logo>
+            </Navbar.Logo>
             <div className="menu-icon" onClick={handleClick}>
                 {click ? <CgClose /> : <CgMenu />}
             </div>
@@ -28,7 +28,7 @@ const NavBar = () => {
                     })
                 }
             </ul>
-        </NavbarJSX.Item>
+        </Navbar.Item>
     )
 }
 export { NavBar };

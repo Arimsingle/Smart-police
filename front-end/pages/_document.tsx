@@ -7,8 +7,7 @@ class Document extends NextDocument<Props> {
         return (
             <Html>
                 <Head />
-                <meta name="viewport" content="width = device - width, initial - scale=1, shrink - to - fit=no" />
-                <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;300&display=swap" rel="stylesheet" />
+                <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
                 <body>
                     <Main />
                     <NextScript />
