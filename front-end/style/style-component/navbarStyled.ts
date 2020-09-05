@@ -1,7 +1,7 @@
 import styled from "styled-components";
 export const Navbar = {
     Item: styled.div`
-        background:linear-gradient(90deg,#870000 0%,#190A05 100%);
+        background-color:#39374e;
         height:80px;
         display:flex;
         justify-content:center;
@@ -20,22 +20,33 @@ export const Navbar = {
 
         .nav-links{
             color:#fff;
+            display: flex;
+            align-items: center;
             text-decoration:none;
-            padding:0.5rem 1rem;
+            padding: 0.5rem 1rem;
+            height: 100%;
         }
         .nav-links:hover{
-            background-color:#870000;
+            color:#ff3639;
             border-radius:5px;
-            transition:all 0.3s ease-out;
+            transform: scale(1.1);
+            transition: all 0.3s ease;
         }
 
         .menu-icon{
             color:#fff;
             display:none;
         }
+        .nav-item {
+            height: 80px;
+            border-bottom: 2px solid transparent;
+          }
+        .nav-item:hover {
+            border-bottom: 2px solid #f00946;
+            transition: all 0.5s ease;
+          }
         @media only screen and (max-width: 960px){
             position:relative;
-            border-bottom: 1px solid white;
             .nav-menu{
                 display:flex;
                 flex-direction:column;
@@ -48,20 +59,26 @@ export const Navbar = {
                 transition: all 0.5s ease;
             }
             .nav-menu.active{
-                background:linear-gradient(90deg,#870000 0%,#190A05 100%);;
+                background-color:#3b3a52;
                 left:0;
                 opacity:1;
-                transition:all 0.5s ease;
+                transition:all 0.3s ease-out;
                 z-index:1;
             }
-            .nav-links{
-                text-align:center;
-                padding:2rem;
-                width:100%;
-                display:table;
-            }
+            .nav-item:hover {
+                border: none;
+              }
+            
+            .nav-item {
+                width: 100%;
+              }
+            .nav-links {
+                text-align: center;
+                padding: 2rem;
+                width: 100%;
+                display: table;
+              }
             .nav-links:hover{
-                background-color:#190A05;
                 border-radius:0;
             }
             .menu-icon{
@@ -73,6 +90,9 @@ export const Navbar = {
                 font-size:1.8rem;
                 cursor:pointer;
             }
+            .menu-icon:hover{
+                color:#ff3639;
+            }
         }
     `,
     Logo: styled.h1`
@@ -80,8 +100,9 @@ export const Navbar = {
         justify-self:start;
         margin-left:10px;
         cursor:pointer;
-        .react-logo{
-            margin-left:0.5rem;
+        .police-logo{
+            margin-bottom:0.3rem;
+            margin-left:0rem;
             font-size:2.4rem;
         }
         @media only screen and (max-width: 1022px) and (min-width: 960px){

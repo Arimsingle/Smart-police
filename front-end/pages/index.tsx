@@ -1,9 +1,8 @@
-// import { PageHeader } from "../components/pageHeader"
-import { NavBar } from "../components/navBar"
 import fontJSX from "../tsx/font"
+import { Home } from "./HomePage";
 const IndexPage = () => (
   <div>
-    <NavBar />
+    <Home />
     <style jsx global>
       {fontJSX}
     </style>

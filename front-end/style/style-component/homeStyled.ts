@@ -1,0 +1,89 @@
+import styled from "styled-components";
+export const HomeStyled = styled.div`
+        .home__hero-section{
+            color:#fff;
+            padding:150px 0;
+        }
+        .home__hero-row{
+            align-items:center;
+        }
+        .row{
+            display:flex;
+            margin-right:-15px;
+            margin-bottom:-15px;
+            margin-left:-15px;
+            flex-wrap:wrap;
+            align-content:stretch;
+        }
+        .col{
+            margin-bottom:15px;
+            padding-right:15px;
+            padding-left:15px;
+            flex:1;
+            max-width:50%;
+            flex-basis:50%;
+        }
+        .home__hero-text-warpper{
+            max-width:540px;
+            padding-top:0;
+            padding-bottom:60px;
+        }
+        .top-line{
+            color:#ff3639;
+            font-size:20px;
+            line-height:16px;
+            font-weight:700;
+            letter-spacing:1.4px;
+            text-transform:uppercase;
+            margin-bottom:16px;
+        }
+        .heading{
+            margin-bottom:24px;
+            font-size:48px;
+            line-height:1.1;
+            font-weight:600;
+            color:#fff;
+        }
+        .dark{
+            color:#3b3a52
+        }
+        .darkBg{
+            background-color:#3b3a50;
+        }
+        .home__hero-subtitle{
+            max-width:440px;
+            margin-bottom:35px;
+            font-size:18px;
+            line-height:24px;
+        }
+        .home__hero-wrapper{
+            max-width:555px;
+        }
+        .home__hero-img{
+            max-width:95%;
+            padding-right:0;
+            margin: 0 0 0 10px;
+        }
+        img {
+            border:0;
+            max-width:100%;
+            vertical-align:middle;
+            display:inline-block;
+        }
+        @media screen and (max-width:991px){
+            .container{
+                padding-right:30px;
+                padding-left:30px;
+            }
+        }
+        @media screen and (max-width:768px){
+
+            .home__hero-text-wrapper{
+                padding-bottom:65px;
+            }
+            .col{
+                max-width:100%;
+                flex-basis:100%;
+            }
+        }
+    `;

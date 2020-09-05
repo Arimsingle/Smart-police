@@ -1,0 +1,2 @@
+red color #FF3639
+background:linear-gradient(90deg,#870000 0%,#190A05 100%);

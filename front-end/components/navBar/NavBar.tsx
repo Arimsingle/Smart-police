@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { CgMenu, CgClose } from "react-icons/cg";
-import { GiPoliceBadge } from "react-icons/gi";
-import { MenuBars } from "./menuBars/menuBars";
-import { Navbar } from "../style/style-component/navbar"
+import { GiPoliceOfficerHead } from "react-icons/gi";
+import { NavData } from "./NavDatas";
+import { Navbar } from "../../style/style-component/navbarStyled"
 import { useState } from "react";
 const NavBar = () => {
     const [click, setClick] = useState(false);
@@ -10,18 +10,18 @@ const NavBar = () => {
     return (
         <Navbar.Item>
             <Navbar.Logo>
-                <GiPoliceBadge className="react-logo" /> Smart Police
+                <GiPoliceOfficerHead className="police-logo" /> POLICE
             </Navbar.Logo>
             <div className="menu-icon" onClick={handleClick}>
                 {click ? <CgClose /> : <CgMenu />}
             </div>
             <ul className={click ? "nav-menu active" : "nav-menu"}>
                 {
-                    MenuBars.map((Bar, index) => {
+                    NavData.map((Data, index) => {
                         return (
-                            <li key={index}>
-                                <Link href={Bar.url}>
-                                    <a className={Bar.cName}>{Bar.title}</a>
+                            <li key={index} className='nav-item'>
+                                <Link href={Data.url}>
+                                    <a className={Data.cName}>{Data.title}</a>
                                 </Link>
                             </li>
                         )

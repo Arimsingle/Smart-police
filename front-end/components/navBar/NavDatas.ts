@@ -1,4 +1,4 @@
-const MenuBars = [
+export const NavData = [
     {
         title: "หน้าหลัก",
         url: "#",
@@ -24,5 +24,4 @@ const MenuBars = [
         url: "#",
         cName: "nav-links"
     },
-]
-export { MenuBars };
+];
