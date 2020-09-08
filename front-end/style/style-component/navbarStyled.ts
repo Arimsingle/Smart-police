@@ -42,6 +42,7 @@ export const Navbar = {
         .nav-item:hover {
             border-bottom: 2px solid #ff3639;
             transition: all 0.3s linear;
+
           }
         @media only screen and (max-width: 960px){
             position:relative;

@@ -36,13 +36,13 @@ export const Footers = () => {
                     <div className='footer-link-wrapper'>
                         <div className='footer-link-items'>
                             <h2>เกี่ยวกับเรา</h2>
-                            <Link href='/'><a>How you like that</a></Link>
+                            <Link href='/'><a>PSU PHUKET</a></Link>
                             <Link href='/'><a>How you like that</a></Link>
                             <Link href='/'><a>How you like that</a></Link>
                         </div>
                         <div className='footer-link-items'>
                             <h2>ติดต่อเรา</h2>
-                            <Link href='/'><a>How you like that</a></Link>
+                            <Link href='/'><a>+66 76276012-13</a></Link>
                             <Link href='/'><a>How you like that</a></Link>
                             <Link href='/'><a>How you like that</a></Link>
                         </div>
@@ -50,15 +50,15 @@ export const Footers = () => {
                     <div className='footer-link-wrapper'>
                         <div className='footer-link-items'>
                             <h2>วีดีโอ</h2>
-                            <Link href='/'><a>How you like that</a></Link>
+                            <Link href='/'><a>Portfolio</a></Link>
                             <Link href='/'><a>How you like that</a></Link>
                             <Link href='/'><a>How you like that</a></Link>
                         </div>
                         <div className='footer-link-items'>
                             <h2>โซเชียล</h2>
-                            <Link href='/'><a>How you like that</a></Link>
-                            <Link href='/'><a>How you like that</a></Link>
-                            <Link href='/'><a>How you like that</a></Link>
+                            <Link href='https://www.facebook.com/arim.mn.10'><a target='_blank'>Facebook</a></Link>
+                            <Link href='https://github.com/Arimsingle'><a target='_blank'>Github</a></Link>
+                            <Link href='https://medium.com/@arimcheberahim'><a target='_blank'>Medium</a></Link>
                         </div>
                     </div>
                 </div>
@@ -74,13 +74,13 @@ export const Footers = () => {
                         </div>
                         <small className='website-rights'>SMART POLICE © 2020</small>
                         <div className='social-icons'>
-                            <Link href='/' >
+                            <Link href='https://www.facebook.com/arim.mn.10' >
                                 <a target='_blank' className='social-icon-link' aria-label='Facebook'><FaFacebook /></a>
                             </Link>
                             <Link href='/'>
                                 <a target='_blank' className='social-icon-link' aria-label='Instagram'><FaInstagram /></a>
                             </Link>
-                            <Link href="/">
+                            <Link href="https://www.youtube.com/channel/UCAzY2MUbl3txnZLOlFZIZhg?view_as=subscriber">
                                 <a target='_blank' className='social-icon-link' aria-label='Youtube'><FaYoutube /></a>
                             </Link>
                             <Link href='/'>
