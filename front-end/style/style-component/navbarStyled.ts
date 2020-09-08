@@ -28,9 +28,7 @@ export const Navbar = {
         }
         .nav-links:hover{
             color:#ff3639;
-            border-radius:5px;
             transform: scale(1.1);
-            transition: all 0.3s ease;
         }
 
         .menu-icon{
@@ -42,8 +40,8 @@ export const Navbar = {
             border-bottom: 2px solid transparent;
           }
         .nav-item:hover {
-            border-bottom: 2px solid #f00946;
-            transition: all 0.5s ease;
+            border-bottom: 2px solid #ff3639;
+            transition: all 0.3s linear;
           }
         @media only screen and (max-width: 960px){
             position:relative;

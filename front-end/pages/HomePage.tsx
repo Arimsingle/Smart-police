@@ -4,12 +4,13 @@ import { HomeDataOne, HomeDataTwo, HomeDataThree } from "../components/home/Home
 import { Footers } from "../components/footer/Footer"
 export const Home = () => {
     return (
-        <div>
+        <div className="parent">
+            <div className="nav-position">
             <NavBar />
             <PageDisplay {...HomeDataOne} />
             <PageDisplay {...HomeDataTwo} />
             <PageDisplay {...HomeDataThree} />
-            <Footers />
+            <Footers /></div>
         </div>
     )
 }
