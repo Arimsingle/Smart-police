@@ -1,5 +1,6 @@
 import { UseForm } from "./useForm";
 import { Validaor } from "./validateInfo";
+import Link from "next/link";
 export const FormSignup = ({ submitForm }: any) => {
     const { handleChange, handleSubmit, values, errors } = UseForm(submitForm, Validaor);
     return (
@@ -60,7 +61,10 @@ export const FormSignup = ({ submitForm }: any) => {
                     สมัคร
                 </button>
                 <span className='form-input-login'>
-                    ท่านมีบัญชีอยู่แล้ว? เข้าสู่ระบบ <a href='#'>ที่นี้</a>
+                    ท่านมีบัญชีอยู่แล้ว? เข้าสู่ระบบ
+                    <Link href='/signin'>
+                        <a >ที่นี้</a>
+                    </Link>
                 </span>
             </form>
         </div>

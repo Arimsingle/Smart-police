@@ -21,7 +21,7 @@ export const NavData = [
     },
     {
         title: "สมัครสมาชิก",
-        url: "/form",
+        url: "/signup",
         cName: "nav-links"
     },
 ];

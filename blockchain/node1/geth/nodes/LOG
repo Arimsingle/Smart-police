@@ -1,6 +1,0 @@
-=============== Sep 1, 2020 (+07) ===============
-21:48:49.169180 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-21:48:49.175177 db@open opening
-21:48:49.178181 version@stat F·[] S·0B[] Sc·[]
-21:48:49.180178 db@janitor F·2 G·0
-21:48:49.180178 db@open done T·5.0007ms

@@ -39,6 +39,7 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                 Surname: req.body._surname,
                 Type: req.body._type,
                 Email: req.body._email,
+                Phone : req.body._phone,
                 Rank: req.body._rank,
                 Date: Now.toThaiString(3),
                 imageUrl: req.body._imageUrl,

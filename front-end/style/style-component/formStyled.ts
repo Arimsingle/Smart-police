@@ -10,6 +10,19 @@ export const FormStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+/* @media only screen and (max-width: 960px){
+  .form-container{
+    width: auto;
+    grid-template-columns: auto;
+    height: 1000px;
+  }
+  .form-content-right{
+    border-radius: 0;
+  }
+  .form-content-left{
+    border-radius: 0;
+  }
+} */
 .form-group{
     margin-top:250px;
 }
@@ -161,4 +174,5 @@ export const FormStyled = styled.div`
   color: #27cdff;
   font-weight: 600;
 }
+
 `;
