@@ -13,7 +13,7 @@ const SignIn = () => {
                     </a>
                 </Link>
                 <div className='form-content-left'>
-                    <img className='form-img' src='/static/images/verifier.svg' alt='spaceship' />
+                    <img className='form-img' src='/static/images/app.svg' alt='spaceship' />
                 </div>
                 <FormSignin />
                 <style jsx global>

@@ -1,5 +1,6 @@
 import { UseForm } from "./useForm";
 import { Validaor } from "./validateInfo";
+import Link from "next/link";
 export const FormSignin = ({ submitForm }: any) => {
     const { handleChange, handleSubmit, values, errors } = UseForm(submitForm, Validaor);
     return (
@@ -12,29 +13,35 @@ export const FormSignin = ({ submitForm }: any) => {
                     <label className='form-label'>อีเมลล์</label>
                     <input
                         className='form-input'
-                        type='text'
-                        name='username'
-                        placeholder='Enter your username'
-                        value={values.username}
-                        onChange={handleChange}
-                    />
-                    {errors.username && <p>{errors.username}</p>}
-                </div>
-                <div className='form-inputs'>
-                    <label className='form-label'>รหัสผ่าน</label>
-                    <input
-                        className='form-input'
                         type='email'
                         name='email'
-                        placeholder='Enter your email'
+                        placeholder='กรอกอีเมลล์ของคุณ'
                         value={values.email}
                         onChange={handleChange}
                     />
                     {errors.email && <p>{errors.email}</p>}
                 </div>
+                <div className='form-inputs'>
+                    <label className='form-label'>รหัสผ่าน</label>
+                    <input
+                        className='form-input'
+                        type='password'
+                        name='password'
+                        placeholder='กรอกรหัสผ่านของคุณ'
+                        value={values.password}
+                        onChange={handleChange}
+                    />
+                    {errors.password && <p>{errors.password}</p>}
+                </div>
                 <button className='form-input-btn' type='submit'>
                     ลงชื่อเข้าใช้
                 </button>
+                <span className='form-input-login'>
+                    ท่านยังไม่มีบัญชี? สมัคร
+                    <Link href='/signup'>
+                        <a>ที่นี้</a>
+                    </Link>
+                </span>
             </form>
         </div>
     )

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 export const FormStyled = styled.div`
 .form-container {
-  margin: 100px auto;
-  width: 1000px;
+  margin: 0px auto;
+  width: 1700px;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
   position: relative;
   border-radius: 10px;
-  height: 600px;
+  height: 950px;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -23,6 +23,10 @@ export const FormStyled = styled.div`
     border-radius: 0;
   }
 } */
+.text-top{
+  display:flex;
+  justify-content:center;
+}
 .form-group{
     margin-top:250px;
 }
@@ -134,6 +138,21 @@ export const FormStyled = styled.div`
   color: #595959;
   font-size: 12px;
 }
+.form-input-aria {
+  display: block;
+  padding-left: 10px;
+  padding-top: 10px;
+  outline: none;
+  border-radius: 2px;
+  height: 100px;
+  width: 100%;
+  border: none;
+}
+
+.form-input-aria::placeholder {
+  color: #595959;
+  font-size: 12px;
+}
 
 .form-input-btn {
   width: 80%;
@@ -162,7 +181,7 @@ export const FormStyled = styled.div`
 }
 
 .form-input-login {
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin-top: 10px;
   color: #fff;
   width: 80%;

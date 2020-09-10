@@ -15,9 +15,9 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
         // Create account
         const _Account = web3.eth.accounts.create();
         // encrypt private key
-        const _EncryptedPrivateKey = crypto.encrypt(_Account.privateKey, req.body._password);
+        const _EncryptedPrivateKey = crypto.encrypt(_Account.privateKey, req.body.password);
         // encrypt password
-        const _EncryptedPassword = crypto.encrypt(req.body._password, "Admin");
+        const _EncryptedPassword = crypto.encrypt(req.body.password, "Admin");
         // Round of address use transaction
         const nonceTransfer = await web3.eth.getTransactionCount(dotenv.parsed.ACCOUNT);
         const rawTx = tranferCoin(nonceTransfer, _Account.address);
@@ -35,21 +35,23 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
         try {
             // data 
             let dataPolice = await {
-                Name: req.body._name,
-                Surname: req.body._surname,
-                Type: req.body._type,
-                Email: req.body._email,
-                Phone : req.body._phone,
-                Rank: req.body._rank,
+                Name: req.body.username,
+                Surname: req.body.surname,
+                Type: "Police",
+                Email: req.body.email,
+                Phone: req.body.phone,
+                Rank: "STARS",
                 Date: Now.toThaiString(3),
-                imageUrl: req.body._imageUrl,
+                imageUrl: "Loading...",
                 Account: _Account.address.slice(2),
+                Address: req.body.address,
                 Supervisor: false,
                 Private: {
                     PrivateKey: JSON.stringify(_EncryptedPrivateKey),
                     Password: JSON.stringify(_EncryptedPassword),
                 }
             };
+            console.log(dataPolice);
             // Data to be buffer
             const bufferPolice = await Buffer.from(JSON.stringify(dataPolice));
             const ipfsUri = await ipfs.add(bufferPolice, { recusive: true });
@@ -62,7 +64,7 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                 from: _Account.address,
                 contract: dotenv.parsed.CONTRACT_ADDRESS,
                 PrivateKey: _EncryptedPrivateKey,
-                password: req.body._password,
+                password: req.body.password,
                 res: res,
                 web3: web3,
                 Tx: Tx

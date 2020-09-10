@@ -10,6 +10,7 @@
   "dependencies": {
     "@types/styled-jsx": "^2.2.8",
     "antd": "^4.6.2",
+    "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
     "next": "latest",
     "next-google-fonts": "^1.2.1",

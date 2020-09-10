@@ -1,12 +1,12 @@
 export const NavData = [
     {
         title: "หน้าหลัก",
-        url: "#",
+        url: "/",
         cName: "nav-links"
     },
     {
-        title: "บริการ",
-        url: "#",
+        title: "ไทม์ไลน์",
+        url: "/logs",
         cName: "nav-links"
     },
     {
