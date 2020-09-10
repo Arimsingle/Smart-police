@@ -6,7 +6,7 @@
 # Tools
 > **Back-end** : NodeJS , **Front-end** : NextJS , **Smart contract** : Solidity
 # Technology 
-> **Blockchain**(Private Ethereum) x **Image processing**(Face recognition) x **Data Analysis**(Linear regression)
+> **Blockchain**(Private Ethereum) x **Image processing**(Face recognition) x **Data Analysis**(Classification)
 # Infomation 
 > Police x Bandit
 # Plugin 
