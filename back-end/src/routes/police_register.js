@@ -45,15 +45,14 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                 imageUrl: "Loading...",
                 Account: _Account.address.slice(2),
                 Address: req.body.address,
-                Supervisor: false,
+                Supervisor: "false",
                 Private: {
                     PrivateKey: JSON.stringify(_EncryptedPrivateKey),
                     Password: JSON.stringify(_EncryptedPassword),
                 }
             };
-            console.log(dataPolice);
             // Data to be buffer
-            const bufferPolice = await Buffer.from(JSON.stringify(dataPolice));
+            const bufferPolice = await Buffer.from(JSON.stringify({ PoliceRegister: dataPolice }));
             const ipfsUri = await ipfs.add(bufferPolice, { recusive: true });
             dataPolice.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
 
@@ -80,6 +79,22 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                         topics.push(result.logs[0].topics[i]);
                     }
                 });
+
+            const ipfs_temp = await contract_Police.methods.addIpfs(_Account.address, dataPolice.ipfsUri);
+            const serializedTx_ipfs = await sendSignTransaction({
+                templete: ipfs_temp,
+                from: _Account.address,
+                contract: dotenv.parsed.CONTRACT_ADDRESS,
+                PrivateKey: _EncryptedPrivateKey,
+                password: req.body.password,
+                res: res,
+                web3: web3,
+                Tx: Tx
+            }).then((result) => {
+                return result;
+            })
+            await web3.eth.sendSignedTransaction('0x' + serializedTx_ipfs.toString('hex')).catch((error) => console.log(error))
+
             // input data to decode
             let decodedData = await web3.eth.abi.decodeLog([
                 {

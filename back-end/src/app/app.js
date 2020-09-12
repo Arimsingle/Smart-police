@@ -95,7 +95,7 @@ router.route('/recorderBandit')
 router.route('/claimer')
     .get(async (req, res) => {
         try {
-            contract_Police.methods.getClaim(req.body._supervisor).call().then((result) => {
+            contract_Police.methods.getClaim(req.body.supervisor).call().then((result) => {
                 return res.json({
                     massage: "Call method success",
                     supervisor: result
@@ -113,7 +113,7 @@ router.route('/claimer')
 router.route('/balance')
     .get(async (req, res) => {
         try {
-            await web3.eth.getBalance(req.body._police).then((result) => {
+            await web3.eth.getBalance(req.body.police).then((result) => {
                 return res.json({
                     massage: "Call method success",
                     balance: result
@@ -130,13 +130,15 @@ router.route('/balance')
 router.route('/ipfs')
     .get(async (req, res) => {
         try {
-            await web3.eth.getIpfs(req.body._police).then((result) => {
+            await contract_Police.methods.getIpfs(req.body.police).call().then((result) => {
+                console.log(result);
                 return res.json({
                     massage: "Call method success",
-                    balance: result
+                    ipfs: result
                 })
             })
         } catch (error) {
+            console.log(error);
             return res.json({
                 massage: "Call method faild",
                 Error: error

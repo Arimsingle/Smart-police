@@ -1,4 +1,4 @@
-import { LogsDisplay } from "../logs/logsDisplay";
+import { LogCardDisplay } from "../logs/logCard";
 import { TagsStyled } from "../../style/style-component/tagsStyled";
 import { Tabs } from 'antd';
 export const Tags = () => {
@@ -11,14 +11,11 @@ export const Tags = () => {
             <div className="container-tags">
                 <Tabs defaultActiveKey="1" onChange={(key) => handleChange(key)} type="card">
                     <TabPane tab="ข้อมูลเจ้าหน้าที่ตำรวจ" key="1">
-                        <LogsDisplay />
+                        <LogCardDisplay/>
                     </TabPane>
                     <TabPane tab="ข้อมูลของนักโทษ" key="2">
-                        Content of Tab Pane 2
-                </TabPane>
-                    <TabPane tab="สถานะ" key="3">
-                        Content of Tab Pane 3
-                </TabPane>
+                        <LogCardDisplay />
+                    </TabPane>
                 </Tabs>
             </div>
         </TagsStyled>

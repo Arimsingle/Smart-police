@@ -1,9 +1,7 @@
 const IPFS = require('ipfs-http-client');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
-// const dateTime = require('node-datetime');
 const crypto = require('../utils/cryptography');
 const { Register, addData } = require('../services/db');
-const { tranferData } = require('../services/rawTx');
 const { findPrivateKey } = require('../services/privatekey');
 const { sendSignTransaction } = require('../services/sendSign');
 require('node-datetime-thai');
@@ -17,38 +15,38 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
         const _Account = web3.eth.accounts.create();
         // encrypt private key
         const _EncryptedPrivateKey = crypto.encrypt(_Account.privateKey, "Police");
-        const PrivateKey = await findPrivateKey('PoliceInfo', req.body._police.slice(2), res).then((result) => {
+        const PrivateKey = await findPrivateKey('PoliceInfo', req.body.police.slice(2), res).then((result) => {
             return result;
         });
         try {
             // data 
             let dataBandit = await {
-                Name: req.body._name,
-                Surname: req.body._surname,
-                Type: req.body._type,
-                Email: req.body._email,
-                Phone : req.body._phone,
-                Rank: req.body._rank,
-                imageUrl: req.body._imageUrl,
+                Name: req.body.name,
+                Surname: req.body.surname,
+                Type: req.body.type,
+                Email: req.body.email,
+                Phone: req.body.phone,
+                Rank: req.body.rank,
+                imageUrl: req.body.imageUrl,
                 Date: Now.toThaiString(3),
                 Account: _Account.address.slice(2),
-                Police: req.body._police,
+                Police: req.body.police,
                 Private: {
                     PrivateKey: JSON.stringify(_EncryptedPrivateKey)
                 }
             };
             // Data to be buffer
-            const bufferBandit = await Buffer.from(JSON.stringify(dataBandit));
+            const bufferBandit = await Buffer.from(JSON.stringify({ BanditRegister: dataBandit }));
             const ipfsUri = await ipfs.add(bufferBandit, { recusive: true });
             dataBandit.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
             const bandit_temp = await contract_Police.methods.Bandit_Info(_Account.address, dataBandit.ipfsUri);
             // use sendSignTransaction function
             const serializedTx = await sendSignTransaction({
                 templete: bandit_temp,
-                from: req.body._police,
+                from: req.body.police,
                 contract: dotenv.parsed.CONTRACT_ADDRESS,
                 PrivateKey: JSON.parse(PrivateKey),
-                password: req.body._password,
+                password: req.body.password,
                 res: res,
                 web3: web3,
                 Tx: Tx
@@ -63,6 +61,25 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                         topics.push(result.logs[0].topics[i]);
                     }
                 });
+
+
+            const ipfs_temp = await contract_Police.methods.addIpfs(req.body.police, dataBandit.ipfsUri);
+            const serializedTx_ipfs = await sendSignTransaction({
+                templete: ipfs_temp,
+                from: req.body.police,
+                contract: dotenv.parsed.CONTRACT_ADDRESS,
+                PrivateKey: JSON.parse(PrivateKey),
+                password: req.body.password,
+                res: res,
+                web3: web3,
+                Tx: Tx
+            }).then((result) => {
+                return result;
+            })
+            await web3.eth.sendSignedTransaction('0x' + serializedTx_ipfs.toString('hex')).catch((error) => console.log(error))
+
+
+
             // input data to decode
             let decodedData = await web3.eth.abi.decodeLog([
                 {

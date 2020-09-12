@@ -1,40 +1,37 @@
 const crypto = require('../utils/cryptography');
+const IPFS = require('ipfs-http-client');
+const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 const { conditionSwitch } = require('../services/switch');
-const { tranferData } = require('../services/rawTx');
 const { findPrivateKey } = require('../services/privatekey');
+const { sendSignTransaction } = require('../services/sendSign');
+
 module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dotenv }) {
     router.post('/record', async (req, res) => {
         // find private key in database 
         let data = "";
-        // let data2 = "";
         let topics = [];
-        // let topics2 = [];
-        //ตอนนี้ใช้ collecion police ไปก่อน
-        const PrivateKey = await findPrivateKey('PoliceInfo', req.body._supervisor.slice(2), res).then((result) => {
+        const PrivateKey = await findPrivateKey('PoliceInfo', req.body.supervisor.slice(2), res).then((result) => {
             return result;
         });
-        // console.log(PrivateKey);
         try {
             // _PublicInfo ข้อมูลของคดี
-            const police_temp = await contract_Police.methods.setHistoryBandit(
-                req.body._supervisor,
-                req.body._bandit,
-                req.body._publicInfo);
-            const dataEncode = await police_temp.encodeABI();
-            const gas = await police_temp.estimateGas({ from: req.body._supervisor });
-            const ethBalance = await web3.eth.getBalance(req.body._supervisor);
-            if (ethBalance < gas) {
-                return res.json({
-                    message: "Not enough eth coin"
-                })
-            }
-            const nonce = await web3.eth.getTransactionCount(req.body._supervisor);
-            const rawTx = tranferData(nonce, gas, dataEncode, dotenv.parsed.CONTRACT_ADDRESS);
-            const decryptedPrivateKey = crypto.decrypt(JSON.parse(PrivateKey), req.body._password).slice(2);
-            const privateKey = Buffer.from(decryptedPrivateKey, 'hex');
-            const tx = new Tx(rawTx);
-            tx.sign(privateKey);
-            const serializedTx = tx.serialize();
+            const record_temp = await contract_Police.methods.setHistoryBandit(
+                req.body.supervisor,
+                req.body.bandit,
+                req.body.publicInfo);
+            const serializedTx = await sendSignTransaction({
+                templete: record_temp,
+                from: req.body.supervisor,
+                contract: dotenv.parsed.CONTRACT_ADDRESS,
+                PrivateKey: JSON.parse(PrivateKey),
+                password: req.body.password,
+                res: res,
+                web3: web3,
+                Tx: Tx
+            }).then((result) => {
+                return result;
+            })
+            console.log(serializedTx);
             /////////////////////////////////////////////////////////////
             await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
                 .on('receipt', async (result) => {
@@ -73,21 +70,68 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                 }
             ], data, topics);
             let banditHistoryData = {
-                _police: decodedHistoty._admin,
-                _bandit: decodedHistoty._bandit,
-                _publicInfo: decodedHistoty._publicInfo
+                police: decodedHistoty._admin,
+                bandit: decodedHistoty._bandit,
+                publicInfo: decodedHistoty._publicInfo
             }
+            const bufferBanditHistory = await Buffer.from(JSON.stringify({ BanditHistoryData: banditHistoryData }));
+            const ipfsUri = await ipfs.add(bufferBanditHistory, { recusive: true });
+            banditHistoryData.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
+
+            ////////////////////////////////////////////////////IPSF//////////////////////////////////////////////////
+            const ipfs_temp = await contract_Police.methods.addIpfs(req.body.supervisor, banditHistoryData.ipfsUri);
+            const serializedTx_ipfs = await sendSignTransaction({
+                templete: ipfs_temp,
+                from: req.body.supervisor,
+                contract: dotenv.parsed.CONTRACT_ADDRESS,
+                PrivateKey: JSON.parse(PrivateKey),
+                password: req.body.password,
+                res: res,
+                web3: web3,
+                Tx: Tx
+            }).then((result) => {
+                return result;
+            })
+            console.log(serializedTx_ipfs);
+            await web3.eth.sendSignedTransaction('0x' + serializedTx_ipfs.toString('hex')).catch((error) => console.log(error))
+            ////////////////////////////////////////////////////IPSF//////////////////////////////////////////////////
+            
+
             let recordBanditData = {
-                _supervisor: decodedRecord._supervisor,
-                _bandit: decodedRecord._bandit
+                supervisor: decodedRecord._supervisor,
+                bandit: decodedRecord._bandit
             }
-            await conditionSwitch('Decode', req.body._bandit, {
+
+
+
+            const bufferRecordBandit = await Buffer.from(JSON.stringify({ BanditHistoryData: recordBanditData }));
+            const ipfsUriRecord = await ipfs.add(bufferRecordBandit, { recusive: true });
+            recordBanditData.ipfsUriRecord = `https://ipfs.infura.io/ipfs/${ipfsUriRecord.path}`;
+            ////////////////////////////////////////////////////IPSF//////////////////////////////////////////////////
+            const ipfs_temp_record = await contract_Police.methods.addIpfs(req.body.supervisor, recordBanditData.ipfsUriRecord);
+            const serializedTx_ipfs_record = await sendSignTransaction({
+                templete: ipfs_temp_record,
+                from: req.body.supervisor,
+                contract: dotenv.parsed.CONTRACT_ADDRESS,
+                PrivateKey: JSON.parse(PrivateKey),
+                password: req.body.password,
+                res: res,
+                web3: web3,
+                Tx: Tx
+            }).then((result) => {
+                return result;
+            })
+            await web3.eth.sendSignedTransaction('0x' + serializedTx_ipfs_record.toString('hex')).catch((error) => console.log(error))
+            ////////////////////////////////////////////////////IPSF//////////////////////////////////////////////////
+            console.log(serializedTx_ipfs_record);
+
+            await conditionSwitch('Decode', req.body.bandit, {
                 BanditHistory:
                     [
                         banditHistoryData
                     ] //data
             }, banditHistoryData, 'BanditHistory').then(async () => {
-                await conditionSwitch('Decode', req.body._supervisor, {
+                await conditionSwitch('Decode', req.body.supervisor, {
                     RecordBandit:
                         [
                             recordBanditData

@@ -9,7 +9,7 @@ module.exports = function setSupervisor({ router, web3, Tx, contract_Police, dot
         let Now = new Date();
         try {
             // templete of setPortfolio method
-            const supervisor_temp = await contract_Police.methods.setSupervisor(req.body._supervisor);
+            const supervisor_temp = await contract_Police.methods.setSupervisor(req.body.supervisor);
             // use sendSignTransaction function
             const serializedTx = await sendSignTransaction({
                 templete: supervisor_temp,
@@ -33,16 +33,16 @@ module.exports = function setSupervisor({ router, web3, Tx, contract_Police, dot
             // data interface
             let supervisor = await {
                 from: dotenv.parsed.ACCOUNT.slice(2),
-                to: req.body._supervisor.slice(2),
+                to: req.body.supervisor.slice(2),
                 Date: Now.toThaiString(3),
             }
             // Data to encript buffer upload to ipfs 
             const bufferSupervisor = await Buffer.from(JSON.stringify(supervisor));
             const ipfsUri = await ipfs.add(bufferSupervisor, { recusive: true });
             supervisor.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
-            await addData('Supervisor', req.body._supervisor.slice(2), supervisor)
+            await addData('Supervisor', req.body.supervisor.slice(2), supervisor)
                 .then(async () => {
-                    await updateData('PoliceInfo', req.body._supervisor.slice(2), supervisor)
+                    await updateData('PoliceInfo', req.body.supervisor.slice(2), supervisor)
                         .then(() => {
                             return res.json({
                                 message: 'set supervisor success',

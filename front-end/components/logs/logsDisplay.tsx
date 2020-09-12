@@ -1,36 +1,30 @@
 import { LogsStyled } from "../../style/style-component/logsStyled";
-import { Timeline } from 'antd';
-import { logDatas } from "./logDatas";
-import { DatePicker, Space } from 'antd';
+import { LogsTimeline } from "./log/logTimeline";
 import { Input } from 'antd';
-export const LogsDisplay = () => {
-    const { RangePicker } = DatePicker;
+import { Timeline } from 'antd';
+import { urlRegisterAPI } from "../logs/logDatas";
+import { urlRegisterAPI2 } from "../logs/logDatas";
+export const LogsDisplay = ({ show }: any) => {
     const { Search } = Input;
     return (
         <LogsStyled>
-            <div className="container-logs">
-                <Search
-                    placeholder="กรอกแอดเรสของเจ้าหน้าที่ตำรวจ"
+            <div className="container-search">
+                {show && (<Search
+                    placeholder="กรอกแอดเรสของเจ้าหน้าที่ตำรวจที่ต้องการตรวจสอบ"
                     onSearch={value => console.log(value)}
                     style={{ width: 500 }}
-                />
+                />)}
             </div>
-            <div className="container-logs">
-                <Space direction="vertical" size={12}>
-                    <RangePicker onChange={(e) => console.log(e)} />
-                </Space>
+            <div className="text-header">
+                ภาพรวมไทม์ไลน์ (อดีต-อนาคต)
             </div>
-            <div className="timeline">
-                <Timeline>
-                    {
-                        logDatas.map((data, index) => {
-                            return (
-                                <div key={index}>
-                                    <Timeline.Item>{data.Topic}</Timeline.Item>
-                                </div>
-                            )
-                        })
-                    }
+            <div>
+                <Timeline className="timeline-point">
+                    <LogsTimeline url={urlRegisterAPI} />
+                    <LogsTimeline url={urlRegisterAPI2} />
+                    <LogsTimeline url={urlRegisterAPI} />
+                    <LogsTimeline url={urlRegisterAPI2} />
+                    <LogsTimeline url={urlRegisterAPI2} />
                 </Timeline>
             </div>
         </LogsStyled>
