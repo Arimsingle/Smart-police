@@ -12084,6 +12084,108 @@
     "version": "0.5.1+commit.c8a2cb62.Linux.g++"
   },
   "networks": {
+    "42": {
+      "events": {
+        "0x21a3f1c6fc6e5e45f35a978839247e7d1e97222deba64d14eee22796ab916ac2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_admin",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "supervisor",
+              "type": "address"
+            }
+          ],
+          "name": "_SetSupervisor",
+          "type": "event"
+        },
+        "0x510043e75b856ecf1952ddf5971f5a907858dd898fc48ffc75f5b1ef5d37fda2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_admin",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_bandit",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_publicInfo",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_privateInfo",
+              "type": "string"
+            }
+          ],
+          "name": "_SetHistoryBandit",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8AdF1d218e6de32cb90256399E29919642310ef0",
+      "transactionHash": "0x479b8fb1b87979265bc078e67062313fd5ed9db5956ef1a7d371dbc24cdf68db"
+    },
+    "77": {
+      "events": {
+        "0x21a3f1c6fc6e5e45f35a978839247e7d1e97222deba64d14eee22796ab916ac2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_admin",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "supervisor",
+              "type": "address"
+            }
+          ],
+          "name": "_SetSupervisor",
+          "type": "event"
+        },
+        "0x510043e75b856ecf1952ddf5971f5a907858dd898fc48ffc75f5b1ef5d37fda2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_admin",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_bandit",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_publicInfo",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_privateInfo",
+              "type": "string"
+            }
+          ],
+          "name": "_SetHistoryBandit",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xA710aCFEa5455079fA7A4f4170B03f5e00b3Dc37",
+      "transactionHash": "0x6a2767a0df597b0fb93fdc213621da96b9d8a4a16163d2e92cc8995904f6f65e"
+    },
     "1515": {
       "events": {
         "0x21a3f1c6fc6e5e45f35a978839247e7d1e97222deba64d14eee22796ab916ac2": {
@@ -12101,6 +12203,33 @@
             }
           ],
           "name": "_SetSupervisor",
+          "type": "event"
+        },
+        "0x510043e75b856ecf1952ddf5971f5a907858dd898fc48ffc75f5b1ef5d37fda2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_admin",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_bandit",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_publicInfo",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_privateInfo",
+              "type": "string"
+            }
+          ],
+          "name": "_SetHistoryBandit",
           "type": "event"
         },
         "0x54a91023aeb9a25e62b48936f2a6a11d23acaef6098c1c3c992d1ab6df3c62c3": {
@@ -12142,23 +12271,6 @@
           "name": "_PoliceInfo",
           "type": "event"
         },
-        "0x82c9dd4c7f0d098d85e9a422ae6045b84021140d577011e022315f987fd2b794": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "name": "_bandit",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "name": "_publicInfo",
-              "type": "string"
-            }
-          ],
-          "name": "_Bandit_Info",
-          "type": "event"
-        },
         "0xbc4ca386deb6df9c6f82b37c1eae45c3e42350e8bd33440f846ac76ccc0d3265": {
           "anonymous": false,
           "inputs": [
@@ -12175,15 +12287,83 @@
           ],
           "name": "_RecorderBandit",
           "type": "event"
+        },
+        "0x82c9dd4c7f0d098d85e9a422ae6045b84021140d577011e022315f987fd2b794": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_bandit",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_publicInfo",
+              "type": "string"
+            }
+          ],
+          "name": "_Bandit_Info",
+          "type": "event"
         }
       },
       "links": {},
-      "address": "0xd76C215Cc7739B14CAB01D62FA2086c079E5d7ef",
-      "transactionHash": "0x41c99f375d07bd98945001f9933963a65e0ca0e5e3444f730ec6cadc4b1a9e39"
+      "address": "0x016eE5fa741893EB2E2BFc338fF685C62298bF28",
+      "transactionHash": "0xc7333782f1b6906b8f5658aa93b70d4ddb8db5209df5855cbdb2e0516737d551"
+    },
+    "5777": {
+      "events": {
+        "0x21a3f1c6fc6e5e45f35a978839247e7d1e97222deba64d14eee22796ab916ac2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_admin",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "supervisor",
+              "type": "address"
+            }
+          ],
+          "name": "_SetSupervisor",
+          "type": "event"
+        },
+        "0x510043e75b856ecf1952ddf5971f5a907858dd898fc48ffc75f5b1ef5d37fda2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_admin",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_bandit",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_publicInfo",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_privateInfo",
+              "type": "string"
+            }
+          ],
+          "name": "_SetHistoryBandit",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x92886158aE2238C8342F3ae852bFf0F4F7BeFbb6",
+      "transactionHash": "0x41ca6b6c3c0bbcca6fea05fedea177198ec2613d511ed824a92c8cef93260088"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-09-16T13:12:10.056Z",
+  "updatedAt": "2020-09-12T12:39:43.035Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

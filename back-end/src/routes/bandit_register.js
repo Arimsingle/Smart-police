@@ -23,12 +23,12 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             let dataBandit = await {
                 Name: req.body.name,
                 Surname: req.body.surname,
-                Type: req.body.type,
+                Type: "Bandit",
                 Email: req.body.email,
                 Phone: req.body.phone,
-                Rank: req.body.rank,
                 imageUrl: req.body.imageUrl,
                 Date: Now.toThaiString(3),
+                Address:req.body.address,
                 Account: _Account.address.slice(2),
                 Police: req.body.police,
                 Private: {

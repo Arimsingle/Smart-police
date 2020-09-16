@@ -2,11 +2,11 @@ import styled from "styled-components";
 export const FormStyled = styled.div`
 .form-container {
   margin: 0px auto;
-  width: 1700px;
+  width: 1600px;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
   position: relative;
   border-radius: 10px;
-  height: 950px;
+  height: 1200px;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }

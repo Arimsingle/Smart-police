@@ -1,31 +1,6 @@
-=============== Sep 10, 2020 (+07) ===============
-15:26:34.884512 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-15:26:34.894516 db@open opening
-15:26:34.896523 version@stat F·[] S·0B[] Sc·[]
-15:26:34.898511 db@janitor F·2 G·0
-15:26:34.898511 db@open done T·3.9946ms
-=============== Sep 10, 2020 (+07) ===============
-19:10:10.603336 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-19:10:10.605336 version@stat F·[] S·0B[] Sc·[]
-19:10:10.605336 db@open opening
-19:10:10.605336 journal@recovery F·1
-19:10:10.608334 journal@recovery recovering @1
-19:10:10.618339 memdb@flush created L0@2 N·4154 S·32KiB "loc..seq,v2":"version,v1"
-19:10:10.621337 version@stat F·[1] S·32KiB[32KiB] Sc·[0.25]
-19:10:10.631338 db@janitor F·3 G·0
-19:10:10.631338 db@open done T·26.0018ms
-=============== Sep 12, 2020 (+07) ===============
-19:24:41.863462 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-19:24:41.873467 version@stat F·[1] S·32KiB[32KiB] Sc·[0.25]
-19:24:41.873467 db@open opening
-19:24:41.874463 journal@recovery F·1
-19:24:41.875467 journal@recovery recovering @3
-19:24:41.884465 memdb@flush created L0@5 N·4254 S·34KiB "loc..seq,v4156":"n:;..ong,v4168"
-19:24:41.888475 version@stat F·[2] S·67KiB[67KiB] Sc·[0.50]
-19:24:41.897461 db@janitor F·4 G·0
-19:24:41.897461 db@open done T·23.9939ms
-19:24:41.903465 table@compaction L0·2 -> L1·0 S·67KiB Q·8410
-19:24:41.916463 table@build created L1@8 N·12 S·596B "loc..seq,v4156":"version,v1"
-19:24:41.916463 version@stat F·[0 1] S·596B[0B 596B] Sc·[0.00 0.00]
-19:24:41.918463 table@compaction committed F-1 S-66KiB Ke·0 D·8396 T·14.9981ms
-19:24:41.920464 table@remove removed @2
+=============== Sep 16, 2020 (+07) ===============
+19:49:25.755819 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+19:49:25.764812 db@open opening
+19:49:25.770872 version@stat F·[] S·0B[] Sc·[]
+19:49:25.774813 db@janitor F·2 G·0
+19:49:25.774813 db@open done T·10.0012ms

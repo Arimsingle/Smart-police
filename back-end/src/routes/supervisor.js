@@ -1,3 +1,5 @@
+
+//Not Decode yet !
 const IPFS = require('ipfs-http-client');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 const { sendSignTransaction } = require('../services/sendSign');
@@ -9,7 +11,10 @@ module.exports = function setSupervisor({ router, web3, Tx, contract_Police, dot
         let Now = new Date();
         try {
             // templete of setPortfolio method
-            const supervisor_temp = await contract_Police.methods.setSupervisor(req.body.supervisor);
+            const supervisor_temp = await contract_Police.methods
+                .setSupervisor(
+                    req.body.supervisor
+                );
             // use sendSignTransaction function
             const serializedTx = await sendSignTransaction({
                 templete: supervisor_temp,

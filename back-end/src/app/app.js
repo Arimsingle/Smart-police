@@ -24,7 +24,24 @@ require('../routes/portfolio')({ router, web3, Tx, contract_Police, dotenv });
 router.route('/policeinfo')
     .get(async (req, res) => {
         try {
-            contract_Police.methods.getPoliceInfo(req.body._police).call().then((result) => {
+            contract_Police.methods.getPoliceInfo(req.body.police).call().then((result) => {
+                return res.json({
+                    massage: "Call method success",
+                    Data: result
+                })
+            })
+        } catch (error) {
+            return res.json({
+                massage: "Call method faild",
+                Error: error
+            })
+        }
+    })
+
+router.route('/banditinfo')
+    .get(async (req, res) => {
+        try {
+            contract_Police.methods.getBanditInfo(req.body.bandit).call().then((result) => {
                 return res.json({
                     massage: "Call method success",
                     Data: result
@@ -41,7 +58,7 @@ router.route('/policeinfo')
 router.route('/historybandit')
     .get(async (req, res) => {
         try {
-            contract_Police.methods.getHistoryBanditArray(req.body._certifier, req.body._bandit).call().then((result) => {
+            contract_Police.methods.getHistoryBanditArray(req.body.certifier, req.body._bandit).call().then((result) => {
                 return res.json({
                     massage: "Call method success",
                     Data: result
@@ -59,7 +76,7 @@ router.route('/historybandit')
 router.route('/certifierbandit')
     .get(async (req, res) => {
         try {
-            contract_Police.methods.getCertifierBandit(req.body._bandit).call().then((result) => {
+            contract_Police.methods.getCertifierBandit(req.body.bandit).call().then((result) => {
                 return res.json({
                     massage: "Call method success",
                     Data: result
@@ -77,7 +94,7 @@ router.route('/certifierbandit')
 router.route('/recorderBandit')
     .get(async (req, res) => {
         try {
-            contract_Police.methods.getRecorderBandit(req.body._recorder).call().then((result) => {
+            contract_Police.methods.getRecorderBandit(req.body.recorder).call().then((result) => {
                 return res.json({
                     massage: "Call method success",
                     recorder: result

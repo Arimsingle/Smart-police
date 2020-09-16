@@ -14,10 +14,12 @@ module.exports = function portfolioFunction({ router, web3, Tx, contract_Police,
         try {
 
             // templete of setPortfolio method
-            const portfolio_temp = await contract_Police.methods.setPortfolio(
-                req.body.supervisor,
-                req.body.police,
-                req.body.portfolio);
+            const portfolio_temp = await contract_Police.methods
+                .setPortfolio(
+                    req.body.supervisor,
+                    req.body.police,
+                    req.body.portfolio
+                );
             //use sendSignTransaction function
             const serializedTx = await sendSignTransaction({
                 templete: portfolio_temp,
