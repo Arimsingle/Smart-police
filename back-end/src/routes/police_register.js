@@ -45,14 +45,14 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                 imageUrl: "Loading...",
                 Account: _Account.address.slice(2),
                 Address: req.body.address,
-                Supervisor: "false",
+                Doc: "PoliceRegister",
                 Private: {
                     PrivateKey: JSON.stringify(_EncryptedPrivateKey),
                     Password: JSON.stringify(_EncryptedPassword),
                 }
             };
             // Data to be buffer
-            const bufferPolice = await Buffer.from(JSON.stringify({ PoliceRegister: dataPolice }));
+            const bufferPolice = await Buffer.from(JSON.stringify(dataPolice));
             const ipfsUri = await ipfs.add(bufferPolice, { recusive: true });
             dataPolice.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
 
@@ -111,8 +111,8 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             ], data, topics);
 
             let PoliceInfoData = {
-                _police: decodedData._police,
-                _publicInfo: decodedData._publicInfo
+                police: decodedData._police,
+                publicInfo: decodedData._publicInfo
             }
 
             await Register('PoliceInfo', dataPolice).then(async () => {

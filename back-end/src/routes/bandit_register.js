@@ -26,17 +26,18 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                 Type: "Bandit",
                 Email: req.body.email,
                 Phone: req.body.phone,
-                imageUrl: req.body.imageUrl,
+                imageUrl: "Loading...",
                 Date: Now.toThaiString(3),
-                Address:req.body.address,
+                Address: req.body.address,
                 Account: _Account.address.slice(2),
-                Police: req.body.police,
+                Police: req.body.police.slice(2),
+                Doc: "BanditRegister",
                 Private: {
                     PrivateKey: JSON.stringify(_EncryptedPrivateKey)
                 }
             };
             // Data to be buffer
-            const bufferBandit = await Buffer.from(JSON.stringify({ BanditRegister: dataBandit }));
+            const bufferBandit = await Buffer.from(JSON.stringify(dataBandit));
             const ipfsUri = await ipfs.add(bufferBandit, { recusive: true });
             dataBandit.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
             const bandit_temp = await contract_Police.methods.Bandit_Info(_Account.address, dataBandit.ipfsUri);

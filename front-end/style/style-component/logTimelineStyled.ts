@@ -13,4 +13,8 @@ export const LogTimelineStyled = styled.div`
     .text-key{
         font-size:15px;
     }
+    .box-width{
+        height:500px;
+        width:500px;
+    }
     `;

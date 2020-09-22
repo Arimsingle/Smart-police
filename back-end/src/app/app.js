@@ -22,12 +22,12 @@ require('../routes/record')({ router, web3, Tx, contract_Police, dotenv });
 require('../routes/portfolio')({ router, web3, Tx, contract_Police, dotenv });
 // List infomation of a police
 router.route('/policeinfo')
-    .get(async (req, res) => {
+    .post(async (req, res) => {
         try {
             contract_Police.methods.getPoliceInfo(req.body.police).call().then((result) => {
                 return res.json({
                     massage: "Call method success",
-                    Data: result
+                    Ipfs: result
                 })
             })
         } catch (error) {
@@ -39,12 +39,12 @@ router.route('/policeinfo')
     })
 
 router.route('/banditinfo')
-    .get(async (req, res) => {
+    .post(async (req, res) => {
         try {
             contract_Police.methods.getBanditInfo(req.body.bandit).call().then((result) => {
                 return res.json({
                     massage: "Call method success",
-                    Data: result
+                    Ipfs: result
                 })
             })
         } catch (error) {
@@ -56,7 +56,7 @@ router.route('/banditinfo')
     })
 // List all history who's certifier record bandit -> like station maybe :D
 router.route('/historybandit')
-    .get(async (req, res) => {
+    .post(async (req, res) => {
         try {
             contract_Police.methods.getHistoryBanditArray(req.body.certifier, req.body._bandit).call().then((result) => {
                 return res.json({
@@ -74,7 +74,7 @@ router.route('/historybandit')
     })
 // List who's certifier bandit (Certifier[])
 router.route('/certifierbandit')
-    .get(async (req, res) => {
+    .post(async (req, res) => {
         try {
             contract_Police.methods.getCertifierBandit(req.body.bandit).call().then((result) => {
                 return res.json({
@@ -92,7 +92,7 @@ router.route('/certifierbandit')
     })
 // List who's record bandit (address[])
 router.route('/recorderBandit')
-    .get(async (req, res) => {
+    .post(async (req, res) => {
         try {
             contract_Police.methods.getRecorderBandit(req.body.recorder).call().then((result) => {
                 return res.json({
@@ -110,7 +110,7 @@ router.route('/recorderBandit')
     })
 // List status of supervisor (boolean)
 router.route('/claimer')
-    .get(async (req, res) => {
+    .post(async (req, res) => {
         try {
             contract_Police.methods.getClaim(req.body.supervisor).call().then((result) => {
                 return res.json({
@@ -128,7 +128,7 @@ router.route('/claimer')
     })
 // List balance
 router.route('/balance')
-    .get(async (req, res) => {
+    .post(async (req, res) => {
         try {
             await web3.eth.getBalance(req.body.police).then((result) => {
                 return res.json({
@@ -145,9 +145,9 @@ router.route('/balance')
     })
 // List ipfs link
 router.route('/ipfs')
-    .get(async (req, res) => {
+    .post(async (req, res) => {
         try {
-            await contract_Police.methods.getIpfs(req.body.police).call().then((result) => {
+            await contract_Police.methods.getIpfs(req.body.account).call().then((result) => {
                 console.log(result);
                 return res.json({
                     massage: "Call method success",

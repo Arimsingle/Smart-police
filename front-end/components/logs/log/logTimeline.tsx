@@ -1,37 +1,39 @@
 import React from 'react';
-import axios from 'axios'
-import { useEffect, useState } from 'react';
 import { Timeline } from 'antd';
 import { LogTimelineStyled } from "../../../style/style-component/logTimelineStyled";
 import { Card, Avatar } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
-
-export const LogsTimeline = ({ url }: any) => {
+import { TitleSwitch } from "../../../service/titleSwitch";
+import { DesSwitch } from "../../../service/desSwitch";
+import { Tag } from 'antd';
+import {
+    CheckCircleOutlined,
+} from '@ant-design/icons';
+export const LogsTimeline = ({ doc, keys, values }: any) => {
     const { Meta } = Card;
-    const [values, setValues] = useState<any>([]);
-    const [keys, setKeys] = useState<any>([]);
-    useEffect(() => {
-        const fetchDataAsync = async () => {
-            await axios.get(url.url).then(resp => {
-                setKeys(Object.keys(resp.data));
-                setValues(Object.values(resp.data));
-            })
-        }
-        fetchDataAsync();
-    }, []);
-
+    const titleTransalte =
+        <div>
+            {TitleSwitch(doc)}
+            {<Tag style={{ marginLeft: "10px" }} icon={<CheckCircleOutlined />}
+                color="success">
+                Confirmed
+            </Tag>}
+        </div>;
+    const desTransalte = DesSwitch(doc);
     const config = {
         title: 'ข้อมูลประวัติส่วนตัว',
         content: (
             <LogTimelineStyled>
                 <div className="text-in-modal">
                     {
-                        keys.map((key: any, index: any) => {
+                        keys.map((value: any, index: any) => {
                             return (
                                 <div key={index}>
-                                    {index !== 11 && (
-                                        <p>{url.keys[index]} : {values[index]}</p>
+                                    {index < keys.length - 2 && (
+                                        <div>
+                                            <p>{value}:{values[index]}</p>
+                                        </div>
                                     )}
                                 </div>
                             )
@@ -46,16 +48,16 @@ export const LogsTimeline = ({ url }: any) => {
         <LogTimelineStyled>
             <Timeline.Item>
                 <Card
-                    style={{ width: 300 }}
+                    style={{ width: 500 }}
                     actions={[
                         <EyeOutlined key="see" onClick={() => {
-                            modal.info(config);
+                            modal.info(config)
                         }} />,
                     ]}>
                     <Meta
                         avatar={<Avatar src="https://i.pinimg.com/originals/fb/3f/e7/fb3fe7a71631c34341ea4ccb98cf24b3.png" />}
-                        title="สมัครสมาชิกสำเร็จ"
-                        description="0x2cC1b8A57341123EE3cF22D6c320153c1a6931a2"
+                        title={titleTransalte}
+                        description={desTransalte}
                     />
                 </Card>
             </Timeline.Item>
