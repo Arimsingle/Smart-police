@@ -21,7 +21,6 @@ module.exports = function setSupervisor({ router, web3, Tx, contract_Police, dot
                 from: dotenv.parsed.ACCOUNT,
                 contract: dotenv.parsed.CONTRACT_ADDRESS,
                 PrivateKey: dotenv.parsed.PRIVATE_KEY,
-                password: req.body._password,
                 res: res,
                 web3: web3,
                 Tx: Tx
@@ -39,12 +38,29 @@ module.exports = function setSupervisor({ router, web3, Tx, contract_Police, dot
             let supervisor = await {
                 from: dotenv.parsed.ACCOUNT.slice(2),
                 to: req.body.supervisor.slice(2),
+                Doc: "Supervisor",
                 Date: Now.toThaiString(3),
             }
+            
             // Data to encript buffer upload to ipfs 
             const bufferSupervisor = await Buffer.from(JSON.stringify(supervisor));
             const ipfsUri = await ipfs.add(bufferSupervisor, { recusive: true });
             supervisor.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
+
+            const ipfs_temp = await contract_Police.methods.addIpfs(req.body.supervisor, supervisor.ipfsUri);
+            const serializedTx_ipfs = await sendSignTransaction({
+                templete: ipfs_temp,
+                from: dotenv.parsed.ACCOUNT,
+                contract: dotenv.parsed.CONTRACT_ADDRESS,
+                PrivateKey: dotenv.parsed.PRIVATE_KEY,
+                res: res,
+                web3: web3,
+                Tx: Tx
+            }).then((result) => {
+                return result;
+            })
+            await web3.eth.sendSignedTransaction('0x' + serializedTx_ipfs.toString('hex')).catch((error) => console.log(error))
+
             await addData('Supervisor', req.body.supervisor.slice(2), supervisor)
                 .then(async () => {
                     await updateData('PoliceInfo', req.body.supervisor.slice(2), supervisor)

@@ -148,7 +148,7 @@ router.route('/ipfs')
     .post(async (req, res) => {
         try {
             await contract_Police.methods.getIpfs(req.body.account).call().then((result) => {
-                console.log(result);
+                // console.log(result);
                 return res.json({
                     massage: "Call method success",
                     ipfs: result

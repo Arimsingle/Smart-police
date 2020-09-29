@@ -57,6 +57,7 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                     "type": "string"
                 }
             ], data, topics);
+            
             let decodedRecord = await web3.eth.abi.decodeLog([
                 {
                     "indexed": true,
@@ -69,6 +70,7 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                     "type": "address"
                 }
             ], data, topics);
+
             let banditHistoryData = {
                 police: decodedHistoty._admin,
                 bandit: decodedHistoty._bandit,
