@@ -12,15 +12,15 @@ const Form = () => {
     }
     return (
         <FormStyled>
-            <div className='form-container'>
+            <div className='form-container-signup'>
                 <Link href="/">
                     <a className='close-btn'>
                         <AiOutlineHome />
                     </a>
                 </Link>
-                <div className='form-content-left'>
+                {/* <div className='form-content-left'>
                     <img className='form-img' src='/static/images/app.svg' alt='spaceship' />
-                </div>
+                </div> */}
                 {
                     !isSubmitted
                         ? (<FormSignup submitForm={submitForm} />)

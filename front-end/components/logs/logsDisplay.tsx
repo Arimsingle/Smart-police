@@ -8,7 +8,7 @@ export const LogsDisplay = ({ show }: any) => {
     const [valueObj, setValueObj] = useState<any>({});
     useEffect(() => {
         const fetchDataAsync = async () => {
-            const apiValues = await FetchAPI("Ipfs", { account: "0xb2945d10Eb92ceCFeCB1D2dBB5B19BD0641df760" }).then((res: any) => {
+            const apiValues = await FetchAPI("Ipfs", { account: "0xa68fa2a78Ee81580F2E2c6b251FA636d6cdd3385" }).then((res: any) => {
                 return res;
             })
             setValueObj(apiValues);

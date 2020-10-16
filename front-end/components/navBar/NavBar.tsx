@@ -9,25 +9,27 @@ const NavBar = () => {
     const handleClick = () => setClick(state => !state);
     return (
         <Navbar.Item>
-            <Navbar.Logo>
-                <GiPoliceOfficerHead className="police-logo" /> POLICE
+            <div className="fixed-navbar">
+                <Navbar.Logo>
+                    <GiPoliceOfficerHead className="police-logo" /> POLICE
             </Navbar.Logo>
-            <div className="menu-icon" onClick={handleClick}>
-                {click ? <CgClose /> : <CgMenu />}
+                <div className="menu-icon" onClick={handleClick}>
+                    {click ? <CgClose /> : <CgMenu />}
+                </div>
+                <ul className={click ? "nav-menu active" : "nav-menu"}>
+                    {
+                        NavData.map((Data, index) => {
+                            return (
+                                <li key={index} className='nav-item'>
+                                    <Link href={Data.url}>
+                                        <a className={Data.cName}>{Data.title}</a>
+                                    </Link>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
             </div>
-            <ul className={click ? "nav-menu active" : "nav-menu"}>
-                {
-                    NavData.map((Data, index) => {
-                        return (
-                            <li key={index} className='nav-item'>
-                                <Link href={Data.url}>
-                                    <a className={Data.cName}>{Data.title}</a>
-                                </Link>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
         </Navbar.Item>
     )
 }

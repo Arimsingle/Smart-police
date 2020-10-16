@@ -29,7 +29,7 @@ export const FetchAPI = async (title: any, accountObj: any) => {
                 response = await axios.post("http://localhost:8000/api/ipfs", accountObj);
                 for (let i = 0; i < response.data.ipfs.length; i++) {
                     await axios.get(response.data.ipfs[i]).then((res: any) => {
-                        console.log(res.data.Doc);
+                        // console.log(res.data.Doc);
                         dataObj.doc.push(res.data.Doc);
                         dataObj.key.push(Object.keys(res.data));
                         dataObj.value.push(Object.values(res.data));

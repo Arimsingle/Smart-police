@@ -8,12 +8,13 @@ const SignIn = () => {
         <FormStyled>
             <div className='form-container'>
                 <Link href="/">
-                    <a className='close-btn'>
+                    <a className='close-btn-signin'>
                         <AiOutlineHome />
                     </a>
                 </Link>
+                
                 <div className='form-content-left'>
-                    <img className='form-img' src='/static/images/app.svg' alt='spaceship' />
+                    <img className='form-img' src='/static/images/male2.svg' alt='spaceship' />
                 </div>
                 <FormSignin />
                 <style jsx global>

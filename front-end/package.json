@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "@types/styled-jsx": "^2.2.8",
+    "animate.css": "^4.1.1",
     "antd": "^4.6.2",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
+    "motion-ui": "^2.0.3",
     "next": "latest",
     "next-google-fonts": "^1.2.1",
     "prop-types": "^15.7.2",

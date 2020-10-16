@@ -79,6 +79,16 @@ export const FooterStyled = styled.div`
     }
   
     .footer-link-items a:hover {
+        color: #ff3639;
+        transition: 0.3s ease-out;
+    }
+    .footer-link-items p {
+        color: #fff;
+        text-decoration: none;
+        margin-bottom: 0.5rem;
+    }
+  
+    .footer-link-items p:hover {
         color: #e9e9e9;
         transition: 0.3s ease-out;
     }
@@ -116,6 +126,10 @@ export const FooterStyled = styled.div`
         justify-content: space-between;
         align-items: center;
         width: 240px;
+        margin-bottom:16px;
+    }
+    .social-icons a:hover {
+        color: #ff3639;
     }
   
     .social-logo {

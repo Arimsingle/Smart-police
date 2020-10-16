@@ -10,7 +10,7 @@ export const FormSignin = ({ submitForm }: any) => {
                     เข้าสู่ระบบของโครงงาน Smart Police
                 </h1>
                 <div className='form-inputs'>
-                    <label className='form-label'>อีเมลล์</label>
+                    <label className='form-label'>อีเมลล์ {errors.email && <span>*{errors.email}</span>}</label>
                     <input
                         className='form-input'
                         type='email'
@@ -19,10 +19,9 @@ export const FormSignin = ({ submitForm }: any) => {
                         value={values.email}
                         onChange={handleChange}
                     />
-                    {errors.email && <p>{errors.email}</p>}
                 </div>
                 <div className='form-inputs'>
-                    <label className='form-label'>รหัสผ่าน</label>
+                    <label className='form-label'>รหัสผ่าน {errors.password && <span>*{errors.password}</span>}</label>
                     <input
                         className='form-input'
                         type='password'
@@ -31,7 +30,6 @@ export const FormSignin = ({ submitForm }: any) => {
                         value={values.password}
                         onChange={handleChange}
                     />
-                    {errors.password && <p>{errors.password}</p>}
                 </div>
                 <button className='form-input-btn' type='submit'>
                     ลงชื่อเข้าใช้

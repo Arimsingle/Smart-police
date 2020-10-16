@@ -5,7 +5,7 @@ import {
     FaFacebook,
     FaInstagram,
     FaYoutube,
-    FaTwitter,
+    FaMediumM,
     FaLinkedin
 } from 'react-icons/fa';
 import { GiPoliceOfficerHead } from "react-icons/gi";
@@ -37,22 +37,22 @@ export const Footers = () => {
                         <div className='footer-link-items'>
                             <h2>เกี่ยวกับเรา</h2>
                             <Link href='/'><a>PSU PHUKET</a></Link>
-                            <Link href='/'><a>How you like that</a></Link>
-                            <Link href='/'><a>How you like that</a></Link>
+                            <Link href='/'><a>COE PHUKET</a></Link>
+                            <Link href='/'><a>COC PHUKET</a></Link>
                         </div>
                         <div className='footer-link-items'>
                             <h2>ติดต่อเรา</h2>
-                            <Link href='/'><a>+66 76276012-13</a></Link>
-                            <Link href='/'><a>How you like that</a></Link>
-                            <Link href='/'><a>How you like that</a></Link>
+                            <p>+66 76276012-13</p>
+                            <p>+66 76276012-14</p>
+                            <p>+66 76276012-15</p>
                         </div>
                     </div>
                     <div className='footer-link-wrapper'>
                         <div className='footer-link-items'>
                             <h2>วีดีโอ</h2>
                             <Link href='/'><a>Portfolio</a></Link>
-                            <Link href='/'><a>How you like that</a></Link>
-                            <Link href='/'><a>How you like that</a></Link>
+                            <Link href='/'><a>University</a></Link>
+                            <Link href='/'><a>Faculty</a></Link>
                         </div>
                         <div className='footer-link-items'>
                             <h2>โซเชียล</h2>
@@ -83,10 +83,10 @@ export const Footers = () => {
                             <Link href="https://www.youtube.com/channel/UCAzY2MUbl3txnZLOlFZIZhg?view_as=subscriber">
                                 <a target='_blank' className='social-icon-link' aria-label='Youtube'><FaYoutube /></a>
                             </Link>
-                            <Link href='/'>
-                                <a target='_blank' className='social-icon-link' aria-label='Twitter'><FaTwitter /></a>
+                            <Link href='https://medium.com/@arimcheberahim'>
+                                <a target='_blank' className='social-icon-link' aria-label='Twitter'><FaMediumM /></a>
                             </Link>
-                            <Link href='/'>
+                            <Link href=''>
                                 <a target='_blank' className='social-icon-link' aria-label='LinkedIn'><FaLinkedin /></a>
                             </Link>
                         </div>

@@ -1,12 +1,16 @@
 import styled from "styled-components";
 export const Navbar = {
     Item: styled.div`
-        background-color:#39374e;
-        height:80px;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        font-size:1.2rem;
+    position: relative;
+        .fixed-navbar{
+            background-color:#39374e;
+            height:auto;
+            width:auto;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:1.2rem;
+        }
         .nav-menu{
             display:grid;
             grid-template-columns:repeat(5,auto);

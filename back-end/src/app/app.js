@@ -9,7 +9,6 @@ const { web3 } = require('../web3/web3');
 const { abi } = require('../web3/abi');
 const contract_Police = new web3.eth.Contract(abi, dotenv.parsed.CONTRACT_ADDRESS);
 const Tx = require('ethereumjs-tx');
-
 // use module
 app.use(cors());
 app.use('/api', bodyParser.json(), router);
@@ -58,7 +57,7 @@ router.route('/banditinfo')
 router.route('/historybandit')
     .post(async (req, res) => {
         try {
-            contract_Police.methods.getHistoryBanditArray(req.body.certifier, req.body._bandit).call().then((result) => {
+            contract_Police.methods.getHistoryBanditArray(req.body.certifier, req.body.bandit).call().then((result) => {
                 return res.json({
                     massage: "Call method success",
                     Data: result

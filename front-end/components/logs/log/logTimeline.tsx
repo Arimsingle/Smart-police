@@ -7,9 +7,7 @@ import { Modal } from 'antd';
 import { TitleSwitch } from "../../../service/titleSwitch";
 import { DesSwitch } from "../../../service/desSwitch";
 import { Tag } from 'antd';
-import {
-    CheckCircleOutlined,
-} from '@ant-design/icons';
+import { CheckCircleOutlined } from '@ant-design/icons';
 export const LogsTimeline = ({ doc, keys, values }: any) => {
     const { Meta } = Card;
     const titleTransalte =
@@ -22,7 +20,7 @@ export const LogsTimeline = ({ doc, keys, values }: any) => {
         </div>;
     const desTransalte = DesSwitch(doc);
     const config = {
-        title: 'ข้อมูลประวัติส่วนตัว',
+        title: "ข้อมูลเพิ่มเติม",
         content: (
             <LogTimelineStyled>
                 <div className="text-in-modal">
