@@ -11,4 +11,7 @@ export default css.global`
     font-family: 'Prompt-ExtraLight';
     background-color:#ece6eb;
   }
+  canvas {
+    display: none;
+  }
 `

@@ -19,5 +19,5 @@
     "target": "esnext"
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "pages/_app.tsx", "style/button.js"]
+  "include": ["**/*.ts", "**/*.tsx", "pages/_app.tsx", "style/button.js", "components/faceApi/index.js"]
 }

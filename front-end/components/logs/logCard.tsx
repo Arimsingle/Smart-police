@@ -4,22 +4,22 @@ import { useState } from "react";
 import { LogsDisplay } from "./logsDisplay";
 import { LogCardInterface } from "../../interfaces/logCardInterface";
 import { logCardDatas } from "./logDatas";
+import { contentOverview, contentRegister, contentPortfolio, contentReport } from "./logDatas"
 export const LogCardDisplay = () => {
     const tabList: LogCardInterface[] = logCardDatas;
     const [state, setState] = useState<any>({
-        key: 'myself',
+        key: 'overview',
         noTitleKey: 'app',
     });
     const onTabChange = (key: any, type: any) => {
-        console.log(key, type);
+        // console.log(key, type);
         setState({ [type]: key });
     };
-    const unShowSearch: any = {
-        show: true,
-    }
     const contentList: any = {
-        myself: <LogsDisplay/>,
-        others: <LogsDisplay {...unShowSearch}/>
+        overview: <LogsDisplay {...contentOverview} />,
+        register: <LogsDisplay {...contentRegister} />,
+        portfolio: <LogsDisplay {...contentPortfolio} />,
+        report: <LogsDisplay {...contentReport} />
     };
     return (
         <LogsStyled>

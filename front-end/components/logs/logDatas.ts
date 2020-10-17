@@ -1,14 +1,41 @@
 const axios = require('axios');
+/////////////////////////////////////////////////////////
 export const logCardDatas = [
     {
-        key: 'myself',
+        key: 'overview',
         tab: 'ภาพรวม',
     },
     {
-        key: 'others',
-        tab: 'บุคคลอื่น',
+        key: 'register',
+        tab: 'สมัครสมาชิก',
+    },
+    {
+        key: 'portfolio',
+        tab: 'ผลงานที่ได้ทำ',
+    },
+    {
+        key: 'report',
+        tab: 'บันทึกรายงานนักโทษ',
     },
 ];
+/////////////////////////////////////////////////////////
+export const contentOverview: any = {
+    show: false,
+    content: "ภาพรวม"
+}
+export const contentRegister: any = {
+    show: true,
+    content: "สมัครสมาชิก"
+}
+export const contentPortfolio: any = {
+    show: true,
+    content: "ผลงานที่ได้"
+}
+export const contentReport: any = {
+    show: true,
+    content: "บันทึกรายงานนักโทษ"
+}
+/////////////////////////////////////////////////////////
 export const urlRegisterAPI = {
     title: "ข้อมูลเจ้าหน้าที่ตำรวจ",
     keys: ["ชื่อ", "นามสกุล", "ประเภท", "อีเมลล์", "เบอร์โทรศัพท์", "ระดับ", "วันที่สมัคร", "รูปภาพ", "รหัสผู้ใช้", "ที่อยู่", "สิทธิพิเศษ"],
