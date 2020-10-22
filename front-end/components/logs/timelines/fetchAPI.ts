@@ -9,7 +9,7 @@ export const FetchAPI = async (title: any, accountObj: any) => {
         let response;
         switch (title) {
             case 'PoliceRegister':
-                response = await axios.post("http://localhost:8000/api/ipfs", accountObj);
+                response = await axios.post("http://localhost:8000/api/policeinfo", accountObj);
                 for (let i = 0; i < response.data.length; i++) {
                     await axios.get(response.data).then((res: any) => {
                         console.log(res.data);
@@ -37,6 +37,7 @@ export const FetchAPI = async (title: any, accountObj: any) => {
                 }
                 return dataObj;
             default:
+                console.log('INVALID VALUE');
                 return 'INVALID VALUE';
         }
     } catch (error) {

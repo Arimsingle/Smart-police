@@ -5,7 +5,7 @@ import { LogsDisplay } from "./logsDisplay";
 import { LogCardInterface } from "../../interfaces/logCardInterface";
 import { logCardDatas } from "./logDatas";
 import { contentOverview, contentRegister, contentPortfolio, contentReport } from "./logDatas"
-export const LogCardDisplay = () => {
+export const LogCardDisplay = ({ titile }: any) => {
     const tabList: LogCardInterface[] = logCardDatas;
     const [state, setState] = useState<any>({
         key: 'overview',
@@ -25,7 +25,7 @@ export const LogCardDisplay = () => {
         <LogsStyled>
             <Card
                 style={{ width: '100%' }}
-                title="ข้อมูลเจ้าหน้าที่ตำรวจ"
+                title={titile}
                 tabList={tabList}
                 activeTabKey={state.key}
                 onTabChange={key => {

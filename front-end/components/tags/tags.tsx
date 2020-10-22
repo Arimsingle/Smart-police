@@ -11,10 +11,10 @@ export const Tags = () => {
             <div className="container-tags">
                 <Tabs defaultActiveKey="1" onChange={(key) => handleChange(key)} type="card">
                     <TabPane tab="ข้อมูลเจ้าหน้าที่ตำรวจ" key="1">
-                        <LogCardDisplay/>
+                        <LogCardDisplay titile="ข้อมูลเจ้าหน้าที่ตำรวจ" />
                     </TabPane>
                     <TabPane tab="ข้อมูลของนักโทษ" key="2">
-                        <LogCardDisplay />
+                        <LogCardDisplay titile="ข้อมูลผู้กระทำผิดกฎหมาย"/>
                     </TabPane>
                 </Tabs>
             </div>

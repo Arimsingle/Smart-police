@@ -1,11 +1,11 @@
 import { LogsStyled } from "../../style/style-component/logsStyled";
-import { LogsTimeline } from "./log/logTimeline";
+import { LogsTimeline } from "./timelines/logTimeline";
 import { Input } from 'antd';
 import { Timeline } from 'antd';
 import { useEffect, useState } from 'react';
-import { FetchAPI } from "../logs/log/fetchAPI";
+import { FetchAPI } from "./timelines/fetchAPI";
 import { Result, Button, Modal, Tag } from 'antd';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import FaceDetect from "../faceApi/faceDetect";
 export const LogsDisplay = ({ show, content }: any) => {
     const [valueObj, setValueObj] = useState<any>({});
@@ -13,7 +13,7 @@ export const LogsDisplay = ({ show, content }: any) => {
 
     useEffect(() => {
         const fetchDataAsync = async () => {
-            const apiValues = await FetchAPI("Ipfs", { account: "0xa68fa2a78Ee81580F2E2c6b251FA636d6cdd3385" }).then((res: any) => {
+            const apiValues = await FetchAPI("PoliceRegister", { account: "0xa68fa2a78Ee81580F2E2c6b251FA636d6cdd3385" }).then((res: any) => {
                 return res;
             })
             apiValues && setValueObj(apiValues);
