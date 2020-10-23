@@ -14,7 +14,7 @@ export const Tags = () => {
                         <LogCardDisplay titile="ข้อมูลเจ้าหน้าที่ตำรวจ" />
                     </TabPane>
                     <TabPane tab="ข้อมูลของนักโทษ" key="2">
-                        <LogCardDisplay titile="ข้อมูลผู้กระทำผิดกฎหมาย"/>
+                        <LogCardDisplay titile="ข้อมูลผู้กระทำผิดกฎหมาย" />
                     </TabPane>
                 </Tabs>
             </div>

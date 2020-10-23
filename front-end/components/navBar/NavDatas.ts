@@ -11,12 +11,12 @@ export const NavData = [
     },
     {
         title: "แผงควบคุม",
-        url: "#",
+        url: "/dashboard",
         cName: "nav-links"
     },
     {
         title: "ติดต่อเรา",
-        url: "#",
+        url: "/contact",
         cName: "nav-links"
     },
     {

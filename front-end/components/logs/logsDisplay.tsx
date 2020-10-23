@@ -5,22 +5,48 @@ import { Timeline } from 'antd';
 import { useEffect, useState } from 'react';
 import { FetchAPI } from "./timelines/fetchAPI";
 import { Result, Button, Modal, Tag } from 'antd';
-// import { useRouter } from 'next/router';
 import FaceDetect from "../faceApi/faceDetect";
-export const LogsDisplay = ({ show, content }: any) => {
+export const LogsDisplay = ({ show, content, title }: any) => {
     const [valueObj, setValueObj] = useState<any>({});
-    // const router = useRouter()
-
     useEffect(() => {
+
         const fetchDataAsync = async () => {
-            const apiValues = await FetchAPI("PoliceRegister", { account: "0xa68fa2a78Ee81580F2E2c6b251FA636d6cdd3385" }).then((res: any) => {
-                return res;
-            })
-            apiValues && setValueObj(apiValues);
+            let apiValues;
+            switch (title) {
+                case "PoliceRegister":
+                    apiValues = await FetchAPI(title, { police: "0x43Df0F9dc6be1Ec1bCA115Cc19FEc925C7400646" })
+                        .then((res: any) => {
+                            return res;
+                        })
+                    apiValues && setValueObj(apiValues);
+                    break;
+                case "BanditRegister":
+                    apiValues = await FetchAPI(title, { bandit: "0x43Df0F9dc6be1Ec1bCA115Cc19FEc925C7400646" })
+                        .then((res: any) => {
+                            return res;
+                        })
+                    apiValues && setValueObj(apiValues);
+                    break;
+                case "Supervisor":
+                    apiValues = await FetchAPI(title, { supervisor: "0x43Df0F9dc6be1Ec1bCA115Cc19FEc925C7400646" })
+                        .then((res: any) => {
+                            return res;
+                        })
+                    apiValues && setValueObj(apiValues);
+                    break;
+                case "Ipfs":
+                    apiValues = await FetchAPI(title, { account: "0x43Df0F9dc6be1Ec1bCA115Cc19FEc925C7400646" })
+                        .then((res: any) => {
+                            return res;
+                        })
+                    apiValues && setValueObj(apiValues);
+                    break;
+                default:
+                    break;
+            }
         }
         fetchDataAsync();
-    }, [valueObj]);
-    // console.log(valueObj);
+    }, [10]);
     const docs: any = valueObj.doc;
     const keys: any = valueObj.key;
     const values: any = valueObj.value;
@@ -30,7 +56,6 @@ export const LogsDisplay = ({ show, content }: any) => {
     const showModal = () => {
         setVisible(true);
     };
-
     const hideModal = () => {
         setVisible(false);
     };
@@ -77,7 +102,6 @@ export const LogsDisplay = ({ show, content }: any) => {
                             title="403"
                             subTitle="Sorry, you are not authorized to access this page."
                             extra={<Button type="primary" onClick={showModal}>Authentication</Button>}
-                        // <Button type="primary" onClick={() => router.push('/')}>Back Home</Button> //back to main page
                         />)
                     }
                 </Timeline>

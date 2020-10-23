@@ -5,25 +5,47 @@ export const FetchAPI = async (title: any, accountObj: any) => {
         key: [],
         value: []
     };
+    let dataObj_PoliceRegister: any = {
+        doc: [],
+        key: [],
+        value: []
+    };
     try {
         let response;
         switch (title) {
             case 'PoliceRegister':
                 response = await axios.post("http://localhost:8000/api/policeinfo", accountObj);
-                for (let i = 0; i < response.data.length; i++) {
-                    await axios.get(response.data).then((res: any) => {
-                        console.log(res.data);
+                // console.log(response.data.Ipfs);
+                for (let i = 0; i < response.data.Ipfs.length; i++) {
+                    await axios.get(response.data.Ipfs[i]).then((res: any) => {
+                        // console.log(res.data);
+                        dataObj_PoliceRegister.doc.push(res.data.Doc);
+                        dataObj_PoliceRegister.key.push(Object.keys(res.data));
+                        dataObj_PoliceRegister.value.push(Object.values(res.data));
                     })
                 }
-                console.log(response.data);
-                return response.data;
+                // console.log(response.data.Ipfs);
+                return dataObj_PoliceRegister;
+            case 'Portfolio':
+                response = await axios.post("http://localhost:8000/api/policeinfo", accountObj);
+                // console.log(response.data.Ipfs);
+                for (let i = 0; i < response.data.Ipfs.length; i++) {
+                    await axios.get(response.data.Ipfs[i]).then((res: any) => {
+                        // console.log(res.data);
+                        dataObj_PoliceRegister.doc.push(res.data.Doc);
+                        dataObj_PoliceRegister.key.push(Object.keys(res.data));
+                        dataObj_PoliceRegister.value.push(Object.values(res.data));
+                    })
+                }
+                // console.log(response.data.Ipfs);
+                return dataObj_PoliceRegister;
             case 'BanditRegister':
-                response = await axios.post("http://localhost:8000/api/ipfs", accountObj);
-                console.log(response.data);
+                response = await axios.post("http://localhost:8000/api/banditinfo", accountObj);
+                // console.log(response.data);
                 return response.data;
             case 'Supervisor':
                 response = await axios.post("http://localhost:8000/api/ipfs", accountObj);
-                console.log(response.data);
+                // console.log(response.data);
                 return response.data;
             case 'Ipfs':
                 response = await axios.post("http://localhost:8000/api/ipfs", accountObj);

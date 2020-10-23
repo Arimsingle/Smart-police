@@ -30,6 +30,7 @@ router.route('/policeinfo')
                 })
             })
         } catch (error) {
+            console.log(error);
             return res.json({
                 massage: "Call method faild",
                 Error: error
@@ -115,6 +116,25 @@ router.route('/claimer')
                 return res.json({
                     massage: "Call method success",
                     supervisor: result
+                })
+            })
+        } catch (error) {
+            return res.json({
+                massage: "Call method faild",
+                Error: error
+            })
+        }
+
+    })
+// List status of supervisor (boolean)
+router.route('/myportfolio')
+    .post(async (req, res) => {
+        try {
+            console.log(req.body.police);
+            contract_Police.methods.getPortfolio(req.body.police).call().then((result) => {
+                return res.json({
+                    massage: "Call method success",
+                    portfolio: result
                 })
             })
         } catch (error) {

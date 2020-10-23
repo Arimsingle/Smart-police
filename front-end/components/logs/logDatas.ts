@@ -21,26 +21,27 @@ export const logCardDatas = [
 /////////////////////////////////////////////////////////
 export const contentOverview: any = {
     show: false,
-    content: "ภาพรวม"
+    content: "ภาพรวม",
+    title: "Ipfs",
 }
 export const contentRegister: any = {
     show: true,
-    content: "สมัครสมาชิก"
+    content: "สมัครสมาชิก",
+    title: "PoliceRegister"
 }
 export const contentPortfolio: any = {
     show: true,
-    content: "ผลงานที่ได้"
+    content: "ผลงานที่ได้",
+    title: "Ipfs"
 }
 export const contentReport: any = {
     show: true,
-    content: "บันทึกรายงานนักโทษ"
+    content: "บันทึกรายงานนักโทษ",
+    title: "BanditRegister"
 }
 /////////////////////////////////////////////////////////
-export const urlRegisterAPI = {
-    title: "ข้อมูลเจ้าหน้าที่ตำรวจ",
-    keys: ["ชื่อ", "นามสกุล", "ประเภท", "อีเมลล์", "เบอร์โทรศัพท์", "ระดับ", "วันที่สมัคร", "รูปภาพ", "รหัสผู้ใช้", "ที่อยู่", "สิทธิพิเศษ"],
-    url: "https://ipfs.infura.io/ipfs/QmSKJzFEG53PimJMgjp4nMeTrgRJGAvusUByJ8Ab1HgSo8"
-}
+export const titileRegister = ["ชื่อ", "นามสกุล", "ประเภท", "อีเมลล์", "เบอร์โทรศัพท์", "ระดับ", "วันที่สมัคร", "รูปภาพ", "บัญชีผู้ใช้", "ที่อยู่", "สิทธิพิเศษ"]
+export const titileRegisterBandit = ["ชื่อ", "นามสกุล", "ประเภท", "อีเมลล์", "เบอร์โทรศัพท์", "รูปภาพ", "วันที่สมัคร", "ที่อยู่", "บัญชีผู้ใช้", "ตำรวจ"]
 export const urlSupervisor = {
     title: "หัวหน้า",
     keys: ["ชื่อ", "นามสกุล", "ประเภท", "อีเมลล์", "เบอร์โทรศัพท์", "ระดับ", "วันที่สมัคร", "รูปภาพ", "รหัสผู้ใช้", "ที่อยู่", "สิทธิพิเศษ"],

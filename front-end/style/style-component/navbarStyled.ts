@@ -1,11 +1,9 @@
 import styled from "styled-components";
 export const Navbar = {
     Item: styled.div`
-    position: relative;
         .fixed-navbar{
             background-color:#39374e;
-            height:auto;
-            width:auto;
+            height:80px;
             display:flex;
             justify-content:center;
             align-items:center;
@@ -21,7 +19,6 @@ export const Navbar = {
             justify-content:end;
             margin:0;
         }
-
         .nav-links{
             color:#fff;
             display: flex;
@@ -34,7 +31,6 @@ export const Navbar = {
             color:#ff3639;
             transform: scale(1.1);
         }
-
         .menu-icon{
             color:#fff;
             display:none;
@@ -46,8 +42,8 @@ export const Navbar = {
         .nav-item:hover {
             border-bottom: 2px solid #ff3639;
             transition: all 0.3s linear;
-
           }
+
         @media only screen and (max-width: 960px){
             position:relative;
             .nav-menu{
@@ -103,18 +99,12 @@ export const Navbar = {
         justify-self:start;
         margin-left:10px;
         cursor:pointer;
-        .police-logo{
-            margin-bottom:0.3rem;
-            margin-left:0rem;
+        .react-logo{
+            margin-left:0.5rem;
             font-size:2.4rem;
         }
         @media only screen and (max-width: 1022px) and (min-width: 960px){
             font-size:2.1rem;
-        }
-        @media screen and (max-width:500px){
-            font-size:1.8rem;
-            margin:0;
-            margin-top:10px;
         }
         @media screen and (max-width:960px){
             position:absolute;
@@ -123,4 +113,4 @@ export const Navbar = {
             transform:translate(25%,50%);
         }
 `
-}
+} 

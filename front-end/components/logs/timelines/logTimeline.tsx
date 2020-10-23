@@ -8,8 +8,11 @@ import { TitleSwitch } from "../../../service/titleSwitch";
 import { DesSwitch } from "../../../service/desSwitch";
 import { Tag } from 'antd';
 import { CheckCircleOutlined } from '@ant-design/icons';
+import { TranslateSwitch } from "../../../service/TranslateSwitch";
+import { Typography } from 'antd';
 export const LogsTimeline = ({ doc, keys, values }: any) => {
     const { Meta } = Card;
+    const { Paragraph } = Typography;
     const titleTransalte =
         <div>
             {TitleSwitch(doc)}
@@ -19,18 +22,21 @@ export const LogsTimeline = ({ doc, keys, values }: any) => {
             </Tag>}
         </div>;
     const desTransalte = DesSwitch(doc);
+    // const keysTranSlate = TranslateSwitch(doc) ยังต้องแก้อีก value && 
+    // console.log(keysTranSlate);
     const config = {
         title: "ข้อมูลเพิ่มเติม",
         content: (
             <LogTimelineStyled>
                 <div className="text-in-modal">
                     {
-                        keys.map((value: any, index: any) => {
+                        keys && keys.map((value: any, index: any) => {
                             return (
                                 <div key={index}>
                                     {index < keys.length - 2 && (
                                         <div>
-                                            <p>{value}:{values[index]}</p>
+                                            {values[index].length < 40 ? <Paragraph ellipsis >{value}: {values[index]}</Paragraph>
+                                                : <Paragraph ellipsis copyable>{value}: {values[index]}</Paragraph>}
                                         </div>
                                     )}
                                 </div>

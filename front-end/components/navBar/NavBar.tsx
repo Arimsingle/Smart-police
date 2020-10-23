@@ -12,7 +12,7 @@ const NavBar = () => {
             <div className="fixed-navbar">
                 <Navbar.Logo>
                     <GiPoliceOfficerHead className="police-logo" /> POLICE
-            </Navbar.Logo>
+                </Navbar.Logo>
                 <div className="menu-icon" onClick={handleClick}>
                     {click ? <CgClose /> : <CgMenu />}
                 </div>

@@ -14,11 +14,12 @@ export const UseForm = (callback: any, Validaor: any) => {
     const [errors, setErrors] = useState<any>({});
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const RegisterDatas = async (valueRegister: FormInterface) => {
-        await axios.post(`http://localhost:8000/api/police/register`, valueRegister).then((result) => {
-            console.log(result);
-        }).catch((err) => {
-            console.log(err);
-        })
+        await axios.post(`http://localhost:8000/api/police/register`, valueRegister)
+            .then((result) => {
+                console.log(result);
+            }).catch((err) => {
+                console.log(err);
+            })
         console.log(valueRegister);
     }
     const handleChange = (e: any) => {
@@ -37,7 +38,6 @@ export const UseForm = (callback: any, Validaor: any) => {
         if (Object.keys(errors).length === 0 && isSubmitting) {
             RegisterDatas(values);
             callback();
-
         }
     },
         [errors]);
