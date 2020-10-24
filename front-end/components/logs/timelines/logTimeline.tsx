@@ -8,7 +8,6 @@ import { TitleSwitch } from "../../../service/titleSwitch";
 import { DesSwitch } from "../../../service/desSwitch";
 import { Tag } from 'antd';
 import { CheckCircleOutlined } from '@ant-design/icons';
-import { TranslateSwitch } from "../../../service/TranslateSwitch";
 import { Typography } from 'antd';
 export const LogsTimeline = ({ doc, keys, values }: any) => {
     const { Meta } = Card;
@@ -24,6 +23,8 @@ export const LogsTimeline = ({ doc, keys, values }: any) => {
     const desTransalte = DesSwitch(doc);
     // const keysTranSlate = TranslateSwitch(doc) ยังต้องแก้อีก value && 
     // console.log(keysTranSlate);
+    console.log(desTransalte,doc);
+    
     const config = {
         title: "ข้อมูลเพิ่มเติม",
         content: (
@@ -33,12 +34,10 @@ export const LogsTimeline = ({ doc, keys, values }: any) => {
                         keys && keys.map((value: any, index: any) => {
                             return (
                                 <div key={index}>
-                                    {index < keys.length - 2 && (
-                                        <div>
-                                            {values[index].length < 40 ? <Paragraph ellipsis >{value}: {values[index]}</Paragraph>
-                                                : <Paragraph ellipsis copyable>{value}: {values[index]}</Paragraph>}
-                                        </div>
-                                    )}
+                                    <div>
+                                        {values[index].length < 40 ? (<Paragraph ellipsis >{value}: {values[index]}</Paragraph>)
+                                            : <span>{value}: <Paragraph ellipsis copyable>{values[index]}</Paragraph></span>}
+                                    </div>
                                 </div>
                             )
                         })

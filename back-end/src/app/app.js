@@ -130,7 +130,6 @@ router.route('/claimer')
 router.route('/myportfolio')
     .post(async (req, res) => {
         try {
-            console.log(req.body.police);
             contract_Police.methods.getPortfolio(req.body.police).call().then((result) => {
                 return res.json({
                     massage: "Call method success",

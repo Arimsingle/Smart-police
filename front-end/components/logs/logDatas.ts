@@ -32,7 +32,7 @@ export const contentRegister: any = {
 export const contentPortfolio: any = {
     show: true,
     content: "ผลงานที่ได้",
-    title: "Ipfs"
+    title: "Portfolio"
 }
 export const contentReport: any = {
     show: true,

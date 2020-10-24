@@ -12,13 +12,28 @@ module.exports = function portfolioFunction({ router, web3, Tx, contract_Police,
             return result;
         });
         try {
+            /////////////////////////////////////////////////////////////
 
+            const portfolioData = {
+                from: req.body.supervisor.slice(2),
+                to: req.body.police.slice(2),
+                portfolio: req.body.portfolio,
+                Date: Now.toThaiString(3),
+                Doc: "Portfolio",
+            }
+
+            const bufferPortfolio = await Buffer.from(JSON.stringify(portfolioData));
+            const ipfsUri = await ipfs.add(bufferPortfolio, { recusive: true });
+            portfolioData.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
+            console.log(portfolioData.ipfsUri);
+            /////////////////////////////////////////////////////////////
+            
             // templete of setPortfolio method
             const portfolio_temp = await contract_Police.methods
                 .setPortfolio(
                     req.body.supervisor,
                     req.body.police,
-                    req.body.portfolio
+                    portfolioData.ipfsUri
                 );
             //use sendSignTransaction function
             const serializedTx = await sendSignTransaction({
@@ -35,18 +50,9 @@ module.exports = function portfolioFunction({ router, web3, Tx, contract_Police,
             })
             // sign & send transaction
             await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
-            const portfolioData = {
-                from: req.body.supervisor.slice(2),
-                to: req.body.police.slice(2),
-                portfolio: req.body.portfolio,
-                Date: Now.toThaiString(3),
-            }
-            console.log(portfolioData);
+            // console.log(portfolioData);
 
             ////////////////////////////////////////////////////IPSF//////////////////////////////////////////////////
-            const bufferPortfolio = await Buffer.from(JSON.stringify({ Portfolio: portfolioData }));
-            const ipfsUri = await ipfs.add(bufferPortfolio, { recusive: true });
-            portfolioData.ipfsUri = `https://ipfs.infura.io/ipfs/${ipfsUri.path}`;
             const ipfs_temp = await contract_Police.methods.addIpfs(req.body.supervisor, portfolioData.ipfsUri);
             const serializedTx_ipfs = await sendSignTransaction({
                 templete: ipfs_temp,
@@ -64,12 +70,12 @@ module.exports = function portfolioFunction({ router, web3, Tx, contract_Police,
             ////////////////////////////////////////////////////IPSF//////////////////////////////////////////////////
 
             // call condition function
-            console.log(req.body.police);
+            // console.log(req.body.police);
             await conditionSwitch('Decode', req.body.police, {
                 PolicePortfolio:
                     [
                         portfolioData
-                    ] //portfolioData
+                    ]
             }, portfolioData, "PolicePortfolio").then(() => {
                 return res.json({
                     message: "Set portfolio success",

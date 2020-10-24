@@ -8,45 +8,53 @@ import { Result, Button, Modal, Tag } from 'antd';
 import FaceDetect from "../faceApi/faceDetect";
 export const LogsDisplay = ({ show, content, title }: any) => {
     const [valueObj, setValueObj] = useState<any>({});
+    const [account, setAccount] = useState<any>("0x1893Ad57Bcf8a61b5977745162D075c34020E6d3");
     useEffect(() => {
-
         const fetchDataAsync = async () => {
             let apiValues;
             switch (title) {
+                case "Ipfs":
+                    apiValues = await FetchAPI(title, { account: account })
+                        .then((res: any) => {
+                            return res;
+                        })
+                    apiValues && setValueObj(apiValues);
+                    break;
                 case "PoliceRegister":
-                    apiValues = await FetchAPI(title, { police: "0x43Df0F9dc6be1Ec1bCA115Cc19FEc925C7400646" })
+                    apiValues = await FetchAPI(title, { police: account })
+                        .then((res: any) => {
+                            return res;
+                        })
+                    apiValues && setValueObj(apiValues);
+                    break;
+                case "Portfolio":
+                    apiValues = await FetchAPI(title, { police: account })
                         .then((res: any) => {
                             return res;
                         })
                     apiValues && setValueObj(apiValues);
                     break;
                 case "BanditRegister":
-                    apiValues = await FetchAPI(title, { bandit: "0x43Df0F9dc6be1Ec1bCA115Cc19FEc925C7400646" })
+                    apiValues = await FetchAPI(title, { bandit: account })
                         .then((res: any) => {
                             return res;
                         })
                     apiValues && setValueObj(apiValues);
                     break;
                 case "Supervisor":
-                    apiValues = await FetchAPI(title, { supervisor: "0x43Df0F9dc6be1Ec1bCA115Cc19FEc925C7400646" })
-                        .then((res: any) => {
-                            return res;
-                        })
-                    apiValues && setValueObj(apiValues);
-                    break;
-                case "Ipfs":
-                    apiValues = await FetchAPI(title, { account: "0x43Df0F9dc6be1Ec1bCA115Cc19FEc925C7400646" })
+                    apiValues = await FetchAPI(title, { supervisor: account })
                         .then((res: any) => {
                             return res;
                         })
                     apiValues && setValueObj(apiValues);
                     break;
                 default:
+                    alert("Error");
                     break;
             }
         }
         fetchDataAsync();
-    }, [10]);
+    }, [valueObj]);
     const docs: any = valueObj.doc;
     const keys: any = valueObj.key;
     const values: any = valueObj.value;

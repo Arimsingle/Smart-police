@@ -1,6 +1,6 @@
 const axios = require('axios');
 export const FetchAPI = async (title: any, accountObj: any) => {
-    let dataObj: any = {
+    let dataObj_Ipfs: any = {
         doc: [],
         key: [],
         value: []
@@ -10,35 +10,50 @@ export const FetchAPI = async (title: any, accountObj: any) => {
         key: [],
         value: []
     };
+    let dataObj_Portfolio: any = {
+        doc: [],
+        key: [],
+        value: []
+    };
+
     try {
         let response;
         switch (title) {
+            case 'Ipfs':
+                response = await axios.post("http://localhost:8000/api/ipfs", accountObj);
+                for (let i = 0; i < response.data.ipfs.length; i++) {
+                    console.log(response.data.ipfs);
+                    await axios.get(response.data.ipfs[i]).then((res: any) => {
+                        dataObj_Ipfs.doc.push(res.data.Doc);
+                        dataObj_Ipfs.key.push(Object.keys(res.data).splice(0, Object.keys(res.data).length - 2));
+                        dataObj_Ipfs.value.push(Object.values(res.data).splice(0, Object.keys(res.data).length - 2));
+                    })
+                }
+                // console.log(dataObj_Ipfs);
+
+                return dataObj_Ipfs;
             case 'PoliceRegister':
                 response = await axios.post("http://localhost:8000/api/policeinfo", accountObj);
-                // console.log(response.data.Ipfs);
                 for (let i = 0; i < response.data.Ipfs.length; i++) {
                     await axios.get(response.data.Ipfs[i]).then((res: any) => {
-                        // console.log(res.data);
                         dataObj_PoliceRegister.doc.push(res.data.Doc);
-                        dataObj_PoliceRegister.key.push(Object.keys(res.data));
-                        dataObj_PoliceRegister.value.push(Object.values(res.data));
+                        dataObj_PoliceRegister.key.push(Object.keys(res.data).splice(0, Object.keys(res.data).length - 2));
+                        dataObj_PoliceRegister.value.push(Object.values(res.data).splice(0, Object.keys(res.data).length - 2));
                     })
                 }
-                // console.log(response.data.Ipfs);
                 return dataObj_PoliceRegister;
             case 'Portfolio':
-                response = await axios.post("http://localhost:8000/api/policeinfo", accountObj);
-                // console.log(response.data.Ipfs);
-                for (let i = 0; i < response.data.Ipfs.length; i++) {
-                    await axios.get(response.data.Ipfs[i]).then((res: any) => {
+                response = await axios.post("http://localhost:8000/api/myportfolio", accountObj); //portfolio
+                for (let i = 0; i < response.data.portfolio.length; i++) {
+                    // console.log(response.data.portfolio[i][0]);
+                    await axios.get(response.data.portfolio[i][0]).then((res: any) => {
                         // console.log(res.data);
-                        dataObj_PoliceRegister.doc.push(res.data.Doc);
-                        dataObj_PoliceRegister.key.push(Object.keys(res.data));
-                        dataObj_PoliceRegister.value.push(Object.values(res.data));
+                        dataObj_Portfolio.doc.push(res.data.Doc);
+                        dataObj_Portfolio.key.push(Object.keys(res.data));
+                        dataObj_Portfolio.value.push(Object.values(res.data));
                     })
                 }
-                // console.log(response.data.Ipfs);
-                return dataObj_PoliceRegister;
+                return dataObj_Portfolio;
             case 'BanditRegister':
                 response = await axios.post("http://localhost:8000/api/banditinfo", accountObj);
                 // console.log(response.data);
@@ -47,17 +62,6 @@ export const FetchAPI = async (title: any, accountObj: any) => {
                 response = await axios.post("http://localhost:8000/api/ipfs", accountObj);
                 // console.log(response.data);
                 return response.data;
-            case 'Ipfs':
-                response = await axios.post("http://localhost:8000/api/ipfs", accountObj);
-                for (let i = 0; i < response.data.ipfs.length; i++) {
-                    await axios.get(response.data.ipfs[i]).then((res: any) => {
-                        // console.log(res.data.Doc);
-                        dataObj.doc.push(res.data.Doc);
-                        dataObj.key.push(Object.keys(res.data));
-                        dataObj.value.push(Object.values(res.data));
-                    })
-                }
-                return dataObj;
             default:
                 console.log('INVALID VALUE');
                 return 'INVALID VALUE';
