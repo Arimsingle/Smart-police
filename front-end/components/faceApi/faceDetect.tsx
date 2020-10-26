@@ -1,12 +1,17 @@
 // import * as canvas from 'canvas';
 import * as faceapi from 'face-api.js';
 import { useState, useEffect } from 'react';
-const FaceDetect = ({ visible }: any) => {
+const FaceDetect = ({ visible, setIsAuth }: any) => {
     useEffect(() => {
         console.log(visible);
         Webcam();
     }, [visible == true])
     const [name, setName] = useState('');
+    const TransformText = (text: any) => {
+        let str = text.indexOf("(");
+        str = text.slice(0, str - 1)
+        return str;
+    }
     async function Webcam() {
         Promise.all([
             faceapi.nets.tinyFaceDetector.loadFromUri('/static/models'),
@@ -81,6 +86,7 @@ const FaceDetect = ({ visible }: any) => {
         <div>
             <video id="video" height="400px" width="470px" autoPlay muted />
             <h1>Name : {name}</h1>
+            {setIsAuth(TransformText(name))}
         </div>
     )
 }

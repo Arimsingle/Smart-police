@@ -2,9 +2,11 @@ import { LogsStyled } from "../../style/style-component/logsStyled";
 import { Card } from 'antd';
 import { useState } from "react";
 import { LogsDisplay } from "./logsDisplay";
+import { AuthDisplay } from "./authDisplay";
 import { LogCardInterface } from "../../interfaces/logCardInterface";
 import { logCardDatas } from "./logDatas";
-import { contentOverview, contentRegister, contentPortfolio, contentReport } from "./logDatas"
+import { contentOverview, contentRegister, contentPortfolio } from "./logDatas";
+
 export const LogCardDisplay = ({ titile }: any) => {
     const tabList: LogCardInterface[] = logCardDatas;
     const [state, setState] = useState<any>({
@@ -14,12 +16,14 @@ export const LogCardDisplay = ({ titile }: any) => {
     const onTabChange = (key: any, type: any) => {
         // console.log(key, type);
         setState({ [type]: key });
+        console.log(key);
+
     };
     const contentList: any = {
         overview: <LogsDisplay {...contentOverview} />,
         register: <LogsDisplay {...contentRegister} />,
         portfolio: <LogsDisplay {...contentPortfolio} />,
-        report: <LogsDisplay {...contentReport} />
+        authentication: <AuthDisplay />
     };
     return (
         <LogsStyled>

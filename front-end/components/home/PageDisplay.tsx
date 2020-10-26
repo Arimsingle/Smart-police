@@ -29,7 +29,7 @@ export const PageDisplay: any = ({
                                 <p className={lightTextDesc ? "home__hero-subtitle" : "home__hero-subtitle dark"}>
                                     {description}
                                 </p>
-                                <Link href="#">
+                                <Link href="/dashboard">
                                     <a>
                                         <Button type="primary" size="large" className="button">Monitor Explorer</Button>
                                     </a>

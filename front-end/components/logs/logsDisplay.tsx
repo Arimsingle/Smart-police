@@ -8,7 +8,7 @@ import { Result, Button, Modal, Tag } from 'antd';
 import FaceDetect from "../faceApi/faceDetect";
 export const LogsDisplay = ({ show, content, title }: any) => {
     const [valueObj, setValueObj] = useState<any>({});
-    const [account, setAccount] = useState<any>("0x1893Ad57Bcf8a61b5977745162D075c34020E6d3");
+    const [account, setAccount] = useState<any>("0xcDBd57caff62EAE34FB1091c16bD8267fA4f26E7");
     useEffect(() => {
         const fetchDataAsync = async () => {
             let apiValues;
@@ -60,6 +60,7 @@ export const LogsDisplay = ({ show, content, title }: any) => {
     const values: any = valueObj.value;
     const { Search } = Input;
     const [visible, setVisible] = useState(false);
+    if (docs == undefined) console.log(555555555);
 
     const showModal = () => {
         setVisible(true);
@@ -99,7 +100,7 @@ export const LogsDisplay = ({ show, content, title }: any) => {
             <div className="d-flex justify-content-center">
                 <Timeline mode="left" className="timeline-point">
                     {
-                        docs ? (docs.map((doc: any, index: any) => {
+                        (docs && keys && values) ? (docs.map((doc: any, index: any) => {
                             return (
                                 <div key={index}>
                                     <LogsTimeline doc={doc} keys={keys[index]} values={values[index]} />

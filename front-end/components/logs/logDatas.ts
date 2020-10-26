@@ -14,8 +14,8 @@ export const logCardDatas = [
         tab: 'ผลงานที่ได้ทำ',
     },
     {
-        key: 'report',
-        tab: 'บันทึกรายงานนักโทษ',
+        key: 'authentication',
+        tab: 'ระบุตัวตน',
     },
 ];
 /////////////////////////////////////////////////////////
@@ -34,10 +34,11 @@ export const contentPortfolio: any = {
     content: "ผลงานที่ได้",
     title: "Portfolio"
 }
-export const contentReport: any = {
+//ยังไม่ได้ใช้
+export const contentEthereum: any = {
     show: true,
-    content: "บันทึกรายงานนักโทษ",
-    title: "BanditRegister"
+    content: "เหรียญ",
+    title: "Balance"
 }
 /////////////////////////////////////////////////////////
 export const titileRegister = ["ชื่อ", "นามสกุล", "ประเภท", "อีเมลล์", "เบอร์โทรศัพท์", "ระดับ", "วันที่สมัคร", "รูปภาพ", "บัญชีผู้ใช้", "ที่อยู่", "สิทธิพิเศษ"]

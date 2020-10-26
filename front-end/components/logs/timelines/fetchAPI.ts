@@ -10,6 +10,11 @@ export const FetchAPI = async (title: any, accountObj: any) => {
         key: [],
         value: []
     };
+    let dataObj_BanditRegister: any = {
+        doc: [],
+        key: [],
+        value: []
+    };
     let dataObj_Portfolio: any = {
         doc: [],
         key: [],
@@ -22,15 +27,13 @@ export const FetchAPI = async (title: any, accountObj: any) => {
             case 'Ipfs':
                 response = await axios.post("http://localhost:8000/api/ipfs", accountObj);
                 for (let i = 0; i < response.data.ipfs.length; i++) {
-                    console.log(response.data.ipfs);
+                    // console.log(response.data.ipfs);
                     await axios.get(response.data.ipfs[i]).then((res: any) => {
                         dataObj_Ipfs.doc.push(res.data.Doc);
                         dataObj_Ipfs.key.push(Object.keys(res.data).splice(0, Object.keys(res.data).length - 2));
                         dataObj_Ipfs.value.push(Object.values(res.data).splice(0, Object.keys(res.data).length - 2));
                     })
                 }
-                // console.log(dataObj_Ipfs);
-
                 return dataObj_Ipfs;
             case 'PoliceRegister':
                 response = await axios.post("http://localhost:8000/api/policeinfo", accountObj);
@@ -45,9 +48,7 @@ export const FetchAPI = async (title: any, accountObj: any) => {
             case 'Portfolio':
                 response = await axios.post("http://localhost:8000/api/myportfolio", accountObj); //portfolio
                 for (let i = 0; i < response.data.portfolio.length; i++) {
-                    // console.log(response.data.portfolio[i][0]);
                     await axios.get(response.data.portfolio[i][0]).then((res: any) => {
-                        // console.log(res.data);
                         dataObj_Portfolio.doc.push(res.data.Doc);
                         dataObj_Portfolio.key.push(Object.keys(res.data));
                         dataObj_Portfolio.value.push(Object.values(res.data));
@@ -56,11 +57,19 @@ export const FetchAPI = async (title: any, accountObj: any) => {
                 return dataObj_Portfolio;
             case 'BanditRegister':
                 response = await axios.post("http://localhost:8000/api/banditinfo", accountObj);
-                // console.log(response.data);
-                return response.data;
+                // console.log(response);
+                for (let i = 0; i < response.data.Ipfs.length; i++) {
+                    console.log(response.data.Ipfs);
+                    await axios.get(response.data.Ipfs[i]).then((res: any) => {
+                        console.log(res.data);
+                        dataObj_BanditRegister.doc.push(res.data.Doc);
+                        dataObj_BanditRegister.key.push(Object.keys(res.data).splice(0, Object.keys(res.data).length - 1));
+                        dataObj_BanditRegister.value.push(Object.values(res.data).splice(0, Object.keys(res.data).length - 1));
+                    })
+                }
+                return dataObj_BanditRegister;
             case 'Supervisor':
                 response = await axios.post("http://localhost:8000/api/ipfs", accountObj);
-                // console.log(response.data);
                 return response.data;
             default:
                 console.log('INVALID VALUE');

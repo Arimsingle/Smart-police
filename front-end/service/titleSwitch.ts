@@ -1,5 +1,5 @@
 export const TitleSwitch = (title: any) => {
-    console.log(title);
+    // console.log(title);
     
     switch (title) {
         case "PoliceRegister":

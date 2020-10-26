@@ -9,6 +9,7 @@ import { DesSwitch } from "../../../service/desSwitch";
 import { Tag } from 'antd';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
+
 export const LogsTimeline = ({ doc, keys, values }: any) => {
     const { Meta } = Card;
     const { Paragraph } = Typography;
@@ -23,7 +24,7 @@ export const LogsTimeline = ({ doc, keys, values }: any) => {
     const desTransalte = DesSwitch(doc);
     // const keysTranSlate = TranslateSwitch(doc) ยังต้องแก้อีก value && 
     // console.log(keysTranSlate);
-    console.log(desTransalte,doc);
+    // console.log(desTransalte,doc);
     
     const config = {
         title: "ข้อมูลเพิ่มเติม",

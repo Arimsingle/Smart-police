@@ -101,3 +101,36 @@
 03:43:16.934962 table@remove removed @8
 03:43:16.934962 table@remove removed @5
 03:43:16.935964 table@remove removed @2
+=============== Oct 25, 2020 (+07) ===============
+15:57:37.931873 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+15:57:37.942875 version@stat F·[0 1] S·1MiB[0B 1MiB] Sc·[0.00 0.01]
+15:57:37.942875 db@open opening
+15:57:37.942875 journal@recovery F·1
+15:57:37.949875 journal@recovery recovering @20
+15:57:38.015877 memdb@flush created L0@23 N·38067 S·1MiB "B\x00\x00..\xb6SL,v58073":"r\x00\x00..\x03\xf1@,v68409"
+15:57:38.019892 version@stat F·[1 1] S·2MiB[1MiB 1MiB] Sc·[0.25 0.01]
+15:57:38.033874 db@janitor F·5 G·1
+15:57:38.033874 db@janitor removing table-19
+15:57:38.034875 db@open done T·91.9996ms
+15:58:02.267669 db@close closing
+15:58:02.274655 db@close done T·6.9859ms
+=============== Oct 25, 2020 (+07) ===============
+15:58:06.383176 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+15:58:06.384161 version@stat F·[1 1] S·2MiB[1MiB 1MiB] Sc·[0.25 0.01]
+15:58:06.384161 db@open opening
+15:58:06.384161 journal@recovery F·1
+15:58:06.388162 journal@recovery recovering @24
+15:58:06.434165 memdb@flush created L0@26 N·32229 S·1MiB "\x008\x8e..\xb5X\xfb,v100530":"\xff\xd0\x1f..\x13}\x00,v100617"
+15:58:06.437171 version@stat F·[2 1] S·3MiB[2MiB 1MiB] Sc·[0.50 0.01]
+15:58:06.453162 db@janitor F·5 G·0
+15:58:06.453162 db@open done T·69.001ms
+=============== Oct 26, 2020 (+07) ===============
+20:39:18.544759 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:39:18.554756 version@stat F·[2 1] S·3MiB[2MiB 1MiB] Sc·[0.50 0.01]
+20:39:18.554756 db@open opening
+20:39:18.555759 journal@recovery F·1
+20:39:18.562755 journal@recovery recovering @27
+20:39:18.578757 memdb@flush created L0@29 N·6041 S·312KiB "H\x00\x06..S~\xb0,v105085":"r\x00\x00..\x88\xa7\\,v106681"
+20:39:18.582758 version@stat F·[3 1] S·4MiB[2MiB 1MiB] Sc·[0.75 0.01]
+20:39:18.596758 db@janitor F·6 G·0
+20:39:18.596758 db@open done T·42.0017ms
