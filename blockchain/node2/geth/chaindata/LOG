@@ -133,3 +133,34 @@
 20:39:22.648812 version@stat F·[2 1] S·3MiB[1MiB 1MiB] Sc·[0.50 0.02]
 20:39:22.658896 db@janitor F·5 G·0
 20:39:22.658896 db@open done T·77.0554ms
+=============== Oct 29, 2020 (+07) ===============
+20:06:32.905052 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:06:32.915053 version@stat F·[2 1] S·3MiB[1MiB 1MiB] Sc·[0.50 0.02]
+20:06:32.915053 db@open opening
+20:06:32.915053 journal@recovery F·1
+20:06:32.918051 journal@recovery recovering @29
+20:06:33.026061 memdb@flush created L0@31 N·65279 S·2MiB "B\x00\x00..\xb6SL,v139238":"r\x00\x00..\xf6\x9e\x8c,v171356"
+20:06:33.029057 version@stat F·[3 1] S·5MiB[3MiB 1MiB] Sc·[0.75 0.02]
+20:06:33.046066 db@janitor F·6 G·0
+20:06:33.046066 db@open done T·131.0131ms
+20:07:12.829758 db@close closing
+20:07:12.849768 db@close done T·20.0102ms
+=============== Oct 29, 2020 (+07) ===============
+20:07:14.141948 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:07:14.142940 version@stat F·[3 1] S·5MiB[3MiB 1MiB] Sc·[0.75 0.02]
+20:07:14.142940 db@open opening
+20:07:14.142940 journal@recovery F·1
+20:07:14.147941 journal@recovery recovering @32
+20:07:14.229940 memdb@flush created L0@34 N·56539 S·1MiB "\x008\x8e..\xb5X\xfb,v227731":"\xff\xd7J..\xad\x170,v227621"
+20:07:14.232940 version@stat F·[4 1] S·7MiB[5MiB 1MiB] Sc·[1.00 0.02]
+20:07:14.250942 db@janitor F·7 G·0
+20:07:14.250942 db@open done T·108.002ms
+20:07:14.250942 table@compaction L0·4 -> L1·1 S·7MiB Q·227901
+20:07:14.355940 table@build created L1@37 N·40442 S·2MiB "\x008\x8e..\xb5X\xfb,v227731":"h\x00\x00..GWW,v142132"
+20:07:14.391941 table@build created L1@38 N·19288 S·1MiB "h\x00\x00..WWt,v142129":"\xff\xd7J..\xad\x170,v227621"
+20:07:14.391941 version@stat F·[0 2] S·3MiB[0B 3MiB] Sc·[0.00 0.03]
+20:07:14.393942 table@compaction committed F-3 S-4MiB Ke·0 D·134120 T·143.0003ms
+20:07:14.393942 table@remove removed @31
+20:07:14.394941 table@remove removed @28
+20:07:14.394941 table@remove removed @25
+20:07:14.395941 table@remove removed @24

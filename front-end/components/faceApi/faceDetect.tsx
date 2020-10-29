@@ -86,7 +86,7 @@ const FaceDetect = ({ visible, setIsAuth }: any) => {
         <div>
             <video id="video" height="400px" width="470px" autoPlay muted />
             <h1>Name : {name}</h1>
-            {setIsAuth(TransformText(name))}
+            {setIsAuth ? setIsAuth(TransformText(name)):""}
         </div>
     )
 }

@@ -2,6 +2,7 @@ import Link from "next/link";
 import PropTypes, { InferProps } from "prop-types";
 import { HomeStyled } from "../../style/style-component/homeStyled"
 import { Button } from 'antd';
+import GammaDisplay from "../three/gamma";
 export const PageDisplay: any = ({
     lightBg,
     topLine,
@@ -39,6 +40,9 @@ export const PageDisplay: any = ({
                         <div className="col">
                             <div className="home__hero-img-wrapper">
                                 <img src={img} alt={alt} className="home__hero-img" />
+                                {/* <div className="home__hero-img">
+                                    <GammaDisplay />
+                                </div> */}
                             </div>
                         </div>
                     </div>

@@ -1,10 +1,17 @@
 import { Result, Button, Modal } from 'antd';
 import { useState } from 'react';
+import { message } from 'antd';
 import FaceDetect from "../faceApi/faceDetect";
 export const AuthDisplay = () => {
     const [visible, setVisible] = useState(false)
     const [isAuth, setIsAuth] = useState("");
+
+    const success = () => {
+        message.success('กำลังเปิดกล้อง กรุณารอสักครู่');
+    };
+
     const showModal = () => {
+        success();
         setVisible(true);
     };
     const hideModal = () => {
