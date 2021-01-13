@@ -8,7 +8,7 @@ import { Result, Button, Modal, Tag } from 'antd';
 import FaceDetect from "../faceApi/faceDetect";
 export const LogsDisplay = ({ show, content, title }: any) => {
     const [valueObj, setValueObj] = useState<any>({});
-    const [account, setAccount] = useState<any>("0xcDBd57caff62EAE34FB1091c16bD8267fA4f26E7");
+    const [account, setAccount] = useState<any>("0x3C93D1309955bC0BA18628e5E3d164D0A9e99b46");
     useEffect(() => {
         const fetchDataAsync = async () => {
             let apiValues;

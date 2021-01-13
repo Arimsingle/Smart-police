@@ -2,6 +2,8 @@ import { Result, Button, Modal } from 'antd';
 import { useState } from 'react';
 import { message } from 'antd';
 import FaceDetect from "../faceApi/faceDetect";
+
+
 export const AuthDisplay = () => {
     const [visible, setVisible] = useState(false)
     const [isAuth, setIsAuth] = useState("");
@@ -19,11 +21,11 @@ export const AuthDisplay = () => {
     };
     const modal = (
         <Modal
-            title="Face Detection"
+            title="Face Recognition"
             visible={visible}
             onOk={hideModal}
             onCancel={hideModal}
-            okText="Close"
+            okText="Okay"
             cancelText="Cancle">
             <FaceDetect visible={visible} setIsAuth={setIsAuth} />
         </Modal>
