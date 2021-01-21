@@ -1,0 +1,5 @@
+Function Interface
+- Record badit story
+- Record police portfolio
+- Set supervisor
+- Check Balance

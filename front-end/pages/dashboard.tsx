@@ -1,12 +1,14 @@
 import { NavBar } from "../components/navBar/NavBar";
 import fontJSX from "../tsx/font";
-import GammaDisplay from "../components/three/gamma";
+import Transaction from '../components/transaction/Transaction'
+// import GammaDisplay from "../components/three/gamma";
 const DashBoard = () => {
     return (
         <div>
             <NavBar />
-            <h1>Dashboard pages</h1>
-            <GammaDisplay />
+            <h1>Transaction</h1>
+            <Transaction />
+            {/* <GammaDisplay /> */}
             <style jsx global>
                 {fontJSX}
             </style>
