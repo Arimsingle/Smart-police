@@ -2,6 +2,7 @@
 import * as faceapi from 'face-api.js';
 import { useState, useEffect } from 'react';
 import RandomReaction from '../logs/timeCounter/randomReaction';
+import { Progress } from 'antd';
 const FaceDetect = ({ visible, setIsAuth }: any) => {
     useEffect(() => {
         console.log(visible);
@@ -9,6 +10,7 @@ const FaceDetect = ({ visible, setIsAuth }: any) => {
     }, [visible == true])
     const [name, setName] = useState('');
     const [reactions, setReactions] = useState('');
+    const [persent, setPercent] = useState<any>([]);
     const TransformText = (text: any) => {
         let str = text.indexOf("(");
         str = text.slice(0, str - 1)
@@ -98,12 +100,24 @@ const FaceDetect = ({ visible, setIsAuth }: any) => {
             )
         }
     }
+    console.log(persent);
+
     return (
         <div>
             <video id="video" height="400px" width="470px" autoPlay muted />
             <h5>Name : {name}</h5>
-            <RandomReaction reaction={reactions} setIsAuth={setIsAuth} name={name}/>
+            <RandomReaction reaction={reactions} setIsAuth={setIsAuth} name={name} setPercent={setPercent} />
             <h5>Reactions : {reactions}</h5>
+            <div>
+                <Progress
+                    strokeColor={{
+                        from: '#108ee9',
+                        to: '#39374e',
+                    }}
+                    percent={(persent.length / 2) * 100}
+                    status="active"
+                />
+            </div>
             {/* {setIsAuth ? setIsAuth(TransformText(name)) : ""} */}
         </div>
     )
