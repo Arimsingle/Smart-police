@@ -112,7 +112,7 @@ const FaceDetect = ({ visible, setIsAuth }: any) => {
                 <Progress
                     strokeColor={{
                         from: '#108ee9',
-                        to: '#39374e',
+                        to: '#00B0FF',
                     }}
                     percent={(persent.length / 2) * 100}
                     status="active"

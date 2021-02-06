@@ -10,6 +10,7 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
         // find private key in database 
         let data = "";
         let topics = [];
+        console.log(req.body.supervisor);
         const PrivateKey = await findPrivateKey('PoliceInfo', req.body.supervisor.slice(2), res).then((result) => {
             return result;
         });
@@ -57,7 +58,7 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
                     "type": "string"
                 }
             ], data, topics);
-            
+
             let decodedRecord = await web3.eth.abi.decodeLog([
                 {
                     "indexed": true,
@@ -97,7 +98,7 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             console.log(serializedTx_ipfs);
             await web3.eth.sendSignedTransaction('0x' + serializedTx_ipfs.toString('hex')).catch((error) => console.log(error))
             ////////////////////////////////////////////////////IPSF//////////////////////////////////////////////////
-            
+
 
             let recordBanditData = {
                 supervisor: decodedRecord._supervisor,

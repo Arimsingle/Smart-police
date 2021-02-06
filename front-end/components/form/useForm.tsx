@@ -13,7 +13,8 @@ export const UseForm = (callback: any, Validaor: any) => {
     })
     const [errors, setErrors] = useState<any>({});
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-    const RegisterDatas = async (valueRegister: FormInterface) => {
+    
+    const RegisterPolice = async (valueRegister: FormInterface) => {
         await axios.post(`http://localhost:8000/api/police/register`, valueRegister)
             .then((result) => {
                 console.log(result);
@@ -22,6 +23,7 @@ export const UseForm = (callback: any, Validaor: any) => {
             })
         console.log(valueRegister);
     }
+    
     const handleChange = (e: any) => {
         const { name, value } = e.target;
         setValues({
@@ -36,7 +38,7 @@ export const UseForm = (callback: any, Validaor: any) => {
     }
     useEffect(() => {
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            RegisterDatas(values);
+            RegisterPolice(values);
             callback();
         }
     },
