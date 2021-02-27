@@ -1,8 +1,8 @@
 import { UseForm } from "./useForm";
 import { Validaor } from "./validateInfo";
 import Link from "next/link";
-export const FormSignup = ({ submitForm }: any) => {
-    const { handleChange, handleSubmit, values, errors } = UseForm(submitForm, Validaor);
+export const FormSignup = ({ submitForm, setData }: any) => {
+    const { handleChange, handleSubmit, values, errors } = UseForm(submitForm, Validaor, setData);
     return (
         <div className="form-container-signup">
             <div className='form-content-left'>

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from "react"
 import { FormInterface } from "../../interfaces/formInterface";
-export const UseForm = (callback: any, Validaor: any) => {
+export const UseForm = (callback: any, Validaor: any, setData: any) => {
     const [values, setValues] = useState<FormInterface>({
         username: "",
         surname: "",
@@ -13,17 +13,20 @@ export const UseForm = (callback: any, Validaor: any) => {
     })
     const [errors, setErrors] = useState<any>({});
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-    
+
     const RegisterPolice = async (valueRegister: FormInterface) => {
         await axios.post(`http://localhost:8000/api/police/register`, valueRegister)
             .then((result) => {
-                console.log(result);
+                console.log(result.data.message);
+                console.log(result.data.Result);
+                setData({ message: result.data.message })
+                setData({ value: result.data.Result.Account })
             }).catch((err) => {
                 console.log(err);
             })
         console.log(valueRegister);
     }
-    
+
     const handleChange = (e: any) => {
         const { name, value } = e.target;
         setValues({

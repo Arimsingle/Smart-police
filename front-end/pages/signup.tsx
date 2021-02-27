@@ -7,9 +7,11 @@ import { AiOutlineHome } from "react-icons/ai";
 import fontJSX from "../tsx/font";
 const Form = () => {
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+    const [data, setData] = useState({ message: '', value: '' });
     const submitForm = () => {
         setIsSubmitted(true);
     }
+
     return (
         <FormStyled>
             <div className='form-container-signup'>
@@ -23,8 +25,8 @@ const Form = () => {
                 </div> */}
                 {
                     !isSubmitted
-                        ? (<FormSignup submitForm={submitForm} />)
-                        : (<FormSuccsess />)
+                        ? (<FormSignup submitForm={submitForm} setData={setData} />)
+                        : (<FormSuccsess data={data} />)
                 }
                 <style jsx global>
                     {fontJSX}

@@ -72,7 +72,7 @@ const FaceDetect = ({ visible, setIsAuth }: any) => {
                         // console.log(resizedDetections[i].expressions);
                         let obj: any = resizedDetections[i].expressions;
                         let max: any = Math.max(...Object.values<any>(obj));
-                        let arr: any = Object.values(obj).map(function (value: any, index: any) {
+                        let arr: any = Object.values(obj).map((value: any, index: any) => {
                             if (value === max) {
                                 return index;
                             }

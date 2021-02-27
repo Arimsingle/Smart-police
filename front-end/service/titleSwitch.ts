@@ -5,7 +5,7 @@ export const TitleSwitch = (title: any) => {
         case "PoliceRegister":
             return "การสมัครสมาชิก";
         case "BanditRegister":
-            return "การบันทึกข้อมูล";
+            return "การบันทึกข้อมูลประวัติส่วนตัว";
         case "Portfolio":
             return "ผลงาน";
         case "Supervisor":

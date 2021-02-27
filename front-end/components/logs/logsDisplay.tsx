@@ -8,7 +8,7 @@ import { Result, Button, Modal, Tag } from 'antd';
 import FaceDetect from "../faceApi/faceDetect";
 export const LogsDisplay = ({ show, content, title }: any) => {
     const [valueObj, setValueObj] = useState<any>({});
-    const [account, setAccount] = useState<any>("0x3C93D1309955bC0BA18628e5E3d164D0A9e99b46");
+    const [account, setAccount] = useState<any>("0xf809976b6043059BECA58cae55d98ED8908Cf961");
     useEffect(() => {
         const fetchDataAsync = async () => {
             let apiValues;
@@ -48,6 +48,13 @@ export const LogsDisplay = ({ show, content, title }: any) => {
                         })
                     apiValues && setValueObj(apiValues);
                     break;
+                case "Record":
+                    apiValues = await FetchAPI(title, { supervisor: account })
+                        .then((res: any) => {
+                            return res;
+                        })
+                    apiValues && setValueObj(apiValues);
+                    break;
                 default:
                     alert("Error");
                     break;
@@ -68,6 +75,8 @@ export const LogsDisplay = ({ show, content, title }: any) => {
     const hideModal = () => {
         setVisible(false);
     };
+    console.log(valueObj);
+    
     const modal = (
         <Modal
             title="Face Detection"

@@ -75,7 +75,8 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
             let banditHistoryData = {
                 police: decodedHistoty._admin,
                 bandit: decodedHistoty._bandit,
-                publicInfo: decodedHistoty._publicInfo
+                publicInfo: decodedHistoty._publicInfo,
+                Doc: "Record_Data",
             }
             const bufferBanditHistory = await Buffer.from(JSON.stringify({ BanditHistoryData: banditHistoryData }));
             const ipfsUri = await ipfs.add(bufferBanditHistory, { recusive: true });
@@ -102,7 +103,8 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
 
             let recordBanditData = {
                 supervisor: decodedRecord._supervisor,
-                bandit: decodedRecord._bandit
+                bandit: decodedRecord._bandit,
+                Doc: "Record",
             }
 
 

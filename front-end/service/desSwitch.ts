@@ -4,7 +4,7 @@ export const DesSwitch = (des: any) => {
         case "PoliceRegister":
             return "การสมัครสมาชิกของเจ้าหน้าที่ตำรวจ";
         case "BanditRegister":
-            return "การบันทึกข้อมูลของผู้กระทำผิดกฎหมาย";
+            return "การบันทึกข้อมูลประวัติส่วนตัวของผู้กระทำผิดกฎหมาย";
         case "Portfolio":
             return "ผลงานของเจ้าหน้าที่ตำรวจ";
         case "Supervisor":

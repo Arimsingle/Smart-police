@@ -4,6 +4,7 @@ import { Card } from 'antd';
 import styled from "styled-components";
 import { Input } from 'antd';
 import { Button } from 'antd';
+import { notification } from 'antd';
 const { TextArea } = Input;
 const Transaction_Styled = styled.div`
         .dasdboard-img{
@@ -26,6 +27,16 @@ const SetTransaction = ({ SetkeySelect }: any) => {
     const [email, setEmail] = useState<any>('');
     const [address, setAdress] = useState<any>('');
 
+    const [status, setStatus] = useState<any>(false);
+
+    const openNotificationWithIcon = () => {
+        notification["success"]({
+            message: 'บันทึกข้อมูลเสร็จสิ้น',
+            description:
+                'การบันทึกข้อมูลเสร็จสิ้น สามารถไปดูข้อมูลได้ที่หน้าแสดงไทม์ไลน์',
+        });
+        setStatus(false);
+    };
 
     const RecordBandit: any = async (valueRegister: any) => {
         console.log(valueRegister);
@@ -33,16 +44,18 @@ const SetTransaction = ({ SetkeySelect }: any) => {
             await axios.post(`http://localhost:8000/api/record`, valueRegister)
                 .then((result) => {
                     console.log(result);
+                    console.log(result.statusText);
+                    setStatus(result.statusText)
+
                 }).catch((err) => {
                     console.log(err);
                 })
-        } catch (error) {
-            console.log(error);
-        } finally {
             setSuperviser('');
             setPassword('');
             setBandit('');
             setPublicInfo('');
+        } catch (error) {
+            console.log(error);
         }
 
 
@@ -53,26 +66,19 @@ const SetTransaction = ({ SetkeySelect }: any) => {
             await axios.post(`http://localhost:8000/api/bandit/register`, valueRegister)
                 .then((result) => {
                     console.log(result);
+                    setStatus(result.statusText)
+                    setName('');
+                    setSername('');
+                    setPhone('');
+                    setEmail('');
+                    setPolice('');
+                    setPassword('');
+                    setAdress('');
                 }).catch((err) => {
                     console.log(err);
                 })
-            setName('');
-            setSername('');
-            setPhone('');
-            setEmail('');
-            setPolice('');
-            setPassword('');
-            setAdress('');
         } catch (error) {
             console.log(error);
-        } finally {
-            setName('');
-            setSername('');
-            setPhone('');
-            setEmail('');
-            setPolice('');
-            setPassword('');
-            setAdress('');
         }
 
     }
@@ -82,16 +88,16 @@ const SetTransaction = ({ SetkeySelect }: any) => {
             await axios.post(`http://localhost:8000/api/portfolio`, valuePortfolio)
                 .then((result) => {
                     console.log(result);
+                    setStatus(result.statusText);
+                    setSuperviser('');
+                    setPassword('');
+                    setPolice('');
+                    setPortfolio('');
                 }).catch((err) => {
                     console.log(err);
                 })
         } catch (error) {
             console.log(error);
-        } finally {
-            setSuperviser('');
-            setPassword('');
-            setPolice('');
-            setPortfolio('');
         }
     }
 
@@ -100,13 +106,13 @@ const SetTransaction = ({ SetkeySelect }: any) => {
             await axios.post(`http://localhost:8000/api/supervisor`, valueSuperviser)
                 .then((result) => {
                     console.log(result);
+                    setStatus(result.statusText);
+                    setSuperviser('');
                 }).catch((err) => {
                     console.log(err);
                 })
         } catch (error) {
             console.log(error);
-        } finally {
-            setSuperviser('');
         }
     }
 
@@ -132,13 +138,13 @@ const SetTransaction = ({ SetkeySelect }: any) => {
                     <Input placeholder="เบอร์โทรศัพท์" value={phone} onChange={(e) => { setPhone(e.target.value) }} />
                 </div>
                 <div className="mt-1">
-                    <Input placeholder="อีเมล" value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                    <Input type="email" placeholder="อีเมล" value={email} onChange={(e) => { setEmail(e.target.value) }} />
                 </div>
                 <div className="mt-1">
                     <Input placeholder="เจ้าหน้าที่ตำรวจ (Address)" value={police} onChange={(e) => { setPolice(e.target.value) }} />
                 </div>
                 <div className="mt-1">
-                    <Input placeholder="รหัสผ่าน (Police)" value={password} onChange={(e) => { setPassword(e.target.value) }} />
+                    <Input type="password" placeholder="รหัสผ่าน (Police)" value={password} onChange={(e) => { setPassword(e.target.value) }} />
                 </div>
                 <div className="mt-1">
                     <TextArea rows={4} placeholder="ที่อยู่ บ้านเลขที่ หมู่ ตำบล อำเเภอ จังหวัด" value={address} onChange={(e) => { setAdress(e.target.value) }} />
@@ -166,7 +172,7 @@ const SetTransaction = ({ SetkeySelect }: any) => {
                     <Input placeholder="ผู้ดูแลตำรวจ (Address)" onChange={(e) => { setSuperviser(e.target.value) }} />
                 </div>
                 <div className="mt-1">
-                    <Input placeholder="รหัสผ่าน" onChange={(e) => { setPassword(e.target.value) }} />
+                    <Input type="password" placeholder="รหัสผ่าน" onChange={(e) => { setPassword(e.target.value) }} />
                 </div>
                 <div className="mt-1">
                     <Input placeholder="ผู้กระทำผิดกฎหมาย (Address)" onChange={(e) => { setBandit(e.target.value) }} />
@@ -195,7 +201,7 @@ const SetTransaction = ({ SetkeySelect }: any) => {
                     <Input placeholder="ผู้ดูแลตำรวจ (Address)" onChange={(e) => { setSuperviser(e.target.value) }} />
                 </div>
                 <div className="mt-1">
-                    <Input placeholder="รหัสผ่าน" onChange={(e) => { setPassword(e.target.value) }} />
+                    <Input type="password" placeholder="รหัสผ่าน" onChange={(e) => { setPassword(e.target.value) }} />
                 </div>
                 <div className="mt-1">
                     <Input placeholder="เจ้าหน้าที่ตำรวจ (Address)" onChange={(e) => { setPolice(e.target.value) }} />
@@ -268,6 +274,7 @@ const SetTransaction = ({ SetkeySelect }: any) => {
 
                     })
                 }
+                {status && openNotificationWithIcon()}
             </div>
         </>
     );
