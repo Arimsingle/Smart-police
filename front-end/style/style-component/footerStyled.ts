@@ -48,6 +48,7 @@ export const FooterStyled = styled.div`
         max-width: 1000px;
         display: flex;
         justify-content: center;
+        text-align: center;
     }
   
     .footer-link-wrapper {
@@ -152,6 +153,8 @@ export const FooterStyled = styled.div`
     @media screen and (max-width: 820px) {
         .footer-links {
             padding-top: 2rem;
+            text-align: center;
+
         }
   
         .footer-input {
@@ -168,5 +171,10 @@ export const FooterStyled = styled.div`
   
         .social-media-wrap {
             flex-direction: column;
+        }
+        .footer-link-items{
+            align-items: center;
+            text-align: center;
+            
         }
   }`;

@@ -103,8 +103,12 @@ export const Navbar = {
             margin-left:0.5rem;
             font-size:2.4rem;
         }
+        .police-logo{
+            margin-bottom:5px;
+        }
         @media only screen and (max-width: 1022px) and (min-width: 960px){
             font-size:2.1rem;
+            
         }
         @media screen and (max-width:960px){
             position:absolute;
