@@ -11,7 +11,7 @@ export const Navbar = {
         }
         .nav-menu{
             display:grid;
-            grid-template-columns:repeat(5,auto);
+            grid-template-columns:repeat(6,auto);
             grid-gap:10px;
             list-style:none;
             text-align:center;
@@ -37,6 +37,7 @@ export const Navbar = {
         }
         .nav-item {
             height: 80px;
+            /* height: 10px; */
             border-bottom: 2px solid transparent;
           }
         .nav-item:hover {

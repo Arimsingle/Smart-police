@@ -138,7 +138,7 @@ function GetTransaction({ GetkeySelect }: any) {
           <TransactionStyled>
             <div className="d-flex justify-content-center">
               <img
-                src="/static/images/boss.svg"
+                src="/static/svg/boss.svg"
                 alt="coin"
                 className="dasdboard-img"
               />
@@ -175,7 +175,7 @@ function GetTransaction({ GetkeySelect }: any) {
           <TransactionStyled>
             <div className="d-flex justify-content-center">
               <img
-                src="/static/images/search.svg"
+                src="/static/svg/search.svg"
                 alt="coin"
                 className="dasdboard-img"
               />
@@ -212,7 +212,7 @@ function GetTransaction({ GetkeySelect }: any) {
           <TransactionStyled>
             <div className="d-flex justify-content-center">
               <img
-                src="/static/images/resume.svg"
+                src="/static/svg/resume.svg"
                 alt="coin"
                 className="dasdboard-img"
               />
@@ -249,7 +249,7 @@ function GetTransaction({ GetkeySelect }: any) {
           <TransactionStyled>
             <div className="d-flex justify-content-center">
               <img
-                src="/static/images/stat.svg"
+                src="/static/svg/stat.svg"
                 alt="coin"
                 className="dasdboard-img"
               />
@@ -294,7 +294,7 @@ function GetTransaction({ GetkeySelect }: any) {
           <TransactionStyled>
             <div className="d-flex justify-content-center">
               <img
-                src="/static/images/stat.svg"
+                src="/static/svg/stat.svg"
                 alt="coin"
                 className="dasdboard-img"
               />
@@ -331,7 +331,7 @@ function GetTransaction({ GetkeySelect }: any) {
           <TransactionStyled>
             <div className="d-flex justify-content-center">
               <img
-                src="/static/images/list.svg"
+                src="/static/svg/list.svg"
                 alt="coin"
                 className="dasdboard-img"
               />
@@ -368,7 +368,7 @@ function GetTransaction({ GetkeySelect }: any) {
           <TransactionStyled>
             <div className="d-flex justify-content-center">
               <img
-                src="/static/images/getCoin.svg"
+                src="/static/svg/getCoin.svg"
                 alt="coin"
                 className="dasdboard-img"
               />

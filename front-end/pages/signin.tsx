@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FormSignin } from "../components/form/formSignin"
 import { FormStyled } from "../style/style-component/formStyled"
 import { AiOutlineHome } from "react-icons/ai";
-const SignIn = () => {
+const SignIn: React.FC = () => {
     return (
         <FormStyled>
             <div className='form-container'>

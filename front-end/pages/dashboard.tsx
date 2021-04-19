@@ -10,9 +10,9 @@ import { BiMessageDetail } from "react-icons/bi";
 import { SetTranStyle } from "../style/style-component/setTranStyled";
 import { GetTranStyled } from "../style/style-component/getTranStyled";
 const { Option } = Select;
-const DashBoard = () => {
-  const [SetkeySelect, setKeySelect] = useState<string>("");
-  const [GetkeySelect, getkeySelect] = useState<string>("");
+const DashBoard: React.FC = () => {
+  const [SetkeySelect, setKeySelect] = useState<string | number>("");
+  const [GetkeySelect, getkeySelect] = useState<string | number>("");
 
   return (
     <>

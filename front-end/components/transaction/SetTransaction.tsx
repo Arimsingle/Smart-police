@@ -132,7 +132,7 @@ const SetTransaction = ({ SetkeySelect }: any) => {
           <Transaction_Styled>
             <div className="d-flex justify-content-center">
               <img
-                src="/static/images/bandit.svg"
+                src="/static/svg/bandit.svg"
                 alt="bandit"
                 className="dasdboard-img"
               />
@@ -235,7 +235,7 @@ const SetTransaction = ({ SetkeySelect }: any) => {
           <Transaction_Styled>
             <div className="d-flex justify-content-center">
               <img
-                src="/static/images/bandit_.svg"
+                src="/static/svg/bandit_.svg"
                 alt="bandit"
                 className="dasdboard-img"
               />
@@ -298,7 +298,7 @@ const SetTransaction = ({ SetkeySelect }: any) => {
           <Transaction_Styled>
             <div className="d-flex justify-content-center">
               <img
-                src="/static/images/resume_police.svg"
+                src="/static/svg/resume_police.svg"
                 alt="police"
                 className="dasdboard-img"
               />
@@ -361,7 +361,7 @@ const SetTransaction = ({ SetkeySelect }: any) => {
           <Transaction_Styled>
             <div className="d-flex justify-content-center">
               <img
-                src="/static/images/superviser_police.svg"
+                src="/static/svg/superviser_police.svg"
                 alt="coin"
                 className="dasdboard-img"
               />

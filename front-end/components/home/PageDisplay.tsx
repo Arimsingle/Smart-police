@@ -35,14 +35,14 @@ export const PageDisplay: any = ({
               flexDirection: imgStart === "start" ? "row-reverse" : "row",
             }}
           >
-            <div className="col">
-              <div
-                className="home__hero-text-wrapper"
-                data-aos="fade-right"
-                data-aos-offset="500"
-                data-aos-duration="500"
-                data-aos-easing="ease-in-sine"
-              >
+            <div
+              className="col"
+              data-aos="fade-right"
+              data-aos-offset="300"
+              data-aos-duration="300"
+              data-aos-easing="ease-in-sine"
+            >
+              <div className="home__hero-text-wrapper">
                 <div className="top-line">{topLine}</div>
                 <h1 className={lightText ? "heading" : "heading dark"}>
                   {headLine}
@@ -65,18 +65,15 @@ export const PageDisplay: any = ({
                 </Link>
               </div>
             </div>
-            <div className="col">
-              <div
-                className="home__hero-img-wrapper"
-                data-aos="fade-left"
-                data-aos-offset="500"
-                data-aos-duration="500"
-                data-aos-easing="ease-in-sine"
-              >
+            <div
+              className="col"
+              data-aos="fade-left"
+              data-aos-offset="500"
+              data-aos-duration="300"
+              data-aos-easing="ease-in-sine"
+            >
+              <div className="home__hero-img-wrapper">
                 <img src={img} alt={alt} className="home__hero-img" />
-                {/* <div className="home__hero-img">
-                                    <GammaDisplay />
-                                </div> */}
               </div>
             </div>
           </div>

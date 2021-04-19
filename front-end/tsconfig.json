@@ -19,5 +19,5 @@
     "target": "esnext"
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "pages/_app.tsx", "style/button.js", "components/faceApi/index.js", "components/three/gamma/effect.js", "components/three/gamma/gamma.js"]
+  "include": ["**/*.ts", "**/*.tsx", "pages/_app.tsx", "style/button.js", "components/face-api/index.js", "components/three/gamma/effect.js", "components/three/gamma/gamma.js"]
 }

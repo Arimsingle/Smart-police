@@ -8,6 +8,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@react-spring/parallax": "^9.0.0",
     "@tensorflow/tfjs-node": "^2.6.0",
     "@types/styled-jsx": "^2.2.8",
     "animate.css": "^4.1.1",

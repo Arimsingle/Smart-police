@@ -1,8 +1,8 @@
 "use strict";
 
-var admin = require('firebase');
+var admin = require("firebase");
 
-var _require = require('./config_fb'),
+var _require = require("./config_fb"),
     firebaseConfig = _require.firebaseConfig;
 
 admin.initializeApp(firebaseConfig);

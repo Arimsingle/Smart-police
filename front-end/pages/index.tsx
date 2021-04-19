@@ -7,7 +7,7 @@ import { BsChevronDoubleUp } from "react-icons/bs";
 import styled from "styled-components";
 import { BackTop } from "antd";
 
-const IndexPage = () => {
+const IndexPage: React.FC = () => {
   const CardArrow = styled.div`
     height: 40px;
     width: 40px;
