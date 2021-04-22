@@ -48,7 +48,7 @@ var faceDetect_1 = require("../face-api/faceDetect");
 exports.LogsDisplay = function (_a) {
     var show = _a.show, content = _a.content, title = _a.title;
     var _b = react_1.useState({}), valueObj = _b[0], setValueObj = _b[1];
-    var _c = react_1.useState("0xf809976b6043059BECA58cae55d98ED8908Cf961"), account = _c[0], setAccount = _c[1];
+    var _c = react_1.useState("0x26f24ED7f261B64bf9bDe1AE6836D401e2CF27F1"), account = _c[0], setAccount = _c[1];
     var fetchDataAsync = function () { return __awaiter(void 0, void 0, void 0, function () {
         var apiValues, _a;
         return __generator(this, function (_b) {

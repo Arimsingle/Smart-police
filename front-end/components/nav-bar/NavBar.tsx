@@ -16,7 +16,7 @@ const NavBar = () => {
         <div className="menu-icon" onClick={handleClick}>
           {click ? <CgClose /> : <CgMenu />}
         </div>
-        <div style={{display: 'flex'}}>
+        <div style={{ display: "flex" }}>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             {NavData.map((Data, index) => {
               return (

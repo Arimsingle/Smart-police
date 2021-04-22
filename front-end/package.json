@@ -31,6 +31,7 @@
     "react-smooth-scrolling": "^1.0.2",
     "react-spring": "^9.0.0",
     "react-three-fiber": "^5.1.4",
+    "recharts": "^2.0.9",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {

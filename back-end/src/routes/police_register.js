@@ -16,14 +16,18 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
         const _Account = web3.eth.accounts.create();
         // encrypt private key
         const _EncryptedPrivateKey = crypto.encrypt(_Account.privateKey, req.body.password);
+        console.log("-----------------------");
+        console.log(dotenv.parsed.PRIVATE_KEY);
         // encrypt password
         const _EncryptedPassword = crypto.encrypt(req.body.password, "Admin");
         // Round of address use transaction
         const nonceTransfer = await web3.eth.getTransactionCount(dotenv.parsed.ACCOUNT);
+        console.log(nonceTransfer);
         const rawTx = tranferCoin(nonceTransfer, _Account.address);
         try {
             // decript privatekey
             const privateKey = Buffer.from(dotenv.parsed.PRIVATE_KEY, 'hex');
+            console.log(privateKey);
             const tx = new Tx(rawTx);
             tx.sign(privateKey);
             const serializedTx = tx.serialize();
@@ -32,6 +36,7 @@ module.exports = function ipfsFunction({ router, web3, Tx, contract_Police, dote
         } catch (error) {
             console.log("Error", error);
         }
+
         try {
             // data 
             let dataPolice = await {

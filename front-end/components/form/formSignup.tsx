@@ -1,12 +1,13 @@
 import { UseForm } from "./useForm";
 import { Validaor } from "./validateInfo";
+import {devSVG} from "../../path/images/path-image"
 import Link from "next/link";
 export const FormSignup = ({ submitForm, setData }: any) => {
     const { handleChange, handleSubmit, values, errors } = UseForm(submitForm, Validaor, setData);
     return (
         <div className="form-container-signup">
             <div className='form-content-left'>
-                <img className='form-img' src='/static/images/dev.svg' alt='spaceship' />
+                <img className='form-img' src={devSVG} alt='spaceship' />
             </div>
             <div className='form-content-right-signup'>
                 <form onSubmit={handleSubmit} className='form' noValidate>

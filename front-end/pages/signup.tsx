@@ -4,7 +4,7 @@ import { FormSignup } from "../components/form/formSignup"
 import { FormSuccsess } from "../components/form/formSuccess"
 import { FormStyled } from "../style/style-component/formStyled"
 import { AiOutlineHome } from "react-icons/ai";
-import fontJSX from "../tsx/font";
+import fontJSX from "../font-config/font";
 const Form: React.FC = () => {
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
     const [data, setData] = useState({ message: '', value: '' });

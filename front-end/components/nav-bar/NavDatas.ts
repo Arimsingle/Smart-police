@@ -10,13 +10,13 @@ export const NavData = [
     cName: "nav-links",
   },
   {
-    title: "แผงควบคุม",
-    url: "/dashboard",
+    title: "บันทึกข้อมูล",
+    url: "/transaction",
     cName: "nav-links",
   },
   {
     title: "วิเคราะห์",
-    url: "/analyze",
+    url: "/dashboard",
     cName: "nav-links",
   },
   {

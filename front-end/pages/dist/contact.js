@@ -4,8 +4,8 @@ var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cook
     return cooked;
 };
 exports.__esModule = true;
-var font_1 = require("../tsx/font");
-var NavBar_1 = require("../components/navBar/NavBar");
+var font_1 = require("../font-config/font");
+var NavBar_1 = require("../components/nav-bar/NavBar");
 var styled_components_1 = require("styled-components");
 // import { dataImg_background } from "../public/static/images/data/bg_svg";
 var react_1 = require("react");

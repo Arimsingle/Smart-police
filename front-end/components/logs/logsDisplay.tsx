@@ -9,7 +9,7 @@ import FaceDetect from "../face-api/faceDetect";
 export const LogsDisplay = ({ show, content, title }: any) => {
   const [valueObj, setValueObj] = useState<any>({});
   const [account, setAccount] = useState<string>(
-    "0xf809976b6043059BECA58cae55d98ED8908Cf961"
+    "0x26f24ED7f261B64bf9bDe1AE6836D401e2CF27F1"
   );
   const fetchDataAsync = async () => { //พึ่งแก้
     let apiValues;

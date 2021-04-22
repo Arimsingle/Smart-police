@@ -1,7 +1,7 @@
 import Home from "./homePages";
-import fontJSX from "../tsx/font";
+import fontJSX from "../font-config/font";
 // import FaceDetect from "../components/faceApi/faceDetect";
-import { NavBar } from "../components/navBar/NavBar";
+import { NavBar } from "../components/nav-bar/NavBar";
 import { Footers } from "../components/footer/Footer";
 import { BsChevronDoubleUp } from "react-icons/bs";
 import styled from "styled-components";

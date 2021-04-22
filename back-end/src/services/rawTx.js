@@ -1,6 +1,7 @@
 const { web3 } = require('../web3/web3');
 const tranferCoin = (nonce, account) => {
     const rawTx = { // Data for send to transaction
+        chainId: web3.utils.numberToHex(1515),
         nonce: web3.utils.numberToHex(nonce),
         gasPrice: web3.utils.numberToHex(web3.utils.toWei('10', 'gwei')),
         gasLimit: web3.utils.numberToHex(21000),

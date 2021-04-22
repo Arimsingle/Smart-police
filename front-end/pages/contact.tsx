@@ -1,5 +1,5 @@
-import fontJSX from "../tsx/font";
-import { NavBar } from "../components/navBar/NavBar";
+import fontJSX from "../font-config/font";
+import { NavBar } from "../components/nav-bar/NavBar";
 import styled from "styled-components";
 // import { dataImg_background } from "../public/static/images/data/bg_svg";
 import { useState, useEffect, useRef } from "react";
