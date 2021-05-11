@@ -51,3 +51,39 @@
 23:06:50.542631 table@remove removed @8
 23:21:49.464014 db@close closing
 23:21:49.464539 db@close done T·524.2µs
+=============== May 1, 2021 (+07) ===============
+23:23:57.447869 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+23:23:57.448868 version@stat F·[0 1] S·573B[0B 573B] Sc·[0.00 0.00]
+23:23:57.448868 db@open opening
+23:23:57.448868 journal@recovery F·1
+23:23:57.451866 journal@recovery recovering @10
+23:23:57.457865 memdb@flush created L0@13 N·422 S·4KiB "loc..seq,v3263":"n:\xce..ong,v3266"
+23:23:57.472868 version@stat F·[1 1] S·4KiB[4KiB 573B] Sc·[0.25 0.00]
+23:23:57.491613 db@janitor F·5 G·1
+23:23:57.491866 db@janitor removing table-9
+23:23:57.492870 db@open done T·44.0017ms
+23:24:45.022707 table@compaction L0·1 -> L1·1 S·4KiB Q·3733
+23:24:45.026602 table@build created L1@16 N·10 S·579B "loc..seq,v3263":"version,v1"
+23:24:45.026602 version@stat F·[0 1] S·579B[0B 579B] Sc·[0.00 0.00]
+23:24:45.029239 table@compaction committed F-1 S-4KiB Ke·0 D·422 T·6.5315ms
+23:24:45.030367 table@remove removed @12
+23:54:01.310489 db@close closing
+23:54:01.311650 db@close done T·1.1612ms
+=============== May 2, 2021 (+07) ===============
+12:52:27.516598 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+12:52:27.531602 version@stat F·[0 1] S·579B[0B 579B] Sc·[0.00 0.00]
+12:52:27.531602 db@open opening
+12:52:27.532599 journal@recovery F·1
+12:52:27.534599 journal@recovery recovering @14
+12:52:27.538599 memdb@flush created L0@17 N·818 S·8KiB "loc..seq,v3686":"n:\xce..ong,v3700"
+12:52:27.541600 version@stat F·[1 1] S·8KiB[8KiB 579B] Sc·[0.25 0.00]
+12:52:27.558601 db@janitor F·5 G·1
+12:52:27.558601 db@janitor removing table-13
+12:52:27.558601 db@open done T·26.9984ms
+12:52:51.065761 table@compaction L0·1 -> L1·1 S·8KiB Q·4527
+12:52:51.069951 table@build created L1@20 N·11 S·597B "loc..seq,v3686":"version,v1"
+12:52:51.069951 version@stat F·[0 1] S·597B[0B 597B] Sc·[0.00 0.00]
+12:52:51.072946 table@compaction committed F-1 S-8KiB Ke·0 D·817 T·7.1843ms
+12:52:51.072946 table@remove removed @16
+13:48:59.538491 db@close closing
+13:48:59.538491 db@close done T·0s

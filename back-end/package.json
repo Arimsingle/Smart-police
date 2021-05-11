@@ -15,11 +15,11 @@
     "ipfs-http-client": "^46.0.0",
     "node-datetime": "^2.1.2",
     "node-datetime-thai": "^1.1.0",
+    "nodemon": "^2.0.7",
     "truffle-hdwallet-provider": "^1.0.17",
     "web3": "^1.2.11",
     "web3-eth-abi": "^1.2.9"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

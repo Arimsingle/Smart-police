@@ -53,3 +53,35 @@
 23:06:34.092901 db@open done T·49.243ms
 23:21:50.214946 db@close closing
 23:21:50.216696 db@close done T·1.7506ms
+=============== May 1, 2021 (+07) ===============
+23:23:53.191590 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+23:23:53.192726 version@stat F·[2 1] S·729KiB[678KiB 51KiB] Sc·[0.50 0.00]
+23:23:53.192726 db@open opening
+23:23:53.193277 journal@recovery F·1
+23:23:53.196695 journal@recovery recovering @12
+23:23:53.203740 memdb@flush created L0@14 N·1642 S·85KiB "H\x04O..\xea\xe8\x85,v13791":"unc..own,v13662"
+23:23:53.214439 version@stat F·[3 1] S·814KiB[763KiB 51KiB] Sc·[0.75 0.00]
+23:23:53.234450 db@janitor F·6 G·0
+23:23:53.235450 db@open done T·42.7239ms
+23:54:02.347324 db@close closing
+23:54:02.350234 db@close done T·2.91ms
+=============== May 2, 2021 (+07) ===============
+12:52:23.557907 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+12:52:23.570497 version@stat F·[3 1] S·814KiB[763KiB 51KiB] Sc·[0.75 0.00]
+12:52:23.570497 db@open opening
+12:52:23.571559 journal@recovery F·1
+12:52:23.578569 journal@recovery recovering @15
+12:52:23.593556 memdb@flush created L0@17 N·3275 S·176KiB "\v\xbe\xe5..j\x92\xa5,v18562":"\xf9\r\xf8..֯\xdf,v18544"
+12:52:23.599554 version@stat F·[4 1] S·991KiB[940KiB 51KiB] Sc·[1.00 0.00]
+12:52:23.610555 db@janitor F·7 G·0
+12:52:23.611570 db@open done T·40.0269ms
+12:52:23.611570 table@compaction L0·4 -> L1·1 S·991KiB Q·18580
+12:52:23.665306 table@build created L1@20 N·12704 S·749KiB "\x02d\xfc..\x19Ba,v431":"\xfe\x9a\xaf..\xc2/7,v13645"
+12:52:23.665407 version@stat F·[0 1] S·749KiB[0B 749KiB] Sc·[0.00 0.01]
+12:52:23.666308 table@compaction committed F-4 S-242KiB Ke·0 D·5869 T·54.7376ms
+12:52:23.666308 table@remove removed @14
+12:52:23.667304 table@remove removed @11
+12:52:23.667304 table@remove removed @8
+12:52:23.667304 table@remove removed @7
+13:48:58.239050 db@close closing
+13:48:58.240066 db@close done T·1.0158ms
